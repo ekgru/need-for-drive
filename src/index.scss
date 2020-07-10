@@ -2,6 +2,7 @@ $mainAccent: #0ec261;
 $mainBlack: #121212;
 $grayDark: #999999;
 $grayLight: #eeeeee;
+$pointer: url("./resources/Pointer.svg"), default;
 
 * {
   cursor: url("./resources/Cursor.svg"), default;
@@ -12,10 +13,11 @@ $grayLight: #eeeeee;
 body {
   margin: 0;
 }
+
 .header {
   display: flex;
   justify-content: space-between;
-  padding-top: 32px;
+  padding: 32px;
   &__site-name {
     color: $mainAccent;
     font-weight: bold;
@@ -41,13 +43,15 @@ body {
   margin: 16px;
 }
 .nav-menu {
+  z-index:2;
   display: flex;
   position: fixed;
   top: 0;
   background-color: #fff;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, #111518 100%, #151b1f 81%);
+  background:  $mainBlack;
+  
   &__link-list {
     display: flex;
     flex-direction: column;
@@ -59,6 +63,7 @@ body {
       line-height: 37px;
       text-transform: uppercase;
       margin-bottom: 8px;
+      cursor: $pointer;
     }
     &__link:hover {
       color: $mainAccent;
@@ -67,22 +72,29 @@ body {
 }
 .main-page {
   display: flex;
-  margin-left: 96px;
-  &__info-block {
-    &__heading {
-      font-weight: bold;
-      font-size: 70px;
-      line-height: 66px;
-      color: $mainBlack;
-      &__eng {
-        color: $mainAccent;
+  height: -webkit-fill-available;
+  margin-left: 64px;
+
+  &__content {
+    min-width: 55%;
+    &__info-block {
+      min-width: 550px;
+      padding: 32px;
+      &__heading {
+        font-weight: bold;
+        font-size: 70px;
+        line-height: 66px;
+        color: $mainBlack;
+        &__eng {
+          color: $mainAccent;
+        }
       }
-    }
-    &__text {
-      font-weight: 300;
-      font-size: 26px;
-      line-height: 30px;
-      color: $grayDark;
+      &__text {
+        font-weight: 300;
+        font-size: 26px;
+        line-height: 30px;
+        color: $grayDark;
+      }
     }
   }
 }
@@ -91,23 +103,149 @@ body {
   height: 48px;
 }
 .button {
-  font-family: Roboto;
   font-weight: 500;
   font-size: 18px;
   line-height: 21px;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 5px;
   outline: none;
   border: none;
-  background: linear-gradient(to right, $mainAccent, #039f67);
+  background: linear-gradient(to right, $mainAccent, darken($mainAccent, 20));
+  &:hover {
+    background: linear-gradient(
+      to right,
+      darken($mainAccent, 20),
+      darken($mainAccent, 30)
+    );
+  }
+  &:active,
+  &:focus {
+    background: linear-gradient(
+      to right,
+      darken($mainAccent, 30),
+      darken($mainAccent, 40)
+    );
+  }
+  &:disabled {
+    background: $grayLight;
+  }
 }
-.button:hover {
-  background: linear-gradient(to right, $mainAccent, darken(#039f67, 10));
+.swiper-container{
+  max-width:45%!important;
+  min-width: 45%;
 }
-.button:active,
-button:focus {
-  background: linear-gradient(to right, $mainAccent, darken(#039f67, 20));
+.swiper-button-prev {
+  height: 100% !important;
+  top: 20px !important;
+  color: #fff !important;
+  left: 0 !important;
+  padding: 5px;
 }
-.button:disabled {
-  background: $grayLight;
+.swiper-button-next {
+  padding: 5px;
+  height: 100% !important;
+  top: 20px !important;
+  right: 0 !important;
+  color: #fff !important;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  &:hover,
+  :active {
+    background-color: transparentize($mainAccent, 0.8);
+    cursor: $pointer;
+  }
+}
+.swiper-pagination-bullet {
+  background-color: $mainAccent !important;
+  cursor: $pointer!important;
+}
+.slide {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-width: 410px;
+  &__content {
+    background: linear-gradient(45deg, black, transparent);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 64px;
+    &__heading {
+      font-weight: 500;
+      font-size: 40px;
+      line-height: 47px;
+    }
+    &__text {
+      font-weight: 300;
+      font-size: 24px;
+      line-height: 90%;
+    }
+    &__btn {
+      width: 164px;
+      height: 48px;
+    }
+  }
+}
+@for $i from 2 through 3 {
+  .swiper-slide:nth-of-type(#{$i}) {
+    .slide {
+      &__content {
+        &__btn {
+          background-image: linear-gradient(
+            to right,
+            adjust-hue($mainAccent, 180deg * ($i - 2) + 20),
+            darken(adjust-hue($mainAccent, 180deg * ($i - 2) + 20), 20)
+          );
+          &:hover {
+            background-image: linear-gradient(
+              to right,
+              darken(adjust-hue($mainAccent, 180deg * ($i - 2) + 20), 20),
+              darken(adjust-hue($mainAccent, 180deg * ($i - 2) + 20), 30)
+            );
+          }
+          &:active,
+          &:focus {
+            background-image: linear-gradient(
+              to right,
+              darken(adjust-hue($mainAccent, 180deg * ($i - 2) + 20), 30),
+              darken(adjust-hue($mainAccent, 180deg * ($i - 2) + 20), 40)
+            );
+          }
+        }
+      }
+    }
+  }
+}
+
+.swiper-slide:last-of-type {
+  .slide {
+    &__content {
+      &__btn {
+        background-image: linear-gradient(
+          to right,
+          adjust-hue($mainAccent, 160deg),
+          darken(adjust-hue($mainAccent, 160deg), 20)
+        );
+        &:hover {
+          background-image: linear-gradient(
+            to right,
+            darken(adjust-hue($mainAccent, 160deg), 20),
+            darken(adjust-hue($mainAccent, 160deg), 30)
+          );
+        }
+        &:active,
+        &:focus {
+          background-image: linear-gradient(
+            to right,
+            darken(adjust-hue($mainAccent, 160deg), 30),
+            darken(adjust-hue($mainAccent, 160deg), 40)
+          );
+        }
+      }
+    }
+  }
 }
