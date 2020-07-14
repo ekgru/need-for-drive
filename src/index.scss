@@ -4,10 +4,17 @@ $grayDark: #999999;
 $grayLight: #eeeeee;
 $pointer: url("./resources/Pointer.svg"), default;
 
+$desktopMini: 1439px;
+$tablet: 1023px;
+$smart: 767px;
+path {
+  fill: inherit !important;
+  stroke: inherit !important;
+}
 * {
   cursor: url("./resources/Cursor.svg"), default;
   font-family: "Roboto";
-  color: #ffffff;
+  color: $grayLight;
   font-style: normal;
 }
 body {
@@ -15,9 +22,13 @@ body {
 }
 
 .header {
+  @media (max-width: $smart) {
+    flex-direction: column-reverse;
+    text-align: right;
+  }
   display: flex;
   justify-content: space-between;
-  padding: 32px;
+  padding: 16px;
   &__site-name {
     color: $mainAccent;
     font-weight: bold;
@@ -33,30 +44,88 @@ body {
   }
 }
 .nav-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   top: 0px;
   height: 100%;
-  position: absolute;
+  position: fixed;
   background-color: $mainBlack;
+  z-index: 3;
+  @media (max-width: $smart) {
+    height: 0%;
+  }
 }
 .nav-btn {
-  height: 32px;
-  margin: 16px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  outline: none;
+  border: none;
+  &__open,
+  &__close {
+    height: 32px;
+    margin: 16px;
+  }
+  &__open {
+    @media (max-width: $smart) {
+      filter: invert(1);
+    }
+  }
+  &__lang {
+    @media (max-width: $smart) {
+      z-index: 3;
+    }
+    width: 48px;
+    height: 48px;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    font-size: 13px;
+    color: $mainAccent;
+    &:hover {
+      border: $grayLight 2px solid;
+      border-radius: 50%;
+      color: $grayLight;
+    }
+    &:active {
+      color: $mainAccent;
+    }
+  }
 }
 .nav-menu {
-  z-index:2;
+  @media (max-width: $smart) {
+    position: fixed;
+    background-color: $mainBlack;
+  }
+  z-index: 2;
   display: flex;
-  position: fixed;
-  top: 0;
+  flex-direction: column-reverse;
+  position: absolute;
   background-color: #fff;
   width: 100%;
   height: 100%;
-  background:  $mainBlack;
-  
+  background: transparentize($mainBlack, 0.81);
+
   &__link-list {
+    @media (max-width: $tablet) {
+      width: 100%;
+    }
+    position: absolute;
+    left: 32px;
+    justify-content: center;
+    width: 60%;
+    height: 100%;
+    background-color: $mainBlack;
     display: flex;
     flex-direction: column;
-    margin: auto 90px;
     &__link {
+      @media (max-width: $smart) {
+        font-size: 26px;
+      }
+      padding-left: 32px;
       text-decoration: none;
       font-weight: 500;
       font-size: 32px;
@@ -68,28 +137,70 @@ body {
     &__link:hover {
       color: $mainAccent;
     }
+    &__social-block {
+      margin-left: 32px;
+      &__icon {
+        margin: 8px;
+        fill: $grayLight;
+        &:hover {
+          fill: $mainAccent;
+        }
+      }
+    }
   }
 }
-.main-page {
-  display: flex;
-  height: -webkit-fill-available;
-  margin-left: 64px;
 
+.main-page {
+  @media (max-width: $smart) {
+    font-size: 2.5rem;
+  }
+  display: flex;
+  height: 100vh;
+  position: relative;
+  padding-left: 64px;
+  @media (max-width: $smart) {
+    padding-left: 16px;
+  }
+  @media (max-width: $smart) {
+    padding-left: 0px;
+  }
   &__content {
-    min-width: 55%;
+    @media (max-width: $tablet) {
+      width: 100%;
+    }
+    @media (max-width: $smart) {
+      font-size: 2.5rem;
+      height: 100vh;
+    }
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     &__info-block {
-      min-width: 550px;
-      padding: 32px;
+      @media (max-width: $desktopMini) {
+        padding: 32px;
+      }
+      @media (max-width: $smart) {
+        padding: 0px;
+      }
+      padding-left: 64px;
       &__heading {
+        @media (max-width: $smart) {
+          font-size: 2.5rem;
+          padding-left: 16px;
+        }
         font-weight: bold;
         font-size: 70px;
-        line-height: 66px;
         color: $mainBlack;
         &__eng {
           color: $mainAccent;
         }
       }
       &__text {
+        @media (max-width: $smart) {
+          font-size: 1rem;
+          padding-left: 16px;
+        }
         font-weight: 300;
         font-size: 26px;
         line-height: 30px;
@@ -103,6 +214,10 @@ body {
   height: 48px;
 }
 .button {
+  @media (max-width: $smart) {
+    width: 100%;
+    border-radius: 0%;
+  }
   font-weight: 500;
   font-size: 18px;
   line-height: 21px;
@@ -130,9 +245,14 @@ body {
     background: $grayLight;
   }
 }
-.swiper-container{
-  max-width:45%!important;
-  min-width: 45%;
+.swiper-container {
+  @media (max-width: $tablet) {
+    display: none;
+  }
+  flex: 1;
+}
+.swiper-slide {
+  width: 100% !important;
 }
 .swiper-button-prev {
   height: 100% !important;
@@ -158,7 +278,7 @@ body {
 }
 .swiper-pagination-bullet {
   background-color: $mainAccent !important;
-  cursor: $pointer!important;
+  cursor: $pointer !important;
 }
 .slide {
   display: flex;
@@ -166,7 +286,7 @@ body {
   height: 100%;
   background-repeat: no-repeat;
   background-size: cover;
-  min-width: 410px;
+  // min-width: 410px;
   &__content {
     background: linear-gradient(45deg, black, transparent);
     width: 100%;
@@ -246,6 +366,39 @@ body {
           );
         }
       }
+    }
+  }
+}
+
+.footer {
+  @media (max-width: $smart) {
+    background-color: $mainBlack;
+    color: $grayLight;
+    flex-direction: column-reverse;
+    text-align: right;
+  }
+  display: flex;
+  justify-content: space-between;
+  padding: 32px;
+  &__copyright {
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 15px;
+    color: $grayDark;
+  }
+  &__phone-number {
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 15px;
+    color: $mainBlack;
+    @media (max-width: $smart) {
+      color: $mainAccent;
+    }
+    &:hover {
+      @media (max-width: $smart) {
+        color: $grayLight;
+      }
+      color: $mainAccent;
     }
   }
 }

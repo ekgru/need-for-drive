@@ -5,10 +5,10 @@ import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
 import Slide from "./Slide";
-import slideOne from "./resources/slide_1.jpg";
-import slideTwo from "./resources/slide_2.jpg";
-import slideThree from "./resources/slide_3.jpg";
-import slideFour from "./resources/slide_4.jpg";
+import slideOne from "./resources/slider's images/slide_1.jpg";
+import slideTwo from "./resources/slider's images/slide_2.jpg";
+import slideThree from "./resources/slider's images/slide_3.jpg";
+import slideFour from "./resources/slider's images/slide_4.jpg";
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 const content = [
   {
@@ -44,8 +44,8 @@ export default function Slider() {
       slidesPerView={1}
       navigation
       pagination={{ clickable: true }}
-      onSwiper={(swiper) => console.log(swiper)}
-      onSlideChange={() => console.log("slide change")}
+      // onSwiper={(swiper) => console.log(swiper)}
+      // onSlideChange={() => console.log("slide change")}
     >
       {sliderContent}
     </Swiper>
