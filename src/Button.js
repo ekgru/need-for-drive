@@ -5,6 +5,7 @@ export default function Button(props) {
       type="button"
       value={props.title}
       className={"button " + props.type}
+      onClick={props.action}
     />
   );
 }
