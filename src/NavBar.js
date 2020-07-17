@@ -3,23 +3,19 @@ import NavBtn from "./NavBtn";
 import "./NavBar.scss";
 export default function NavBar() {
   const [view, setView] = useState(false);
-  const [lang, setLang] = useState("Рус");
+  const [eng, setEng] = useState(false);
   return (
     <>
       <div className="nav-bar">
         <NavBtn active={view} action={() => setView(!view)} />
-        {window.innerWidth > 767 &&
-          (lang === "Рус" ? (
-            <button className="nav-btn__lang" onClick={() => setLang("Eng")}>
-              Eng
-            </button>
-          ) : (
-            <button className="nav-btn__lang" onClick={() => setLang("Рус")}>
-              Рус
-            </button>
-          ))}
+        <button
+          className={"nav-btn__lang" + (view ? " active" : "")}
+          onClick={() => setEng(!eng)}
+        >
+          {eng ? "Рус" : "Eng"}
+        </button>
       </div>
-      <div className={view ? "nav-menu active" : "nav-menu"}>
+      <div className={"nav-menu" + (view ? "  active" : "")}>
         <nav className="nav-menu__link-list">
           <a className="nav-menu__link-list__link" href="#">
             Парковка
@@ -90,15 +86,6 @@ export default function NavBar() {
             </svg>
           </span>
         </nav>
-        {window.innerWidth < 768 && lang === "Рус" ? (
-          <button className="nav-btn__lang" onClick={() => setLang("Eng")}>
-            Eng
-          </button>
-        ) : (
-          <button className="nav-btn__lang" onClick={() => setLang("Рус")}>
-            Рус
-          </button>
-        )}
       </div>
     </>
   );
