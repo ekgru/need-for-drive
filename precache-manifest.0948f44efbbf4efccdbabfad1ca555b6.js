@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3cead354741ea5edbd0b922565f50adb",
+    "revision": "712d44cf59452d3e169518f3a9dd1307",
     "url": "/need-for-drive/index.html"
   },
   {
-    "revision": "bb2745ee0a6bc072c3d3",
+    "revision": "fe5bf0e6fce5333df5c9",
     "url": "/need-for-drive/static/css/2.1be1aeea.chunk.css"
   },
   {
-    "revision": "0189e5fdc17b611cfa66",
-    "url": "/need-for-drive/static/css/main.824ee662.chunk.css"
+    "revision": "69d5098f16f818254924",
+    "url": "/need-for-drive/static/css/main.5f026309.chunk.css"
   },
   {
-    "revision": "bb2745ee0a6bc072c3d3",
-    "url": "/need-for-drive/static/js/2.6d99e9e4.chunk.js"
+    "revision": "fe5bf0e6fce5333df5c9",
+    "url": "/need-for-drive/static/js/2.18c31078.chunk.js"
   },
   {
-    "revision": "e88a3e95b5364d46e95b35ae8c0dc27d",
-    "url": "/need-for-drive/static/js/2.6d99e9e4.chunk.js.LICENSE.txt"
+    "revision": "c64c486544348f10a6d6c716950bc223",
+    "url": "/need-for-drive/static/js/2.18c31078.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "0189e5fdc17b611cfa66",
-    "url": "/need-for-drive/static/js/main.c09148f3.chunk.js"
+    "revision": "69d5098f16f818254924",
+    "url": "/need-for-drive/static/js/main.75808d04.chunk.js"
   },
   {
     "revision": "d626b68bd1aca0cbff82",
@@ -32,6 +32,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/need-for-drive/static/media/Cursor.a710fbef.svg"
   },
   {
+    "revision": "65b12582a9af555be8a237b2e9bf627d",
+    "url": "/need-for-drive/static/media/FakeMap.65b12582.jpg"
+  },
+  {
     "revision": "f2245ebb9520217efe387957369c639d",
     "url": "/need-for-drive/static/media/Geo.f2245ebb.svg"
   },
@@ -40,12 +44,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/need-for-drive/static/media/Pointer.6efdf927.svg"
   },
   {
-    "revision": "b20e2ce323051a4f944b71a7e3ee6fb1",
-    "url": "/need-for-drive/static/media/close_menu_btn.b20e2ce3.svg"
+    "revision": "e07df86cef2e721115583d61d1fb68a6",
+    "url": "/need-for-drive/static/media/Roboto-Bold.e07df86c.ttf"
   },
   {
-    "revision": "0fc651f5597d4036a75a1cb80086309b",
-    "url": "/need-for-drive/static/media/menu_btn.0fc651f5.svg"
+    "revision": "88823c2015ffd5fa89d567e17297a137",
+    "url": "/need-for-drive/static/media/Roboto-Light.88823c20.ttf"
+  },
+  {
+    "revision": "58aef543c97bbaf6a9896e8484456d98",
+    "url": "/need-for-drive/static/media/Roboto-Medium.58aef543.ttf"
   },
   {
     "revision": "fe2f03dd79c1a187240fba03781540c6",
