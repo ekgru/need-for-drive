@@ -1,0 +1,35 @@
+@import "../variables.scss";
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 32px;
+  &__copyright {
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 15px;
+    color: $grayDark;
+  }
+  &__phone-number {
+    text-decoration: none;
+    font-size: 13px;
+    line-height: 15px;
+    color: $mainBlack;
+    &:hover {
+      color: $mainAccent;
+    }
+  }
+}
+@media (max-width: $smart) {
+  .footer {
+    background-color: $mainBlack;
+    color: $grayLight;
+    flex-direction: column-reverse;
+    text-align: right;
+    &__phone-number {
+      color: $mainAccent;
+      &:hover {
+        color: $grayLight;
+      }
+    }
+  }
+}
