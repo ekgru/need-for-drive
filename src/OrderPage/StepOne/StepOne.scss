@@ -1,6 +1,10 @@
 @import "../../variables.scss";
 
-.step-one__form {
+.step-one{
+  display: flex;
+    flex-direction: column;
+    align-items: baseline;
+&__form {
     margin-bottom: 16px;
     text-align: end;
   &__city,
@@ -38,7 +42,7 @@
       display: block;
     }
   }
-}
+}}
 .map-block {
     padding-top: 32px;
   &__description {

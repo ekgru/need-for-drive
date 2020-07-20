@@ -4,7 +4,7 @@ import FakeMap from "../../resources/FakeMap.jpg";
 export default class StepOne extends React.Component {
   render() {
     return (
-      <>
+      <div className='step-one'>
         <form className="step-one__form" action="">
           <label className="step-one__form__city__description" htmlFor="City">
             Город
@@ -52,7 +52,7 @@ export default class StepOne extends React.Component {
             <img src={FakeMap} alt="" />
           </span>
         </div>
-      </>
+      </div>
     );
   }
 }

@@ -1,10 +1,10 @@
 @import "../variables.scss";
 
 .order-page {
-    display: flex;
-    flex-direction: column;
-    margin-left: 64px;
-    height: 100vh;
+  display: flex;
+  margin-left: 64px;
+  flex-direction: column;
+  height: 100vh;
   &__nav {
     color: $grayDark;
     border: 1px solid $grayLight;
@@ -16,6 +16,7 @@
       outline: none;
       &:active,
       &:hover {
+        color: darken($mainAccent, 10);
         border: none;
         outline: none;
       }
@@ -28,14 +29,11 @@
     }
   }
   &__container {
+    flex: 1;
     display: flex;
-    height: 100%;
     &__form {
       flex: 3;
       border-right: 1px solid $grayLight;
-      display: flex;
-      flex-direction: column;
-      align-items: baseline;
       padding: 32px 64px;
     }
     &__total {

@@ -1,36 +1,46 @@
 @import "../../variables.scss";
 
 .total {
+  padding: 32px;
+  text-align: center;
   &__head {
     color: $mainBlack;
     font-weight: bold;
+    text-align: right;
   }
   &__list {
     display: block;
     &__item {
+      padding-bottom: 16px;
       font-weight: 300;
+      font-size: 14px;
       display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-
-      &:after {
-        content: "..................................................";
-        display: block;
-        white-space: nowrap;
-        overflow: hidden;
-        margin-right: 20px;
-      }
+      align-items: flex-end;
       .text {
-          float: left;
-          margin-right: 20px;
         color: $mainBlack;
-        
+        white-space: nowrap;
       }
-      .text-dinamic {
-          float: right;
-          margin-left: 20px;
+      .text__dinamic {
+        text-align: end;
         color: $grayDark;
+        font-size: 14px;
+        white-space: nowrap;
       }
     }
+  }
+}
+.dots {
+  flex: 2;
+  border-bottom: dotted 1px;
+}
+.total__sum {
+  font-weight: 300;
+  font-size: 16px;
+  color: $mainBlack;
+  text-align: left;
+  span {
+    font-size: 16px;
+    color: $mainBlack;
+    font-weight: normal;
   }
 }

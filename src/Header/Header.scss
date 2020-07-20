@@ -9,6 +9,10 @@
     font-weight: bold;
     font-size: 30px;
     line-height: 35px;
+    text-decoration: none;
+    &:hover {
+      color: darken($mainAccent, 10);
+    }
   }
   &__geolocation {
     color: $grayDark;

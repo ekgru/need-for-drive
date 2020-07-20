@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../Header/";
 import StepOne from "./StepOne/";
-import Total from './Total/'
+import Total from "./Total/";
 import "./OrderPage.scss";
 export default class OrderPage extends React.Component {
   render() {
@@ -13,25 +13,36 @@ export default class OrderPage extends React.Component {
             type="button"
             className="order-page__nav__btn"
             value="Местоположение"
-          />{" "}
+          />
           <span>►</span>
           <input
             type="button"
             className="order-page__nav__btn"
             value="Модель"
-          />{" "}
+            disabled
+          />
           <span>►</span>
           <input
             type="button"
             className="order-page__nav__btn"
             value="Дополнительно"
-          />{" "}
+            disabled
+          />
           <span>►</span>
-          <input type="button" className="order-page__nav__btn" value="Итого" />
+          <input
+            type="button"
+            className="order-page__nav__btn"
+            value="Итого"
+            disabled
+          />
         </div>
         <div className="order-page__container">
-          <section className="order-page__container__form"><StepOne/></section>
-          <section className="order-page__container__total"><Total/></section>
+          <section className="order-page__container__form">
+            <StepOne />
+          </section>
+          <section className="order-page__container__total">
+            <Total />
+          </section>
         </div>
       </div>
     );
