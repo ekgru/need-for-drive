@@ -1,0 +1,51 @@
+$mainAccent: #0ec261;
+$mainBlack: #121212;
+$grayDark: #999999;
+$grayLight: #eeeeee;
+$desktopMini: 1439px;
+$tablet: 1023px;
+$smart: 767px;
+
+.order-page {
+    display: flex;
+    flex-direction: column;
+    margin-left: 64px;
+    height: 100vh;
+  &__nav {
+    color: $grayDark;
+    border: 1px solid $grayLight;
+    padding: 2px;
+    &__btn {
+      color: $mainAccent;
+      background: transparent;
+      border: none;
+      outline: none;
+      &:active,
+      &:hover {
+        border: none;
+        outline: none;
+      }
+      &.completed {
+        color: $mainBlack;
+      }
+      &:disabled {
+        color: $grayDark;
+      }
+    }
+  }
+  &__container {
+    display: flex;
+    height: 100%;
+    &__form {
+      flex: 3;
+      border-right: 1px solid $grayLight;
+      display: flex;
+      flex-direction: column;
+      align-items: baseline;
+      padding: 32px 64px;
+    }
+    &__total {
+      flex: 1;
+    }
+  }
+}

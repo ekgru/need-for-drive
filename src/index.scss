@@ -1,12 +1,29 @@
+
+
 $mainAccent: #0ec261;
 $mainBlack: #121212;
 $grayDark: #999999;
 $grayLight: #eeeeee;
 $pointer: url("./resources/Pointer.svg"), default;
-
 $desktopMini: 1439px;
 $tablet: 1023px;
 $smart: 767px;
+@font-face {
+  font-family: "Roboto";
+  src: url("./resources/fonts/Roboto-Bold.ttf");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("./resources/fonts/Roboto-Medium.ttf");
+
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("./resources/fonts/Roboto-Light.ttf");
+  font-weight: 300;
+}
 path {
   fill: inherit !important;
   stroke: inherit !important;
@@ -144,6 +161,7 @@ body {
     display: none;
   }
   flex: 1;
+  min-width: 40%;
 }
 .swiper-slide {
   width: 100% !important;
@@ -180,7 +198,6 @@ body {
   height: 100%;
   background-repeat: no-repeat;
   background-size: cover;
-  // min-width: 410px;
   &__content {
     background: linear-gradient(45deg, black, transparent);
     width: 100%;
@@ -297,10 +314,3 @@ body {
     }
   }
 }
-
-
-
-
-
-
-
