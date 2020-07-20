@@ -1,9 +1,9 @@
 import React from 'react';
-import MainPage from './MainPageContainer';
-import MainPageContainer from './MainPageContainer';
-import NavBar from './NavBar'
+import MainPageContainer from './MainPage/';
+import NavBar from './NavBar/'
 import { Switch, Route } from 'react-router-dom'
-import OrderPage from './OrderPage'
+import OrderPage from './OrderPage/'
+
 
 function App() {
   return (

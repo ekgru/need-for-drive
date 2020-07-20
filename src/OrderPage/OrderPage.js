@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "./Header";
-import StepOne from "./StepOne";
-import Total from './Total'
+import Header from "../Header/";
+import StepOne from "./StepOne/";
+import Total from './Total/'
 import "./OrderPage.scss";
 export default class OrderPage extends React.Component {
   render() {

@@ -1,10 +1,4 @@
-$mainAccent: #0ec261;
-$mainBlack: #121212;
-$grayDark: #999999;
-$grayLight: #eeeeee;
-$desktopMini: 1439px;
-$tablet: 1023px;
-$smart: 767px;
+@import "../../variables.scss";
 
 .total {
   &__head {

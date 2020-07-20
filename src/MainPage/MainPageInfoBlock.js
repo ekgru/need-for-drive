@@ -1,7 +1,5 @@
 import React from "react";
-import Button from "./Button";
-
-
+import Button from "../Button";
 export default function MainPageInfoBlock() {
   return (
     <div className="main-page__content__info-block">

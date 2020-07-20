@@ -1,6 +1,6 @@
 import React from "react";
 import "./StepOne.scss";
-import FakeMap from "./resources/FakeMap.jpg";
+import FakeMap from "../../resources/FakeMap.jpg";
 export default class StepOne extends React.Component {
   render() {
     return (
