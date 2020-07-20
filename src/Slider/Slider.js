@@ -4,11 +4,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.scss";
 import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
+import "./Slider.scss";
 import Slide from "./Slide";
-import slideOne from "./resources/slider's images/slide_1.jpg";
-import slideTwo from "./resources/slider's images/slide_2.jpg";
-import slideThree from "./resources/slider's images/slide_3.jpg";
-import slideFour from "./resources/slider's images/slide_4.jpg";
+import slideOne from "../resources/slider's images/slide_1.jpg";
+import slideTwo from "../resources/slider's images/slide_2.jpg";
+import slideThree from "../resources/slider's images/slide_3.jpg";
+import slideFour from "../resources/slider's images/slide_4.jpg";
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 const content = [
   {
