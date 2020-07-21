@@ -7,7 +7,8 @@
   height: 100vh;
   &__nav {
     color: $grayDark;
-    border: 1px solid $grayLight;
+    border-top: 1px solid $grayLight;
+    border-bottom: 1px solid $grayLight;
     padding: 2px;
     &__btn {
       color: $mainAccent;
@@ -40,4 +41,7 @@
       flex: 1;
     }
   }
+}
+@media (max-width: $tablet) {
+  
 }

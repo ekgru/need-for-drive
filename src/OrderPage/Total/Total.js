@@ -36,11 +36,12 @@ export default function Total() {
           <span className="dots"></span>
           <span className="text__dinamic">Да/нет</span>
         </p>
+
+        <p className="total__sum">
+          <span>Итого:</span> 16000 ₽
+        </p>
+        <Button type="big-btn" title="Заказать" />
       </div>
-      <p className="total__sum">
-        <span>Итого:</span> 16000 ₽
-      </p>
-      <Button type="big-btn" title="Заказать" />
     </div>
   );
 }

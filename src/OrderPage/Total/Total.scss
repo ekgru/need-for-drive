@@ -1,7 +1,7 @@
 @import "../../variables.scss";
 
 .total {
-  padding: 32px;
+  padding: 16px;
   text-align: center;
   &__head {
     color: $mainBlack;
@@ -44,3 +44,6 @@
     font-weight: normal;
   }
 }
+
+// @media (max-width: $tablet) {
+// }
