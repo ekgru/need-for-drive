@@ -1,6 +1,7 @@
 @import "../variables.scss";
 
 .order-page {
+  overflow: hidden;
   display: flex;
   margin-left: 64px;
   flex-direction: column;
@@ -30,7 +31,8 @@
     }
   }
   &__container {
-    flex: 1;
+    height: 90vh;
+        flex: 1;
     display: flex;
     &__form {
       flex: 3;

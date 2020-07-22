@@ -1,0 +1,43 @@
+@import "../../variables.scss";
+
+.car-card {
+  background-color: white;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  &:hover &__info-card::after {
+    content: "";
+    display: block;
+    position: absolute;
+    border: 1px solid $grayDark;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    top: -2px;
+    box-sizing: border-box;
+  }
+  &__radio-btn {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+  &__radio-btn:checked + &__info-card::after {
+    content: "";
+    display: block;
+    position: absolute;
+    border: 1px solid $mainAccent;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    top: -2px;
+    box-sizing: border-box;
+  }
+
+  &__info-card {
+    box-sizing: border-box;
+
+    position: relative;
+    border: 1px solid white;
+  }
+}
