@@ -1,9 +1,9 @@
 @import "../../variables.scss";
 .car-selector {
   display: flex;
-    flex-direction: column;
-    height: 100%;
-    
+  flex-direction: column;
+  height: 100%;
+
   &__category-form {
     &__description {
       font-weight: 300;
@@ -48,60 +48,70 @@
       }
     }
   }
-  &__container{
+  &__container {
     margin-top: 16px;
-    overflow-y: hidden;
-&:hover{
-  overflow-y: scroll;
- 
-}
-
-  &__car-list {
-    width: fit-content;
-    display: grid;
-    grid-column: 1;
-    grid-template-columns: repeat(2, 370px);
-    margin-top: 32px;
-    border: 1px solid $grayLight;
-    grid-gap: 1px;
-    box-sizing: border-box;
-    background-color: $grayLight;
+    overflow-y: auto;
+    &__car-list {
+      width: fit-content;
+      display: grid;
+      grid-column: 1;
+      grid-template-columns: repeat(2, 370px);
+      margin-top: 32px;
+      border: 1px solid $grayLight;
+      grid-gap: 1px;
+      box-sizing: border-box;
+      background-color: $grayLight;
+    }
   }
 }
+::-webkit-scrollbar {
+  width: 10px;
 }
-::-webkit-scrollbar { width: 10px;}
-::-webkit-scrollbar-track-piece { background-color: transparentize( $mainAccent, .9); border-radius: 10px;}
-::-webkit-scrollbar-thumb { height: 20px; background:linear-gradient(to bottom, $mainAccent, darken($mainAccent, 10));; border-radius: 10px;}
-
-
-@media(max-width:1180px) {
-  .car-selector{
-    &__container{
-      &__car-list{
-        grid-template-columns: repeat(2, 370px);
-      }}}
+::-webkit-scrollbar-track-piece {
+  background-color: transparentize($mainAccent, 0.9);
+  border-radius: 10px;
 }
-@media(max-width:$tablet){
-  .car-selector{
-    &__container{
-      &__car-list{
+::-webkit-scrollbar-thumb {
+  height: 20px;
+  background: linear-gradient(to bottom, $mainAccent, darken($mainAccent, 10));
+  border-radius: 10px;
+}
+
+@media (max-width: $desktopMini) {
+  .car-selector {
+    &__container {
+      &__car-list {
+        grid-template-columns: repeat(2, 300px);
+      }
+    }
+  }
+}
+@media (max-width: $tablet) {
+  .car-selector {
+    &__container {
+      &__car-list {
         grid-template-columns: repeat(1, 370px);
-      }}}
+      }
+    }
+  }
 }
-@media (max-width: $smart){
-  .car-selector{
-    &__container{
+@media (max-width: $smart) {
+  .car-selector {
+    &__container {
       display: flex;
-    justify-content: center;
-      &__car-list{
+      justify-content: center;
+      &__car-list {
         grid-template-columns: repeat(2, 270px);
-      }}}
+      }
+    }
+  }
 }
-@media (max-width: 599px){
-  .car-selector{
-    &__container{
-      
-      &__car-list{
+@media (max-width: 599px) {
+  .car-selector {
+    &__container {
+      &__car-list {
         grid-template-columns: repeat(1, 270px);
-      }}}
+      }
+    }
+  }
 }

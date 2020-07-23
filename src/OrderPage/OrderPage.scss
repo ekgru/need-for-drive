@@ -50,27 +50,37 @@
 @media (max-width: $desktopMini) {
   .order-page {
     &__container {
+      &__form {
+        padding: 16px 0px 0px 32px;
+      }
+      &__total {
+        flex: 1;
+      }
+    }
+  }
+}
+@media (max-width: $tablet) {
+  .order-page {
+    &__container {
+      &__form {
+        padding: 16px;
+      }
       &__total {
         flex: 2;
       }
     }
   }
 }
-@media (max-width: $tablet){
-  .order-page{
-  &__container{
-    &__form{
-    padding:16px
-  }} }
-}
-@media (max-width: $smart){
- .order-page{margin: 0px;
-  overflow-y: auto;
-&__container{
-  flex-direction: column;
-  
-  &__form{
-  padding:8px
-}} }
- 
+@media (max-width: $smart) {
+  .order-page {
+    margin: 0px;
+    overflow-y: auto;
+    &__container {
+      flex-direction: column;
+
+      &__form {
+        padding: 8px;
+      }
+    }
+  }
 }
