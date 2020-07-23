@@ -39,7 +39,7 @@ export default class OrderPage extends React.Component {
         </div>
         <div className="order-page__container">
           <section className="order-page__container__form">
-            <StepTwo />
+            <StepOne />
           </section>
           <section className="order-page__container__total">
             <Total />
