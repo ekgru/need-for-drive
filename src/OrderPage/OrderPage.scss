@@ -6,6 +6,7 @@
   margin-left: 64px;
   flex-direction: column;
   height: 100vh;
+  box-sizing: border-box;
   &__nav {
     color: $grayDark;
     border-top: 1px solid $grayLight;
@@ -31,19 +32,45 @@
     }
   }
   &__container {
-    height: 90vh;
-        flex: 1;
+    box-sizing: border-box;
+    height: 90%;
     display: flex;
+    position: relative;
     &__form {
+      height: 90%;
       flex: 3;
       border-right: 1px solid $grayLight;
-      padding: 32px 64px;
+      padding: 32px 0px 0px 64px;
     }
     &__total {
       flex: 1;
     }
   }
 }
-@media (max-width: $tablet) {
+@media (max-width: $desktopMini) {
+  .order-page {
+    &__container {
+      &__total {
+        flex: 2;
+      }
+    }
+  }
+}
+@media (max-width: $tablet){
+  .order-page{
+  &__container{
+    &__form{
+    padding:16px
+  }} }
+}
+@media (max-width: $smart){
+ .order-page{margin: 0px;
+  overflow-y: auto;
+&__container{
+  flex-direction: column;
   
+  &__form{
+  padding:8px
+}} }
+ 
 }

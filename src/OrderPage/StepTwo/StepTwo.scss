@@ -3,6 +3,7 @@
   display: flex;
     flex-direction: column;
     height: 100%;
+    
   &__category-form {
     &__description {
       font-weight: 300;
@@ -48,7 +49,13 @@
     }
   }
   &__container{
-    overflow-y: auto;
+    margin-top: 16px;
+    overflow-y: hidden;
+&:hover{
+  overflow-y: scroll;
+ 
+}
+
   &__car-list {
     width: fit-content;
     display: grid;
@@ -59,5 +66,42 @@
     grid-gap: 1px;
     box-sizing: border-box;
     background-color: $grayLight;
-  }}
+  }
+}
+}
+::-webkit-scrollbar { width: 10px;}
+::-webkit-scrollbar-track-piece { background-color: transparentize( $mainAccent, .9); border-radius: 10px;}
+::-webkit-scrollbar-thumb { height: 20px; background:linear-gradient(to bottom, $mainAccent, darken($mainAccent, 10));; border-radius: 10px;}
+
+
+@media(max-width:1180px) {
+  .car-selector{
+    &__container{
+      &__car-list{
+        grid-template-columns: repeat(2, 370px);
+      }}}
+}
+@media(max-width:$tablet){
+  .car-selector{
+    &__container{
+      &__car-list{
+        grid-template-columns: repeat(1, 370px);
+      }}}
+}
+@media (max-width: $smart){
+  .car-selector{
+    &__container{
+      display: flex;
+    justify-content: center;
+      &__car-list{
+        grid-template-columns: repeat(2, 270px);
+      }}}
+}
+@media (max-width: 599px){
+  .car-selector{
+    &__container{
+      
+      &__car-list{
+        grid-template-columns: repeat(1, 270px);
+      }}}
 }

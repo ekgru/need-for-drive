@@ -36,8 +36,24 @@
 
   &__info-card {
     box-sizing: border-box;
-
+    min-height: 200px;
     position: relative;
     border: 1px solid white;
+    &__head {
+        padding-left: 8px;
+      color: $mainBlack;
+      font-weight: normal;
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+    &__cost {
+        padding-left: 8px;
+      font-weight: 300;
+      font-size: 14px;
+      color:$grayDark
+    }
+    &__img {
+      float: right;
+    }
   }
 }
