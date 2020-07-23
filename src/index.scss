@@ -31,3 +31,13 @@ body {
   margin: 0;
   height: 100vh;
 }
+fieldset {
+  border: none;
+  width: fit-content;
+  text-align: end;
+}
+legend {
+  font-weight: 300;
+  font-size: 14px;
+  color: $mainBlack;
+}
