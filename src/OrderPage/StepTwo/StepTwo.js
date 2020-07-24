@@ -2,6 +2,7 @@ import React from "react";
 import carImg from "../../resources/car.png";
 import CarCard from "./CarCard";
 import "./StepTwo.scss";
+import CustomInput from "../../CustomInput";
 export default class StepTwo extends React.Component {
   constructor() {
     super();
@@ -103,34 +104,27 @@ export default class StepTwo extends React.Component {
           className="car-selector__category-form"
           onChange={this.handleChange}
         >
-          <label className="car-selector__category-form__description">
-            <input
-              className="car-selector__category-form__radio-btn"
-              type="radio"
-              name="model"
-              value="all"
-              defaultChecked
-            />
-            <span>Все модели</span>
-          </label>
-          <label className="car-selector__category-form__description">
-            <input
-              className="car-selector__category-form__radio-btn"
-              type="radio"
-              name="model"
-              value="econom"
-            />
-            <span>Эконом</span>
-          </label>
-          <label className="car-selector__category-form__description">
-            <input
-              className="car-selector__category-form__radio-btn"
-              type="radio"
-              name="model"
-              value="premium"
-            />
-            <span>Премиум</span>
-          </label>
+          <CustomInput
+            type="radio"
+            name="model"
+            value="all"
+            checked={true}
+            description="Все модели"
+          />
+          <CustomInput
+            type="radio"
+            name="model"
+            value="econom"
+            checked={false}
+            description="Эконом"
+          />
+          <CustomInput
+            type="radio"
+            name="model"
+            value="premium"
+            checked={false}
+            description="Премиум"
+          />
         </form>
         <div className="car-selector__container">
           <div className="car-selector__container__car-list">

@@ -1,20 +1,20 @@
 import React from "react";
 import "./StepOne.scss";
 import FakeMap from "../../resources/FakeMap.jpg";
-import TextInput from "../../TextInput";
+import CustomInput from "../../CustomInput";
 export default class StepOne extends React.Component {
   render() {
     return (
       <div className="step-one">
         <form className="step-one__form" action="">
-          <TextInput
+          <CustomInput
             name={"Город"}
             type="text"
             placeholder="Введите название города"
           />
           <br />
 
-          <TextInput
+          <CustomInput
             name={"Пункт Выдачи"}
             type="text"
             placeholder="Выберите пункт выдачи"

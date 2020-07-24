@@ -1,107 +1,89 @@
 import React from "react";
 import "./StepThree.scss";
-import TextInput from "../../TextInput";
+import CustomInput from "../../CustomInput";
 export default class StepThree extends React.Component {
   render() {
     return (
       <div className="step-three">
-        <form className="step-three__form"></form>
-        <fieldset className="step-three__form__color-selector">
-          <legend>Цвет</legend>
-          <br></br>
-          <label className="step-three__form__color-selector__description">
-            <input
-              className="step-three__form__color-selector__radio-btn"
+        <form className="step-three__form">
+          <fieldset className="step-three__form__color-selector">
+            <legend>Цвет</legend>
+            <br></br>
+            <CustomInput
               type="radio"
               name="Цвет"
               value="anything"
-              defaultChecked
+              checked={true}
+              description="Любой"
             />
-            <span> Любой</span>
-          </label>
-          <label className="step-three__form__color-selector__description">
-            <input
-              className="step-three__form__color-selector__radio-btn"
+            <CustomInput
               type="radio"
               name="Цвет"
               value="Red"
+              checked={false}
+              description="Красный"
             />
-            <span>Красный</span>
-          </label>
-          <label className="step-three__form__color-selector__description">
-            <input
-              className="step-three__form__color-selector__radio-btn"
+            <CustomInput
               type="radio"
               name="Цвет"
               value="Blue"
+              checked={false}
+              description="Голубой"
             />
-            <span>Голубой</span>
-          </label>
-        </fieldset>
-        <fieldset>
-          <legend>Дата аренды</legend>
-          <TextInput name={"С"} type="datetime-local" />
-          <br />
-          <TextInput name={"До"} type="datetime-local" />
-        </fieldset>
-        <fieldset className="step-three__form__tariff">
-          <legend>Тариф</legend>
-          <br></br>
-          <label className="step-three__form__tariff__description">
-            <input
-              className="step-three__form__tariff__radio-btn"
+          </fieldset>
+          <fieldset className="step-three__form__date-selector">
+            <legend>Дата аренды</legend>
+            <CustomInput name={"С"} type="datetime-local" />
+            <br />
+            <CustomInput name={"До"} type="datetime-local" />
+          </fieldset>
+          <fieldset className="step-three__form__tariff">
+            <legend>Тариф</legend>
+            <br />
+            <CustomInput
               type="radio"
               name="Тариф"
               value="perMin"
-              defaultChecked
+              checked={true}
+              description="Поминутно, 7₽/мин"
             />
-            <span>Поминутно, 7₽/мин</span>
-          </label>
-          <br />
-          <label className="step-three__form__tariff__description">
-            <input
-              className="step-three__form__tariff__radio-btn"
+            <br />
+            <CustomInput
               type="radio"
               name="Тариф"
               value="perDay"
+              checked={false}
+              description="На сутки, 1999 ₽/сутки"
             />
-            <span>На сутки, 1999 ₽/сутки</span>
-          </label>
-        </fieldset>
-        <fieldset className="step-three__form__additional">
-          <legend>Дополнительные услуги</legend>
-          <br></br>
-          <label className="step-three__form__additional__description">
-            <input
-              className="step-three__form__additional__checkbox"
+          </fieldset>
+          <fieldset className="step-three__form__additional">
+            <legend>Дополнительные услуги</legend>
+            <br />
+            <CustomInput
               type="checkbox"
-              name="Тариф"
-              value="perMin"
-              defaultChecked
+              name="Опции"
+              value="full fuel"
+              checked={true}
+              description="Полный бак, 500р"
             />
-            <span>Полный бак, 500р</span>
-          </label>
-          <br />
-          <label className="step-three__form__additional__description">
-            <input
-              className="step-three__form__additional__checkbox"
+            <br />
+            <CustomInput
               type="checkbox"
-              name="Тариф"
-              value="perDay"
+              name="Опции"
+              value="child seat"
+              checked={false}
+              description="Детское кресло, 200р"
             />
-            <span>Детское кресло, 200р</span>
-          </label>
-          <br />
-          <label className="step-three__form__additional__description">
-            <input
-              className="step-three__form__additional__checkbox"
+            <br />
+            <CustomInput
               type="checkbox"
-              name="Тариф"
-              value="perMin"
+              name="Опции"
+              value="right hand drive"
+              checked={false}
+              description="Правый руль, 1600р"
             />
-            <span>Правый руль, 1600р</span>
-          </label>
-        </fieldset>
+          </fieldset>
+        </form>
       </div>
     );
   }
