@@ -7,11 +7,14 @@
   flex-direction: column;
   height: 100vh;
   box-sizing: border-box;
+  header{
+    padding: 16px 64px;
+  }
   &__nav {
     color: $grayDark;
     border-top: 1px solid $grayLight;
     border-bottom: 1px solid $grayLight;
-    padding: 2px;
+    padding: 2px 58px;
     &__btn {
       color: $mainAccent;
       background: transparent;
@@ -49,9 +52,10 @@
 }
 @media (max-width: $desktopMini) {
   .order-page {
+   
     &__container {
       &__form {
-        padding: 16px 0px 0px 32px;
+        padding: 16px 0px 0px 64px;
       }
       &__total {
         flex: 1;
@@ -61,6 +65,10 @@
 }
 @media (max-width: $tablet) {
   .order-page {
+    header{
+      padding: 16px 16px;
+    }
+    &__nav {padding: 2px 12px;}
     &__container {
       &__form {
         padding: 16px;
@@ -75,6 +83,7 @@
   .order-page {
     margin: 0px;
     overflow-y: auto;
+    &__nav { padding: 2px 8px; }
     &__container {
       flex-direction: column;
 

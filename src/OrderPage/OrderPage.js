@@ -3,6 +3,7 @@ import Header from "../Header/";
 import StepOne from "./StepOne/";
 import StepTwo from "./StepTwo/";
 import StepThree from "./StepThree/";
+import StepFour from "./StepFour/";
 import Total from "./Total/";
 import "./OrderPage.scss";
 export default class OrderPage extends React.Component {
@@ -40,7 +41,7 @@ export default class OrderPage extends React.Component {
         </div>
         <div className="order-page__container">
           <section className="order-page__container__form">
-            <StepThree />
+            <StepFour carInfo={{}}/>
           </section>
           <section className="order-page__container__total">
             <Total />
