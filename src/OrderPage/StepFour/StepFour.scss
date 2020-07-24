@@ -4,6 +4,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  padding-right: 64px;
   &__info-block {
     &__brand {
       font-weight: normal;
@@ -31,4 +32,12 @@
       }
     }
   }
+}
+@media (max-width: $tablet) {
+  .step-four {
+    padding-right: 32px;}
+}
+@media (max-width: $smart) {
+  .step-four {
+    padding-right: 16px;}
 }

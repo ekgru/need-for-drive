@@ -1,98 +1,85 @@
 @import "../variables.scss";
 
-.order-page {
+.final-page {
   overflow: hidden;
   display: flex;
   margin-left: 64px;
   flex-direction: column;
   height: 100vh;
   box-sizing: border-box;
-  header{
+  header {
     padding: 16px 64px;
   }
   &__nav {
-    color: $grayDark;
     border-top: 1px solid $grayLight;
     border-bottom: 1px solid $grayLight;
     padding: 2px 58px;
-    &__btn {
-      color: $mainAccent;
-      background: transparent;
-      border: none;
-      outline: none;
-      &:active,
-      &:hover {
-        color: darken($mainAccent, 10);
-        border: none;
-        outline: none;
-      }
-      &.completed {
-        color: $mainBlack;
-      }
-      &:disabled {
-        color: $grayDark;
-      }
+    p {
+      color: $mainBlack;
+      margin: 0px;
+      font-weight: bold;
+      font-size: 14px;
     }
   }
+
   &__container {
     box-sizing: border-box;
     height: 90%;
     display: flex;
     position: relative;
-    &__form {
+    &__info {
       height: 90%;
-      flex: 2;
+      flex: 4;
       border-right: 1px solid $grayLight;
       padding: 32px 0px 0px 64px;
     }
     &__total {
-      flex: 1;
+      flex: 2;
     }
   }
 }
 @media (max-width: $desktopMini) {
-  .order-page {
-    header{
-      padding: 16px 32px;
-    }
-    &__nav{
-      padding: 2px 28px;
-    }
+  .final-page {
     &__container {
-      &__form {
-        padding: 16px 0px 0px 32px;
+      &__info {
+        padding: 16px 0px 0px 64px;
       }
       &__total {
-        flex: 1;
+        flex: 2;
       }
     }
   }
 }
+
 @media (max-width: $tablet) {
-  .order-page {
-    header{
+  .final-page {
+    header {
       padding: 16px 16px;
     }
-    &__nav {padding: 2px 12px;}
+    &__nav {
+      padding: 2px 12px;
+    }
     &__container {
-      &__form {
-        padding: 8px;
+      &__info {
+        padding: 16px;
       }
       &__total {
-        flex: 1;
+        flex: 2;
       }
     }
   }
 }
 @media (max-width: $smart) {
-  .order-page {
+  .final-page {
     margin: 0px;
     overflow-y: auto;
-    &__nav { padding: 2px 8px; }
+    &__nav {
+      padding: 2px 8px;
+    }
     &__container {
       flex-direction: column;
 
-      &__form {
+      &__info {
         padding: 8px;
       }
     }

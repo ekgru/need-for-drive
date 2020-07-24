@@ -12,7 +12,7 @@ export default class OrderPage extends React.Component {
       <div className="order-page">
         <Header />
         <div className="order-page__nav">
-          <input
+         <input
             type="button"
             className="order-page__nav__btn"
             value="Местоположение"
@@ -41,7 +41,7 @@ export default class OrderPage extends React.Component {
         </div>
         <div className="order-page__container">
           <section className="order-page__container__form">
-            <StepFour carInfo={{}}/>
+            <StepOne carInfo={{}}/>
           </section>
           <section className="order-page__container__total">
             <Total />
