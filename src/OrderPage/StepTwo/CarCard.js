@@ -1,17 +1,18 @@
 import React from "react";
 import "./CarCard.scss";
 export default function CarCard(props) {
-  let { name, costMin, costMax, pic, category } = props;
+  let { title, costMin, costMax, pic, category,action } = props;
   return (
     <label className="car-card">
       <input
         className="car-card__radio-btn"
         type="radio"
         name="car"
-        value={name}
+        value={title}
+        onChange={action}
       />
       <div className="car-card__info-card">
-        <h2 className="car-card__info-card__head">{name}</h2>
+        <h2 className="car-card__info-card__head">{title}</h2>
         <p className="car-card__info-card__cost">
           {costMin} - {costMax}
         </p>

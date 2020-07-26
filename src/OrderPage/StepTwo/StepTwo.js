@@ -4,8 +4,8 @@ import CarCard from "./CarCard";
 import "./StepTwo.scss";
 import CustomInput from "../../CustomInput";
 export default class StepTwo extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       category: "all",
     };
@@ -74,7 +74,8 @@ export default class StepTwo extends React.Component {
     let result = cars.map((el, i) =>
       this.state.category === "all" ? (
         <CarCard
-          name={el.name}
+        action={this.props.action}
+          title={el.name}
           costMin={el.costMin}
           costMax={el.costMax}
           pic={el.img}
@@ -82,7 +83,8 @@ export default class StepTwo extends React.Component {
         />
       ) : el.category === this.state.category ? (
         <CarCard
-          name={el.name}
+        action={this.props.action}
+          title={el.name}
           costMin={el.costMin}
           costMax={el.costMax}
           pic={el.img}
