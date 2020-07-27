@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "b3e12654e06e66478a71fb62ce8d24b7",
+    "revision": "e10bf248c660827d56756ce849083252",
     "url": "/need-for-drive/index.html"
   },
   {
-    "revision": "0440723a8c52d7ff0024",
+    "revision": "390bb9e245db4e345e5c",
     "url": "/need-for-drive/static/css/2.1be1aeea.chunk.css"
   },
   {
-    "revision": "686f13f7c69d3fb9163d",
-    "url": "/need-for-drive/static/css/main.e39b1b68.chunk.css"
+    "revision": "c20a1fdfe085a91a1137",
+    "url": "/need-for-drive/static/css/main.33aa8f21.chunk.css"
   },
   {
-    "revision": "0440723a8c52d7ff0024",
-    "url": "/need-for-drive/static/js/2.777ab969.chunk.js"
+    "revision": "390bb9e245db4e345e5c",
+    "url": "/need-for-drive/static/js/2.b42e6885.chunk.js"
   },
   {
     "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/need-for-drive/static/js/2.777ab969.chunk.js.LICENSE.txt"
+    "url": "/need-for-drive/static/js/2.b42e6885.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "686f13f7c69d3fb9163d",
-    "url": "/need-for-drive/static/js/main.6377e552.chunk.js"
+    "revision": "c20a1fdfe085a91a1137",
+    "url": "/need-for-drive/static/js/main.40b19fb4.chunk.js"
   },
   {
     "revision": "d626b68bd1aca0cbff82",
@@ -54,6 +54,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "58aef543c97bbaf6a9896e8484456d98",
     "url": "/need-for-drive/static/media/Roboto-Medium.58aef543.ttf"
+  },
+  {
+    "revision": "9c23a58302e982ac52c55141a95ac697",
+    "url": "/need-for-drive/static/media/car.9c23a583.png"
   },
   {
     "revision": "fe2f03dd79c1a187240fba03781540c6",
