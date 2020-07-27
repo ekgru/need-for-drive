@@ -27,7 +27,7 @@ export default function CustomInput({
       {type === "text" ? (
         <button
           className="reset-btn"
-          onClick={onClickAction}
+          
           title="Очистить поле"
         >
           &times;
