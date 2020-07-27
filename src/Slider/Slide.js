@@ -1,8 +1,7 @@
 import React from "react";
 import Button from "../Button/";
-export default function Slide(props) {
-  let { img, head, text } = props;
-  const style = { backgroundImage: `url(${img})` };
+export default function Slide({img, head, text} ) {
+  const style = { backgroundImage: `url(${img})`};
   return (
     <div className="slide" style={style}>
       <span className="slide__content">
