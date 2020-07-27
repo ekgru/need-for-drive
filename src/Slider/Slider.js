@@ -45,8 +45,6 @@ export default function Slider() {
       slidesPerView={1}
       navigation
       pagination={{ clickable: true }}
-      // onSwiper={(swiper) => console.log(swiper)}
-      // onSlideChange={() => console.log("slide change")}
     >
       {sliderContent}
     </Swiper>
