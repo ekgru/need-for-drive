@@ -1,4 +1,4 @@
-@import '../variables.scss';
+@import "../variables.scss";
 
 .nav-btn {
   background: transparent;
@@ -76,7 +76,7 @@
   }
   .nav-btn__bar__wrapper {
     position: absolute;
-    left: 0px;
+    left: 3px;
   }
 }
 @media (max-width: $smart) {

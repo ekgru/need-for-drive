@@ -1,0 +1,43 @@
+@import "../../variables.scss";
+.step-four {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-right: 64px;
+  &__info-block {
+    &__brand {
+      font-weight: normal;
+      font-size: 18px;
+      color: $mainBlack;
+    }
+    &__number {
+      font-weight: 300;
+      font-size: 14px;
+      color: $mainBlack;
+      width: fit-content;
+      border: 1px solid $grayDark;
+      border-radius: 4px;
+      padding: 4px 8px;
+    }
+    &__fuel,
+    &__avilable {
+      font-weight: 300;
+      font-size: 14px;
+      color: $mainBlack;
+      span {
+        font-weight: bold;
+        color: $mainBlack;
+        font-size: 14px;
+      }
+    }
+  }
+}
+@media (max-width: $tablet) {
+  .step-four {
+    padding-right: 32px;}
+}
+@media (max-width: $smart) {
+  .step-four {
+    padding-right: 16px;}
+}

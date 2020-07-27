@@ -13,7 +13,7 @@ export default function MainPageInfoBlock() {
       <p className="main-page__content__info-block__text">
         Поминутная аренда авто твоего города
       </p>
-      <Button title="Забронировать" type="big-btn" />
+      <Button title="Забронировать" type="big-btn" action={()=>document.location='/need-for-drive/order-page'} />
     </div>
   );
 }

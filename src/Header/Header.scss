@@ -3,12 +3,16 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
-  padding: 16px;
+  padding: 16px 32px;
   &__site-name {
     color: $mainAccent;
     font-weight: bold;
     font-size: 30px;
     line-height: 35px;
+    text-decoration: none;
+    &:hover {
+      color: darken($mainAccent, 10);
+    }
   }
   &__geolocation {
     display: flex;

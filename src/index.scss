@@ -1,5 +1,21 @@
 @import "variables";
 $pointer: url("./resources/Pointer.svg"), default;
+@font-face {
+  font-family: "Roboto";
+  src: url("./resources/fonts/Roboto-Bold.ttf");
+  font-weight: bold;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("./resources/fonts/Roboto-Medium.ttf");
+
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("./resources/fonts/Roboto-Light.ttf");
+  font-weight: 300;
+}
 
 path {
   fill: inherit !important;
@@ -13,4 +29,15 @@ path {
 }
 body {
   margin: 0;
+  height: 100vh;
+}
+fieldset {
+  border: none;
+  width: fit-content;
+
+}
+legend {
+  font-weight: 300;
+  font-size: 14px;
+  color: $mainBlack;
 }
