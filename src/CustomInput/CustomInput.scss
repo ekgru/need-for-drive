@@ -16,6 +16,11 @@
   padding: 0px 4px;
   margin: 0px 16px;
 }
+input[type='text']{
+  &::-webkit-calendar-picker-indicator {
+    display: none;
+  }
+}
 .reset-btn {
   position: absolute;
   right: 20px;

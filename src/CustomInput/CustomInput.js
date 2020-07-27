@@ -10,11 +10,11 @@ export default function CustomInput(props) {
     value,
     checked,
     description,
+    list,
   } = props;
-  console.log(props.type + "type" + (props.type === "datetime-local"));
   return type === "text" || type === "datetime-local" || type === "select" ? (
     <label className="label-for-text-input">
-      {name}
+      {description}
       <input
         className="textInput"
         type={type}
@@ -23,6 +23,7 @@ export default function CustomInput(props) {
         placeholder={placeholder}
         onChange={onChangeAction}
         value={value}
+        list={list}
       />
       {type === "text" ? (
         <button
@@ -44,6 +45,7 @@ export default function CustomInput(props) {
         type="radio"
         name={name}
         value={value}
+        onChange={onChangeAction}
         defaultChecked={checked}
       />
       <span>{description}</span>
@@ -55,6 +57,7 @@ export default function CustomInput(props) {
         type="checkbox"
         name={name}
         value={value}
+        onChange={onChangeAction}
         defaultChecked={checked}
       />
       <span>{description}</span>

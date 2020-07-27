@@ -1,4 +1,4 @@
-@import "../variables.scss";
+@import "../../variables.scss";
 
 .final-page {
   overflow: hidden;
@@ -13,7 +13,7 @@
   &__nav {
     border-top: 1px solid $grayLight;
     border-bottom: 1px solid $grayLight;
-    padding: 2px 58px;
+    padding: 2px 32px;
     p {
       color: $mainBlack;
       margin: 0px;
@@ -30,7 +30,6 @@
     &__info {
       height: 90%;
       flex: 4;
-      border-right: 1px solid $grayLight;
       padding: 32px 0px 0px 64px;
     }
     &__total {

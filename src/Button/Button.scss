@@ -1,9 +1,5 @@
 @import "../variables.scss";
 
-.big-btn {
-  width: 250px;
-  height: 48px;
-}
 .button {
   min-height: 32px;
   font-weight: 500;
@@ -21,8 +17,7 @@
       darken($mainAccent, 30)
     );
   }
-  &:active,
-  &:focus {
+  &:active {
     background: linear-gradient(
       to right,
       darken($mainAccent, 30),
@@ -31,6 +26,39 @@
   }
   &:disabled {
     background: $grayLight;
+    color: #fff;
+  }
+}
+
+.big-btn {
+  width: 250px;
+  height: 48px;
+}
+.warn-btn {
+  height: 48px;
+  width: 177px;
+  margin: 8px;
+}
+
+.red-btn {
+  background: linear-gradient(to left, darken(#7b0c3b, 20), #7b0c3b 100%);
+  &:hover {
+    background: linear-gradient(
+      to left,
+      darken(#7b0c3b, 20),
+      darken(#7b0c3b, 30)
+    );
+  }
+  &:active {
+    background: linear-gradient(
+      to right,
+      darken(#7b0c3b, 30),
+      darken(#7b0c3b, 40)
+    );
+  }
+  &:disabled {
+    background: $grayLight;
+    color: #fff;
   }
 }
 @media (max-width: $smart) {
