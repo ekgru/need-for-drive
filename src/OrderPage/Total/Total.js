@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import Button from "../../Button";
 import "./Total.scss";
-export default function Total(props) {
+export default function Total({ params, action }) {
   const [warning, setWarning] = useState(false);
-  let { params, action } = props;
   let {
     currentStep,
     completedSteps,
@@ -21,7 +20,7 @@ export default function Total(props) {
     tariff,
   } = params;
   function isDisable(step) {
-    let i = +step
+    let i = +step;
     switch (i) {
       case 0:
         return city && point ? false : true;
@@ -35,8 +34,8 @@ export default function Total(props) {
       case 3:
         return false;
         break;
-        default:
-          return true
+      default:
+        return false;
     }
   }
   const titles = [
@@ -102,7 +101,7 @@ export default function Total(props) {
               <span className="text__dinamic">{getTime()}</span>
             </p>
           )}
-          {(car) && tariff && (
+          {car && tariff && (
             <p className="total__list__item">
               <span className="text">Тариф</span> <span className="dots"></span>
               <span className="text__dinamic">
@@ -137,7 +136,13 @@ export default function Total(props) {
           <Button
             type={`big-btn ${currentStep === 4 ? "red-btn" : ""}`}
             title={titles[currentStep]}
-            action={currentStep === 3 ? () => setWarning(!warning) : action}
+            action={
+              currentStep === 3
+                ? () => setWarning(!warning)
+                : currentStep === 4
+                ? () => (document.location = "/need-for-drive")
+                : action
+            }
             disable={isDisable(currentStep)}
           />
         </div>

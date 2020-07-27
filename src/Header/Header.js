@@ -5,8 +5,17 @@ export default class Header extends React.Component {
   render() {
     return (
       <header className="header">
-        <span className="header__site-name">Need for drive</span>
-        <span className="header__geolocation"><img className='header__geolocation__icon'src={geoIcon} alt='GeoLocation'/><p>Краснодар</p></span>
+        <a className="header__site-name" href="/need-for-drive">
+          Need for drive
+        </a>
+        <span className="header__geolocation">
+          <img
+            className="header__geolocation__icon"
+            src={geoIcon}
+            alt="GeoLocation"
+          />
+          <p>Краснодар</p>
+        </span>
       </header>
     );
   }

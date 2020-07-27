@@ -58,7 +58,7 @@ export default class OrderPage extends React.Component {
       color,
       dateTo,
       dateFrom,
-      car
+      car,
     } = this.state;
     const steps = [
       <StepOne action={this.handleChange} city={city} point={point} />,

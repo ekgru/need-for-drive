@@ -1,7 +1,13 @@
 import React from "react";
 import "./CarCard.scss";
-export default function CarCard(props) {
-  let { title, costMin, costMax, pic, category,action } = props;
+export default function CarCard({
+  title,
+  costMin,
+  costMax,
+  pic,
+  category,
+  action,
+}) {
   return (
     <label className="car-card">
       <input

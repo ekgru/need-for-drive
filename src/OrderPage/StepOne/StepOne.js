@@ -3,8 +3,8 @@ import "./StepOne.scss";
 import FakeMap from "../../resources/FakeMap.jpg";
 import CustomInput from "../../CustomInput";
 export default class StepOne extends React.Component {
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
   }
   render() {
     return (
@@ -12,12 +12,13 @@ export default class StepOne extends React.Component {
         <form className="step-one__form" action="">
           <CustomInput
             name="city"
-            description='Город'
+            description="Город"
             type="text"
             placeholder="Введите название города"
-            list='city'
-            onChangeAction = {this.props.action}
+            list="city"
+            onChangeAction={this.props.action}
             value={this.props.city}
+            onClickAction={""}
           />
           <datalist id="city">
             <option value="Ульяновск" />
@@ -28,15 +29,15 @@ export default class StepOne extends React.Component {
           <br />
 
           <CustomInput
-          name='point'
+            name="point"
             description="Пункт Выдачи"
             type="text"
             placeholder="Выберите пункт выдачи"
-            list='point'
-            onChangeAction ={this.props.action}
+            list="point"
+            onChangeAction={this.props.action}
             value={this.props.point}
           />
-           <datalist id="point">
+          <datalist id="point">
             <option value="Наримова 12" />
             <option value="Красная 33" />
             <option value="Пушкина 14" />

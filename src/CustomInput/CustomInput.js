@@ -1,17 +1,16 @@
 import React from "react";
 import "./CustomInput.scss";
-export default function CustomInput(props) {
-  let {
-    name,
-    type,
-    placeholder,
-    onChangeAction,
-    onClickAction,
-    value,
-    checked,
-    description,
-    list,
-  } = props;
+export default function CustomInput({
+  name,
+  type,
+  placeholder,
+  onChangeAction,
+  onClickAction,
+  value,
+  checked,
+  description,
+  list,
+}) {
   return type === "text" || type === "datetime-local" || type === "select" ? (
     <label className="label-for-text-input">
       {description}
@@ -30,7 +29,6 @@ export default function CustomInput(props) {
           className="reset-btn"
           onClick={onClickAction}
           title="Очистить поле"
-          type="reset"
         >
           &times;
         </button>

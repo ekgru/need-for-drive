@@ -12,7 +12,6 @@ export default class StepTwo extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
   getCars() {
-    //метод для сбора карточек с машинами, пока фейковый
     const cars = [
       {
         name: "Elantra",
@@ -74,7 +73,7 @@ export default class StepTwo extends React.Component {
     let result = cars.map((el, i) =>
       this.state.category === "all" ? (
         <CarCard
-        action={this.props.action}
+          action={this.props.action}
           title={el.name}
           costMin={el.costMin}
           costMax={el.costMax}
@@ -83,7 +82,7 @@ export default class StepTwo extends React.Component {
         />
       ) : el.category === this.state.category ? (
         <CarCard
-        action={this.props.action}
+          action={this.props.action}
           title={el.name}
           costMin={el.costMin}
           costMax={el.costMax}
