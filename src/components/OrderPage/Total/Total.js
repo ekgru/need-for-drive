@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Button from "../../Button";
 import "./Total.scss";
+import { Link } from "react-router-dom";
+
 export default function Total({ params, action }) {
   const [warning, setWarning] = useState(false);
   let {
@@ -58,7 +60,13 @@ export default function Total({ params, action }) {
           <div className="warning__btns-block">
             <h1 className="warning__btns-block__head"> Подтвердить заказ?</h1>
             <span>
-              <Button title="Подтвердить" type="warn-btn" action={action} />
+              <Link
+                className="button warn-btn fake-btn"
+                to="/need-for-drive/order-page/final"
+                onClick={action}
+              >
+                Подтвердить
+              </Link>
               <Button
                 title="Отменить"
                 type="warn-btn red-btn"
@@ -88,7 +96,7 @@ export default function Total({ params, action }) {
               <span className="text__dinamic">{car}</span>
             </p>
           )}
-          {(currentStep === 2 || completedSteps === 2) && color && (
+          {car && color && (
             <p className="total__list__item">
               <span className="text">Цвет</span> <span className="dots"></span>
               <span className="text__dinamic">{color}</span>
@@ -133,18 +141,21 @@ export default function Total({ params, action }) {
           <p className="total__sum">
             <span>Итого:</span> {price}
           </p>
-          <Button
-            type={`big-btn ${currentStep === 4 ? "red-btn" : ""}`}
-            title={titles[currentStep]}
-            action={
-              currentStep === 3
-                ? () => setWarning(!warning)
-                : currentStep === 4
-                ? () => (document.location = "/need-for-drive")
-                : action
-            }
-            disable={isDisable(currentStep)}
-          />
+          {currentStep !== 4 ? (
+            <Button
+              type={`big-btn`}
+              title={titles[currentStep]}
+              action={currentStep === 3 ? () => setWarning(!warning) : action}
+              disable={isDisable(currentStep)}
+            />
+          ) : (
+            <Link
+              className="button  big-btn red-btn fake-btn"
+              to="/need-for-drive"
+            >
+              Отменить
+            </Link>
+          )}
         </div>
       </div>
     </>

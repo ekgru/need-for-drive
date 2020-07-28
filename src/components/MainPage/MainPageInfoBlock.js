@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../Button";
+import { Link } from "react-router-dom";
 export default function MainPageInfoBlock() {
   return (
     <div className="main-page__content__info-block">
@@ -13,11 +13,12 @@ export default function MainPageInfoBlock() {
       <p className="main-page__content__info-block__text">
         Поминутная аренда авто твоего города
       </p>
-      <Button
-        title="Забронировать"
-        type="big-btn"
-        action={() => (document.location = "/need-for-drive/order-page")}
-      />
+      <Link
+        className="button fake-btn big-btn"
+        to="/need-for-drive/order-page/"
+      >
+        Забронировать
+      </Link>
     </div>
   );
 }
