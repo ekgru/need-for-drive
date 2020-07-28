@@ -41,7 +41,7 @@ export default function Slider() {
     </SwiperSlide>
   ));
   return (
-    <Swiper slidesPerView={1} navigation pagination={{ clickable: true }}>
+    <Swiper loop={true} slidesPerView={1} navigation pagination={{ clickable: true }}>
       {sliderContent}
     </Swiper>
   );
