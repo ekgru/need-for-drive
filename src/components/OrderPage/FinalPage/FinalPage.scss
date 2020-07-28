@@ -1,14 +1,10 @@
 @import "../../../variables.scss";
 
 .final-page {
-  overflow: hidden;
-  display: flex;
-  margin-left: 64px;
-  flex-direction: column;
-  height: 100vh;
-  box-sizing: border-box;
-  header {
-    padding: 16px 64px;
+  &__head {
+    font-weight: normal;
+    font-size: 24px;
+    color: $mainBlack;
   }
   &__nav {
     border-top: 1px solid $grayLight;
@@ -52,9 +48,6 @@
 
 @media (max-width: $tablet) {
   .final-page {
-    header {
-      padding: 16px 16px;
-    }
     &__nav {
       padding: 2px 12px;
     }

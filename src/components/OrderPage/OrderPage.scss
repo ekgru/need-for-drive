@@ -7,7 +7,7 @@
   flex-direction: column;
   height: 100vh;
   box-sizing: border-box;
-  header{
+  header {
     padding: 16px 64px;
   }
   &__nav {
@@ -50,12 +50,17 @@
     }
   }
 }
+@media (min-width: $desktopMini) {
+  .order-page {
+    height: 95vh;
+  }
+}
 @media (max-width: $desktopMini) {
   .order-page {
-    header{
+    header {
       padding: 16px 32px;
     }
-    &__nav{
+    &__nav {
       padding: 2px 28px;
     }
     &__container {
@@ -70,10 +75,12 @@
 }
 @media (max-width: $tablet) {
   .order-page {
-    header{
+    header {
       padding: 16px 16px;
     }
-    &__nav {padding: 2px 12px;}
+    &__nav {
+      padding: 2px 12px;
+    }
     &__container {
       &__form {
         padding: 8px;
@@ -88,7 +95,9 @@
   .order-page {
     margin: 0px;
     overflow-y: auto;
-    &__nav { padding: 2px 8px; }
+    &__nav {
+      padding: 2px 8px;
+    }
     &__container {
       flex-direction: column;
 
