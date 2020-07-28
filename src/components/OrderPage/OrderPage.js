@@ -6,7 +6,7 @@ import StepThree from "./StepThree/";
 import StepFour from "./StepFour/";
 import FinalPage from "./FinalPage/";
 import Total from "./Total/";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 
 import "./OrderPage.scss";
 export default class OrderPage extends React.Component {
@@ -72,7 +72,6 @@ export default class OrderPage extends React.Component {
         options={[isFullTank, isNeedChildChair, isRightWheel]}
       />,
       <StepFour carInfo={{}} />,
-      // <FinalPage />,
     ];
     return (
       <div className="order-page">
@@ -126,15 +125,18 @@ export default class OrderPage extends React.Component {
         <div className="order-page__container">
           <section className="order-page__container__form">
             <Switch>
+              <Route exact path="/need-for-drive/order-page/final">
+                {currentStep === 4 ? (
+                  <FinalPage />
+                ) : (
+                  <Redirect to="/need-for-drive" />
+                )}
+              </Route>
+
               <Route
                 exact
                 path="/need-for-drive/order-page/"
                 render={() => steps[currentStep]}
-              />
-              <Route
-                exact
-                path="/need-for-drive/order-page/final"
-                component={() => <StepFour carInfo={{}} />}
               />
             </Switch>
           </section>
