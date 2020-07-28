@@ -6,10 +6,10 @@ import "swiper/components/navigation/navigation.scss";
 import "swiper/components/pagination/pagination.scss";
 import "./Slider.scss";
 import Slide from "./Slide";
-import slideOne from "../../resources/slider's images/slide_1.jpg";
-import slideTwo from "../../resources/slider's images/slide_2.jpg";
-import slideThree from "../../resources/slider's images/slide_3.jpg";
-import slideFour from "../../resources/slider's images/slide_4.jpg";
+import slideOne from "../../resources/sliderImages/slide_1.jpg";
+import slideTwo from "../../resources/sliderImages/slide_2.jpg";
+import slideThree from "../../resources/sliderImages/slide_3.jpg";
+import slideFour from "../../resources/sliderImages/slide_4.jpg";
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 const content = [
   {
@@ -41,11 +41,7 @@ export default function Slider() {
     </SwiperSlide>
   ));
   return (
-    <Swiper
-      slidesPerView={1}
-      navigation
-      pagination={{ clickable: true }}
-    >
+    <Swiper slidesPerView={1} navigation pagination={{ clickable: true }}>
       {sliderContent}
     </Swiper>
   );

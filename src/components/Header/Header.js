@@ -1,13 +1,14 @@
 import React from "react";
 import geoIcon from "../../resources/Geo.svg";
 import "./Header.scss";
+import { Link } from "react-router-dom";
 export default class Header extends React.Component {
   render() {
     return (
       <header className="header">
-        <a className="header__site-name" href="/need-for-drive">
+        <Link className="header__site-name" to="/need-for-drive">
           Need for drive
-        </a>
+        </Link>
         <span className="header__geolocation">
           <img
             className="header__geolocation__icon"

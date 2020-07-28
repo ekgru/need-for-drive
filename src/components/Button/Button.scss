@@ -30,6 +30,15 @@
   }
 }
 
+.fake-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+.fake-btn.red-btn {
+  margin: 0px auto;
+}
 .big-btn {
   width: 250px;
   height: 48px;
@@ -65,5 +74,8 @@
   .button {
     width: 100%;
     border-radius: 0%;
+  }
+  .warn-btn {
+    border-radius: 5px;
   }
 }
