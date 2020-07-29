@@ -126,16 +126,15 @@ export default class OrderPage extends React.Component {
           <section className="order-page__container__form">
             <Switch>
               <Route exact path="/need-for-drive/order-page/final">
-                {currentStep === 4 ? (
+                {+currentStep === 4 ? (
                   <FinalPage />
                 ) : (
                   <Redirect to="/need-for-drive" />
                 )}
               </Route>
-
               <Route
                 exact
-                path="/need-for-drive/order-page/"
+                path={`/need-for-drive/order-page/`}
                 render={() => steps[currentStep]}
               />
             </Switch>
