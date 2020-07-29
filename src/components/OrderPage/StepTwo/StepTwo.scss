@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-
   &__category-form {
     &__description {
       font-weight: 300;
@@ -13,6 +12,7 @@
   &__container {
     margin-top: 16px;
     overflow-y: auto;
+    flex: 1 1;
     &__car-list {
       width: fit-content;
       display: grid;
