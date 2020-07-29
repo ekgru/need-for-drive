@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Button from "../../Button";
+import Warning from "./Warning";
 import "./Total.scss";
 import { Link } from "react-router-dom";
 
@@ -7,14 +8,12 @@ export default function Total({ params, action }) {
   const [warning, setWarning] = useState(false);
   let {
     currentStep,
-    completedSteps,
     city,
     point,
     car,
     color,
     dateFrom,
     dateTo,
-    rateId,
     price,
     isFullTank,
     isNeedChildChair,
@@ -26,16 +25,12 @@ export default function Total({ params, action }) {
     switch (i) {
       case 0:
         return city && point ? false : true;
-        break;
       case 1:
         return car ? false : true;
-        break;
       case 2:
         return dateFrom && dateTo ? false : true;
-        break;
       case 3:
         return false;
-        break;
       default:
         return false;
     }
@@ -55,26 +50,8 @@ export default function Total({ params, action }) {
   }
   return (
     <>
-      {warning && currentStep === 3 && (
-        <div className="warning">
-          <div className="warning__btns-block">
-            <h1 className="warning__btns-block__head"> Подтвердить заказ?</h1>
-            <span>
-              <Link
-                className="button warn-btn fake-btn"
-                to="/need-for-drive/order-page/final"
-                onClick={action}
-              >
-                Подтвердить
-              </Link>
-              <Button
-                title="Отменить"
-                type="warn-btn red-btn"
-                action={() => setWarning(!warning)}
-              />
-            </span>
-          </div>
-        </div>
+      {warning && +currentStep === 3 && (
+        <Warning actionCancel={() => setWarning(!warning)} actionOk={action} />
       )}
       <div className="total">
         <h1 className="total__head">Ваш заказ:</h1>
@@ -102,7 +79,7 @@ export default function Total({ params, action }) {
               <span className="text__dinamic">{color}</span>
             </p>
           )}
-          {dateFrom != 0 && dateTo != 0 && (
+          {dateFrom !== 0 && dateTo !== 0 && (
             <p className="total__list__item">
               <span className="text">Длительность аренды</span>
               <span className="dots"></span>
@@ -141,11 +118,11 @@ export default function Total({ params, action }) {
           <p className="total__sum">
             <span>Итого:</span> {price}
           </p>
-          {currentStep !== 4 ? (
+          {+currentStep !== 4 ? (
             <Button
               type={`big-btn`}
               title={titles[currentStep]}
-              action={currentStep === 3 ? () => setWarning(!warning) : action}
+              action={+currentStep === 3 ? () => setWarning(!warning) : action}
               disable={isDisable(currentStep)}
             />
           ) : (
