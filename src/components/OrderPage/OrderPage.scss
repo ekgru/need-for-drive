@@ -36,11 +36,11 @@
   }
   &__container {
     box-sizing: border-box;
-    height: 90%;
+    overflow-y: auto;
+    flex: 1 1;
     display: flex;
     position: relative;
     &__form {
-      height: 90%;
       flex: 2;
       border-right: 1px solid $grayLight;
       padding: 32px 0px 0px 64px;
@@ -50,11 +50,7 @@
     }
   }
 }
-@media (min-width: $desktopMini) {
-  .order-page {
-    height: 95vh;
-  }
-}
+
 @media (max-width: $desktopMini) {
   .order-page {
     header {

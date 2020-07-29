@@ -62,42 +62,34 @@ $pointer: url("../../resources/Pointer.svg"), default;
     }
   }
 }
-@for $i from 2 through 3 {
-  .swiper-slide:nth-of-type(#{$i}) {
-    .slide {
-      &__content {
-        &__btn {
-          min-height: 48px;
-          background-image: linear-gradient(
-            to right,
-            adjust-hue($mainAccent, 180deg * ($i - 2) + 20),
-            darken(adjust-hue($mainAccent, 180deg * ($i - 2) + 20), 20)
-          );
-          &:hover {
-            background-image: linear-gradient(
-              to right,
-              darken(adjust-hue($mainAccent, 180deg * ($i - 2) + 20), 20),
-              darken(adjust-hue($mainAccent, 180deg * ($i - 2) + 20), 30)
-            );
-          }
-          &:active,
-          &:focus {
-            background-image: linear-gradient(
-              to right,
-              darken(adjust-hue($mainAccent, 180deg * ($i - 2) + 20), 30),
-              darken(adjust-hue($mainAccent, 180deg * ($i - 2) + 20), 40)
-            );
-          }
-        }
-      }
-    }
-  }
-}
 
-.swiper-slide:last-of-type {
+.swiper-slide {
   .slide {
     &__content {
-      &__btn {
+      &__btn.red {
+        min-height: 48px;
+        background-image: linear-gradient(
+          to right,
+          adjust-hue($mainAccent, 200deg),
+          darken(adjust-hue($mainAccent, 200deg), 20)
+        );
+        &:hover {
+          background-image: linear-gradient(
+            to right,
+            darken(adjust-hue($mainAccent, 200deg), 20),
+            darken(adjust-hue($mainAccent, 200deg), 30)
+          );
+        }
+        &:active,
+        &:focus {
+          background-image: linear-gradient(
+            to right,
+            darken(adjust-hue($mainAccent, 200deg), 30),
+            darken(adjust-hue($mainAccent, 200deg), 40)
+          );
+        }
+      }
+      &__btn.violet {
         background-image: linear-gradient(
           to right,
           adjust-hue($mainAccent, 160deg),
@@ -116,6 +108,28 @@ $pointer: url("../../resources/Pointer.svg"), default;
             to right,
             darken(adjust-hue($mainAccent, 160deg), 30),
             darken(adjust-hue($mainAccent, 160deg), 40)
+          );
+        }
+      }
+      &__btn.aqua {
+        background-image: linear-gradient(
+          to right,
+          adjust-hue($mainAccent, 20deg),
+          darken(adjust-hue($mainAccent, 20deg), 20)
+        );
+        &:hover {
+          background-image: linear-gradient(
+            to right,
+            darken(adjust-hue($mainAccent, 20deg), 20),
+            darken(adjust-hue($mainAccent, 20deg), 30)
+          );
+        }
+        &:active,
+        &:focus {
+          background-image: linear-gradient(
+            to right,
+            darken(adjust-hue($mainAccent, 20deg), 30),
+            darken(adjust-hue($mainAccent, 20deg), 40)
           );
         }
       }
