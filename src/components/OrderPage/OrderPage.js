@@ -26,7 +26,7 @@ export default class OrderPage extends React.Component {
       dateTo: 0,
       rateId: "",
       price: 0,
-      isFullTank: true,
+      isFullTank: false,
       isNeedChildChair: false,
       isRightWheel: false,
     };
@@ -61,15 +61,18 @@ export default class OrderPage extends React.Component {
       dateTo,
       dateFrom,
       car,
+      tariff
     } = this.state;
     const steps = [
       <StepOne action={this.handleChange} city={city} point={point} />,
-      <StepTwo action={this.handleChange} />,
+      <StepTwo action={this.handleChange} currentCar={car} />,
       <StepThree
         action={this.handleChange}
         actionClick={this.handleClick}
         color={color}
+        date={{ dateTo, dateFrom }}
         options={[isFullTank, isNeedChildChair, isRightWheel]}
+        tariff={tariff}
       />,
       <StepFour carInfo={{}} />,
     ];

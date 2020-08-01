@@ -79,6 +79,7 @@ export default class StepTwo extends React.Component {
           costMax={el.costMax}
           pic={el.img}
           key={i}
+          car={this.props.currentCar}
         />
       ) : el.category === this.state.category ? (
         <CarCard
@@ -88,6 +89,7 @@ export default class StepTwo extends React.Component {
           costMax={el.costMax}
           pic={el.img}
           key={i}
+          car={this.props.currentCar}
         />
       ) : (
         ""
@@ -109,28 +111,26 @@ export default class StepTwo extends React.Component {
             type="radio"
             name="model"
             value="all"
-            checked={true}
+            defaultChecked={true}
             description="Все модели"
           />
           <CustomInput
             type="radio"
             name="model"
             value="econom"
-            checked={false}
             description="Эконом"
           />
           <CustomInput
             type="radio"
             name="model"
             value="premium"
-            checked={false}
             description="Премиум"
           />
         </form>
         <div className="car-selector__container">
-          <div className="car-selector__container__car-list">
+          <form className="car-selector__container__car-list">
             {this.getCars()}
-          </div>
+          </form>
         </div>
       </div>
     );

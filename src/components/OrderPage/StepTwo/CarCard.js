@@ -7,6 +7,7 @@ export default function CarCard({
   pic,
   category,
   action,
+  car
 }) {
   return (
     <label className="car-card">
@@ -16,6 +17,7 @@ export default function CarCard({
         name="car"
         value={title}
         onChange={action}
+        checked={title===car ? 'checked' : ''}
       />
       <div className="car-card__info-card">
         <h2 className="car-card__info-card__head">{title}</h2>

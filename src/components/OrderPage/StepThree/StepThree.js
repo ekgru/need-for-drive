@@ -1,91 +1,88 @@
 import React from "react";
 import "./StepThree.scss";
 import CustomInput from "../../CustomInput";
-export default function StepThree(props) {
-  const { action,actionClick} = props;
-  
+export default function StepThree({
+  action,
+  actionClick,
+  color,
+  options,
+  date,
+  tariff,
+}) {
+  const colors = ["Любой", "Красный", "Голубой"];
+  const tariffs = [
+    { value: "perMin", description: "Поминутно, 7₽/мин" },
+    { value: "perDay", description: "На сутки, 1999 ₽/сутки" },
+  ];
+  const additional = [
+    { name: "isFullTank", description: "Полный бак, 500р" },
+    { name: "isNeedChildChair", description: "Детское кресло, 200р" },
+    { name: "isRightWheel", description: "Правый руль, 1600р" },
+  ];
   return (
     <div className="step-three">
       <form className="step-three__form">
         <fieldset className="step-three__form__color-selector">
           <legend>Цвет</legend>
           <br></br>
-          <CustomInput
-            type="radio"
-            name="color"
-            value="Любой"
-            checked={true}
-            description="Любой"
-            onChangeAction={action}
-          />
-          <CustomInput
-            type="radio"
-            name="color"
-            value="Красный"
-            description="Красный"
-            onChangeAction={action}
-          />
-          <CustomInput
-            type="radio"
-            name="color"
-            value="Голубой"
-            description="Голубой"
-            onChangeAction={action}
-          />
+          {colors.map((el, i) => (
+            <CustomInput
+              key={i}
+              type="radio"
+              name="color"
+              value={el}
+              checked={color === el ? true : false}
+              description={el}
+              onChangeAction={action}
+            />
+          ))}
         </fieldset>
         <fieldset className="step-three__form__date-selector">
           <legend>Дата аренды</legend>
-          <CustomInput onChangeAction={action} name='dateFrom' description={"С"} type="datetime-local" />
+          <CustomInput
+            onChangeAction={action}
+            name="dateFrom"
+            value={date.dateFrom}
+            description={"С"}
+            type="datetime-local"
+          />
           <br />
-          <CustomInput onChangeAction={action} name='dateTo' description={"До"} type="datetime-local" />
+          <CustomInput
+            onChangeAction={action}
+            name="dateTo"
+            value={date.dateTo}
+            description={"До"}
+            type="datetime-local"
+          />
         </fieldset>
         <fieldset className="step-three__form__tariff">
           <legend>Тариф</legend>
           <br />
-          <CustomInput
-            type="radio"
-            name="tariff"
-            value="perMin"
-            checked={true}
-            description="Поминутно, 7₽/мин"
-            onChangeAction={action}
-          />
-          <br />
-          <CustomInput
-            type="radio"
-            name="tariff"
-            value="perDay"
-            checked={false}
-            description="На сутки, 1999 ₽/сутки"
-            onChangeAction={action}
-          />
+          {tariffs.map((el, i) => (
+            <CustomInput
+              key={i}
+              type="radio"
+              name="tariff"
+              value={el.value}
+              checked={tariff === el.value ? true : false}
+              description={el.description}
+              onChangeAction={action}
+            />
+          ))}
         </fieldset>
         <fieldset className="step-three__form__additional">
           <legend>Дополнительные услуги</legend>
           <br />
-          <CustomInput
-            type="checkbox"
-            name="isFullTank"
-            checked={true}
-            description="Полный бак, 500р"
-            onChangeAction={actionClick}
-          />
-          <br />
-          <CustomInput
-            type="checkbox"
-            name="isNeedChildChair"
-            checked={false}
-            description="Детское кресло, 200р"
-            onChangeAction={actionClick}
-          />
-          <br />
-          <CustomInput
-            type="checkbox"
-            name="isRightWheel"
-            checked={false}
-            description="Правый руль, 1600р"
-            onChangeAction={actionClick}
-          />
+          {additional.map((el, i) => (
+            <CustomInput
+              key={i}
+              type="checkbox"
+              name={el.name}
+              checked={options[i]}
+              description={el.description}
+              onChangeAction={actionClick}
+            />
+          ))}
         </fieldset>
       </form>
     </div>

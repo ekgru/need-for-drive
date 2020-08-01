@@ -7,6 +7,7 @@ export default function CustomInput({
   onChangeAction,
   onClickAction,
   value,
+  defaultChecked,
   checked,
   description,
   list,
@@ -25,11 +26,7 @@ export default function CustomInput({
         list={list}
       />
       {type === "text" ? (
-        <button
-          className="reset-btn"
-          
-          title="Очистить поле"
-        >
+        <button className="reset-btn" type="reset" title="Очистить поле">
           &times;
         </button>
       ) : (
@@ -44,7 +41,8 @@ export default function CustomInput({
         name={name}
         value={value}
         onChange={onChangeAction}
-        defaultChecked={checked}
+        checked={checked}
+        defaultChecked={defaultChecked}
       />
       <span>{description}</span>
     </label>
@@ -56,7 +54,7 @@ export default function CustomInput({
         name={name}
         value={value}
         onChange={onChangeAction}
-        defaultChecked={checked}
+        checked={checked}
       />
       <span>{description}</span>
     </label>
