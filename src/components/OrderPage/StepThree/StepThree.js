@@ -2,7 +2,7 @@ import React from 'react';
 import './StepThree.scss';
 import CustomInput from '../../CustomInput';
 export default function StepThree(props) {
-  const { action, actionClick } = props;
+  const { action, actionClick, dateFrom, dateTo } = props;
 
   return (
     <div className='step-three'>
@@ -40,12 +40,15 @@ export default function StepThree(props) {
             name='dateFrom'
             description={'С'}
             type='datetime-local'
+            value={dateFrom}
           />
           <br />
           <CustomInput
+          dateFrom={dateFrom}
             onChangeAction={action}
             name='dateTo'
             description={'До'}
+            value={dateTo}
             type='datetime-local'
           />
         </fieldset>

@@ -10,14 +10,41 @@ export default function CustomInput({
   checked,
   description,
   list,
+  dateFrom,
 }) {
   return type === 'text' || type === 'datetime-local' || type === 'select' ? (
-    <label className="label-for-text-input">
+    <label className='label-for-text-input'>
       {description}
       <input
-        className="textInput"
+        className='textInput'
         type={type}
-        required="required"
+        min={
+          type === 'datetime-local'
+            ?( name === 'dateTo') && (dateFrom !==0)
+            ? `${new Date(dateFrom).getFullYear()}-${`${
+              new Date(dateFrom).getMonth() + 1
+            }`.padStart(2, 0)}-${`${new Date(dateFrom).getDate()
+            }`.padStart(2, 0)
+          }T${`${new Date(dateFrom).getHours()}`.padStart(2, 0)
+            }:${`${new Date(dateFrom).getMinutes()}`.padStart(2, 0)}` :
+            `${new Date().getFullYear()}-${`${
+                new Date().getMonth() + 1
+              }`.padStart(2, 0)}-${`${new Date().getDate()}`.padStart(2, 0)
+            }T${`${new Date().getHours()}`.padStart(2, 0)
+              }:${`${new Date().getMinutes()}`.padStart(2, 0)}`
+            : ''
+        }
+        max={
+          (type === 'datetime-local') && name==='dateTo' && dateFrom !== 0
+            ? `${new Date(dateFrom).getFullYear()}-${`${
+                new Date(dateFrom).getMonth() + 2
+              }`.padStart(2, 0)}-${`${new Date(dateFrom).getDate()
+              }`.padStart(2, 0)
+            }T${`${new Date(dateFrom).getHours()}`.padStart(2, 0)
+              }:${`${new Date(dateFrom).getMinutes()}`.padStart(2, 0)}`
+            : ''
+        }
+        required='required'
         name={name}
         placeholder={placeholder}
         onChange={onChangeAction}
@@ -25,11 +52,7 @@ export default function CustomInput({
         list={list}
       />
       {type === 'text' ? (
-        <button
-          className="reset-btn"
-
-          title="Очистить поле"
-        >
+        <button className='reset-btn' title='Очистить поле'>
           &times;
         </button>
       ) : (
@@ -37,10 +60,10 @@ export default function CustomInput({
       )}
     </label>
   ) : type === 'radio' ? (
-    <label className="radio-btn__description">
+    <label className='radio-btn__description'>
       <input
-        className="radio-btn"
-        type="radio"
+        className='radio-btn'
+        type='radio'
         name={name}
         value={value}
         onChange={onChangeAction}
@@ -49,10 +72,10 @@ export default function CustomInput({
       <span>{description}</span>
     </label>
   ) : (
-    <label className="checkbox__description">
+    <label className='checkbox__description'>
       <input
-        className="checkbox"
-        type="checkbox"
+        className='checkbox'
+        type='checkbox'
         name={name}
         value={value}
         onChange={onChangeAction}

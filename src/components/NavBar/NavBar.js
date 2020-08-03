@@ -4,6 +4,8 @@ import './NavBar.scss';
 export default function NavBar() {
   const [view, setView] = useState(false);
   const [eng, setEng] = useState(false);
+  const menuItems = ['Парковка', 'Страховка', 'Бензин', 'Обслуживание'];
+  const social = ['telegram', 'facebook', 'instagram'];
   return (
     <>
       <div className='nav-bar'>
@@ -17,22 +19,15 @@ export default function NavBar() {
       </div>
       <div className={'nav-menu' + (view ? '  active' : '')}>
         <nav className='nav-menu__link-list'>
-          <a className='nav-menu__link-list__link' href='#'>
-            Парковка
-          </a>
-          <a className='nav-menu__link-list__link' href='#'>
-            Страховка
-          </a>
-          <a className='nav-menu__link-list__link' href='#'>
-            Бензин
-          </a>
-          <a className='nav-menu__link-list__link' href='#'>
-            Обслуживание
-          </a>
+          {menuItems.map((el, i) => (
+            <a key={i} className='nav-menu__link-list__link' href='#'>
+              {el}
+            </a>
+          ))}
           <span className='nav-menu__link-list__social-block'>
-            <span className='icon icon-telegram'></span>
-            <span className='icon icon-facebook'></span>
-            <span className='icon icon-instagram'></span>
+            {social.map((el, i) => (
+              <span key={i} className={`icon icon-${el}`}></span>
+            ))}
           </span>
         </nav>
       </div>
