@@ -19,10 +19,10 @@ export default class OrderPage extends React.Component {
       city: '',
       pointId: '',
       point: '',
-      carId: '',
       car: '',
+      carInfo: {},
       tariff: 'perMin',
-      color: 'Любой',
+      currentColor: 'Любой',
       dateFrom: 0,
       dateTo: 0,
       rateId: '',
@@ -34,6 +34,7 @@ export default class OrderPage extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.stepNavigation = this.stepNavigation.bind(this);
+    this.getCurrentCar = this.getCurrentCar.bind(this);
   }
   handleChange(event) {
     const { name, value } = event.target;
@@ -44,6 +45,9 @@ export default class OrderPage extends React.Component {
     this.setState((prevState) => {
       return { [name]: !prevState[name] };
     });
+  }
+  getCurrentCar(info) {
+    this.setState({ carInfo: info });
   }
   stepNavigation() {
     +this.state.currentStep === +this.state.completedStep
@@ -58,6 +62,10 @@ export default class OrderPage extends React.Component {
         });
   }
   render() {
+    const API = 'http://api-factory.simbirsoft1.com/api/db/';
+    const headers = {
+      'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
+    };
     const {
       city,
       point,
@@ -66,21 +74,28 @@ export default class OrderPage extends React.Component {
       isFullTank,
       orderNumber,
       currentStep,
-      color,
+      currentColor,
       completedStep,
       dateFrom,
-      car,
+      carInfo,
       tariff,
       dateTo,
     } = this.state;
     /* eslint-disable react/jsx-key */
     const steps = [
       <StepOne action={this.handleChange} city={city} point={point} />,
-      <StepTwo action={this.handleChange} currentCar={car} />,
+      <StepTwo
+      actionCar={this.getCurrentCar}
+        api={API}
+        headers={headers}
+        action={this.handleChange}
+        currentCar={carInfo.name}
+      />,
       <StepThree
         action={this.handleChange}
         actionClick={this.handleClick}
-        color={color}
+        currentColor={currentColor}
+        colors={carInfo.colors}
         dateFrom={dateFrom}
         dateTo={dateTo}
         options={[isFullTank, isNeedChildChair, isRightWheel]}
@@ -105,7 +120,7 @@ export default class OrderPage extends React.Component {
           <div className='order-page__nav'>
             {navigation.map((el, i) => (
               <NavElement
-              key={i}
+                key={i}
                 value={el.value}
                 description={el.description}
                 action={this.handleChange}

@@ -39,6 +39,8 @@ input[type='text']{
 .radio-btn__description {
   font-weight: 300;
   font-size: 14px;
+  text-transform: capitalize;
+
   .radio-btn {
     position: absolute;
     z-index: -1;

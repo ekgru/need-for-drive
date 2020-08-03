@@ -16,7 +16,7 @@ export default function NavElement({
       >
         {description}
       </button>
-      <span>►</span>
+      {value !== 3 && <span>►</span>}
     </>
   );
 }
