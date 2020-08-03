@@ -1,5 +1,5 @@
-import React from "react";
-import "./CustomInput.scss";
+import React from 'react';
+import './CustomInput.scss';
 export default function CustomInput({
   name,
   type,
@@ -11,7 +11,7 @@ export default function CustomInput({
   description,
   list,
 }) {
-  return type === "text" || type === "datetime-local" || type === "select" ? (
+  return type === 'text' || type === 'datetime-local' || type === 'select' ? (
     <label className="label-for-text-input">
       {description}
       <input
@@ -24,19 +24,19 @@ export default function CustomInput({
         value={value}
         list={list}
       />
-      {type === "text" ? (
+      {type === 'text' ? (
         <button
           className="reset-btn"
-          
+
           title="Очистить поле"
         >
           &times;
         </button>
       ) : (
-        ""
+        ''
       )}
     </label>
-  ) : type === "radio" ? (
+  ) : type === 'radio' ? (
     <label className="radio-btn__description">
       <input
         className="radio-btn"

@@ -1,5 +1,8 @@
-@import "../../variables.scss";
-$pointer: url("../../resources/Pointer.svg"), default;
+@import '../../variables.scss';
+$pointer: url('../../resources/Pointer.svg'), default;
+$telegram: url('../../resources/Telegram.svg');
+$facebook: url('../../resources/Facebook.svg');
+$instagram: url('../../resources/Instagram.svg');
 
 .nav-bar {
   display: flex;
@@ -30,8 +33,10 @@ $pointer: url("../../resources/Pointer.svg"), default;
   }
 
   &__link-list {
+    box-sizing: border-box;
     position: absolute;
-    left: 32px;
+    padding-left: 32px;
+    margin-left: 32px;
     justify-content: center;
     width: 60%;
     height: 100%;
@@ -52,12 +57,26 @@ $pointer: url("../../resources/Pointer.svg"), default;
       color: $mainAccent;
     }
     &__social-block {
-      margin-left: 32px;
-      &__icon {
-        margin: 8px;
-        fill: $grayLight;
+      margin: 32px;
+      display: flex;
+      .icon {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        margin-right: 24px;
+        mask-size: cover;
+        background: $grayLight;
+        &.icon-telegram {
+          mask: $telegram;
+        }
+        &.icon-facebook {
+          mask: $facebook;
+        }
+        &.icon-instagram {
+          mask: $instagram;
+        }
         &:hover {
-          fill: $mainAccent;
+          background: $mainAccent;
         }
       }
     }
@@ -86,6 +105,7 @@ $pointer: url("../../resources/Pointer.svg"), default;
 }
 @media (max-width: $tablet) {
   .nav-menu__link-list {
-    width: 100%;
+    width: -webkit-fill-available;
+    height:-webkit-fill-available ;
   }
 }

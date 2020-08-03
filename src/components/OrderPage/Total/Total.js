@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import Button from "../../Button";
-import Warning from "./Warning";
-import "./Total.scss";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import Button from '../../Button';
+import Warning from './Warning';
+import './Total.scss';
+import { Link } from 'react-router-dom';
 
 export default function Total({ params, action }) {
   const [warning, setWarning] = useState(false);
-  let {
+  const {
     currentStep,
     city,
     point,
@@ -21,7 +21,7 @@ export default function Total({ params, action }) {
     tariff,
   } = params;
   function isDisable(step) {
-    let i = +step;
+    const i = +step;
     switch (i) {
       case 0:
         return city && point ? false : true;
@@ -36,17 +36,17 @@ export default function Total({ params, action }) {
     }
   }
   const titles = [
-    "Выбрать модель",
-    "Дополнительно",
-    "Итого",
-    "Заказать",
-    "Отменить",
+    'Выбрать модель',
+    'Дополнительно',
+    'Итого',
+    'Заказать',
+    'Отменить',
   ];
   function getTime() {
-    let resultHours = (new Date(dateTo) - new Date(dateFrom)) / 3600000;
-    return resultHours >= 24
-      ? `${Math.trunc(resultHours / 24)} Д ${Math.trunc(resultHours % 24)} Ч`
-      : resultHours + "Ч";
+    const resultHours = (new Date(dateTo) - new Date(dateFrom)) / 3600000;
+    return resultHours >= 24 ?
+      `${Math.trunc(resultHours / 24)} Д ${Math.trunc(resultHours % 24)} Ч` :
+      resultHours + 'Ч';
   }
   return (
     <>
@@ -68,7 +68,7 @@ export default function Total({ params, action }) {
           )}
           {car && (
             <p className="total__list__item">
-              <span className="text">Модель</span>{" "}
+              <span className="text">Модель</span>{' '}
               <span className="dots"></span>
               <span className="text__dinamic">{car}</span>
             </p>
@@ -90,7 +90,7 @@ export default function Total({ params, action }) {
             <p className="total__list__item">
               <span className="text">Тариф</span> <span className="dots"></span>
               <span className="text__dinamic">
-                {tariff === "perMin" ? "Поминутно" : "На сутки"}
+                {tariff === 'perMin' ? 'Поминутно' : 'На сутки'}
               </span>
             </p>
           )}

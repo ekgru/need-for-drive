@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import Button from "../../Button";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Button from '../../Button';
 
 export default function Warning({ actionOk, actionCancel }) {
   return (
@@ -10,7 +10,7 @@ export default function Warning({ actionOk, actionCancel }) {
         <span>
           <Link
             className="button warn-btn fake-btn"
-            to={"/need-for-drive/order-page/final"}
+            to={'/need-for-drive/order-page/final'}
             onClick={actionOk}
           >
             Подтвердить

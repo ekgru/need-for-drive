@@ -1,2 +1,2 @@
-import FinalPage from './FinalPage.js'
-export default FinalPage
+import FinalPage from './FinalPage.js';
+export default FinalPage;

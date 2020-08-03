@@ -1,5 +1,5 @@
-import React from "react";
-import "./MainPageFooter.scss";
+import React from 'react';
+import './MainPageFooter.scss';
 export default function MainPageFooter() {
   return (
     <footer className="footer">

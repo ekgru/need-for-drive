@@ -1,77 +1,77 @@
-import React from "react";
-import carImg from "../../../resources/car.png";
-import CarCard from "./CarCard";
-import "./StepTwo.scss";
-import CustomInput from "../../CustomInput";
+import React from 'react';
+import carImg from '../../../resources/car.png';
+import CarCard from './CarCard';
+import './StepTwo.scss';
+import CustomInput from '../../CustomInput';
 export default class StepTwo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      category: "all",
+      category: 'all',
     };
     this.handleChange = this.handleChange.bind(this);
   }
   getCars() {
     const cars = [
       {
-        name: "Elantra",
-        costMin: "12000",
-        costMax: "25000",
+        name: 'Elantra',
+        costMin: '12000',
+        costMax: '25000',
         img: carImg,
-        category: "premium",
+        category: 'premium',
       },
       {
-        name: "Elantra 1",
-        costMin: "12000",
-        costMax: "25000",
+        name: 'Elantra 1',
+        costMin: '12000',
+        costMax: '25000',
         img: carImg,
-        category: "econom",
+        category: 'econom',
       },
       {
-        name: "Elantra 2",
-        costMin: "12000",
-        costMax: "25000",
+        name: 'Elantra 2',
+        costMin: '12000',
+        costMax: '25000',
         img: carImg,
-        category: "premium",
+        category: 'premium',
       },
       {
-        name: "Elantra 3",
-        costMin: "12000",
-        costMax: "25000",
+        name: 'Elantra 3',
+        costMin: '12000',
+        costMax: '25000',
         img: carImg,
-        category: "econom",
+        category: 'econom',
       },
       {
-        name: "Elantra 4",
-        costMin: "12000",
-        costMax: "25000",
+        name: 'Elantra 4',
+        costMin: '12000',
+        costMax: '25000',
         img: carImg,
-        category: "premium",
+        category: 'premium',
       },
       {
-        name: "Elantra 5",
-        costMin: "12000",
-        costMax: "25000",
+        name: 'Elantra 5',
+        costMin: '12000',
+        costMax: '25000',
         img: carImg,
-        category: "econom",
+        category: 'econom',
       },
       {
-        name: "Elantra 6",
-        costMin: "12000",
-        costMax: "25000",
+        name: 'Elantra 6',
+        costMin: '12000',
+        costMax: '25000',
         img: carImg,
-        category: "premium",
+        category: 'premium',
       },
       {
-        name: "Elantra 7",
-        costMin: "12000",
-        costMax: "25000",
+        name: 'Elantra 7',
+        costMin: '12000',
+        costMax: '25000',
         img: carImg,
-        category: "econom",
+        category: 'econom',
       },
     ];
-    let result = cars.map((el, i) =>
-      this.state.category === "all" ? (
+    const result = cars.map((el, i) =>
+      this.state.category === 'all' ? (
         <CarCard
           action={this.props.action}
           title={el.name}
@@ -90,8 +90,8 @@ export default class StepTwo extends React.Component {
           key={i}
         />
       ) : (
-        ""
-      )
+        ''
+      ),
     );
     return result;
   }
