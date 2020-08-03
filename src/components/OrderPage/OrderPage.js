@@ -68,6 +68,8 @@ export default class OrderPage extends React.Component {
       currentStep,
       color,
       completedStep,
+      dateFrom,
+      dateTo,
     } = this.state;
     /* eslint-disable react/jsx-key */
     const steps = [
@@ -77,6 +79,8 @@ export default class OrderPage extends React.Component {
         action={this.handleChange}
         actionClick={this.handleClick}
         color={color}
+        dateFrom={dateFrom}
+        dateTo={dateTo}
         options={[isFullTank, isNeedChildChair, isRightWheel]}
       />,
       <StepFour carInfo={{}} />,
@@ -96,8 +100,9 @@ export default class OrderPage extends React.Component {
           </div>
         ) : (
           <div className='order-page__nav'>
-            {navigation.map((el) => (
+            {navigation.map((el, i) => (
               <NavElement
+              key={i}
                 value={el.value}
                 description={el.description}
                 action={this.handleChange}
