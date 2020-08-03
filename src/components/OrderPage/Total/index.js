@@ -1,2 +1,2 @@
-import Total from './Total'
-export default Total
+import Total from './Total';
+export default Total;

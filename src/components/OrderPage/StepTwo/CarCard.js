@@ -1,5 +1,5 @@
-import React from "react";
-import "./CarCard.scss";
+import React from 'react';
+import './CarCard.scss';
 export default function CarCard({
   title,
   costMin,

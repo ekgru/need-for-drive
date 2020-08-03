@@ -1,7 +1,7 @@
-import React from "react";
-import "./StepOne.scss";
-import FakeMap from "../../../resources/FakeMap.jpg";
-import CustomInput from "../../CustomInput";
+import React from 'react';
+import './StepOne.scss';
+import FakeMap from '../../../resources/FakeMap.jpg';
+import CustomInput from '../../CustomInput';
 export default class StepOne extends React.Component {
   constructor(props) {
     super(props);
@@ -18,7 +18,7 @@ export default class StepOne extends React.Component {
             list="city"
             onChangeAction={this.props.action}
             value={this.props.city}
-            onClickAction={""}
+            onClickAction={''}
           />
           <datalist id="city">
             <option value="Ульяновск" />

@@ -1,41 +1,41 @@
-import React from "react";
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/swiper.scss";
-import "swiper/components/navigation/navigation.scss";
-import "swiper/components/pagination/pagination.scss";
-import "./Slider.scss";
-import Slide from "./Slide";
-import slideOne from "../../resources/sliderImages/slide_1.jpg";
-import slideTwo from "../../resources/sliderImages/slide_2.jpg";
-import slideThree from "../../resources/sliderImages/slide_3.jpg";
-import slideFour from "../../resources/sliderImages/slide_4.jpg";
+import React from 'react';
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper.scss';
+import 'swiper/components/navigation/navigation.scss';
+import 'swiper/components/pagination/pagination.scss';
+import './Slider.scss';
+import Slide from './Slide';
+import slideOne from '../../resources/sliderImages/slide_1.jpg';
+import slideTwo from '../../resources/sliderImages/slide_2.jpg';
+import slideThree from '../../resources/sliderImages/slide_3.jpg';
+import slideFour from '../../resources/sliderImages/slide_4.jpg';
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 const content = [
   {
-    head: "Бесплатная парковка",
+    head: 'Бесплатная парковка',
     text:
-      "Оставляйте машину на платных городских парковках и разрешенных местах, не нарушая ПДД, а также в аэропортах",
+      'Оставляйте машину на платных городских парковках и разрешенных местах, не нарушая ПДД, а также в аэропортах',
     img: slideOne,
-    color: 'default'
+    color: 'default',
   },
   {
-    head: "Страховка",
-    text: "Полная страховка автомобиля",
+    head: 'Страховка',
+    text: 'Полная страховка автомобиля',
     img: slideTwo,
-    color: 'aqua'
+    color: 'aqua',
   },
   {
-    head: "Бензин",
-    text: "Полный бак на любой заправке города за наш счёт",
+    head: 'Бензин',
+    text: 'Полный бак на любой заправке города за наш счёт',
     img: slideThree,
-    color: 'red'
+    color: 'red',
   },
   {
-    head: "Обслуживание",
-    text: "Автомобиль проходит еженедельное ТО",
+    head: 'Обслуживание',
+    text: 'Автомобиль проходит еженедельное ТО',
     img: slideFour,
-    color: 'violet'
+    color: 'violet',
   },
 ];
 export default function Slider() {

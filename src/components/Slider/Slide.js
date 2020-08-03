@@ -1,5 +1,5 @@
-import React from "react";
-import Button from "../Button";
+import React from 'react';
+import Button from '../Button';
 export default function Slide({img, head, text, color} ) {
   const style = { backgroundImage: `url(${img})`};
   return (
