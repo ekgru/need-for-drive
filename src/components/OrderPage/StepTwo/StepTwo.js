@@ -12,9 +12,10 @@ export default class StepTwo extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
   componentDidMount() {
+    const { api, headers } = this.props;
     this.getCars();
-    fetch(`${this.props.api}car`, {
-      headers: this.props.headers,
+    fetch(`${api}car`, {
+      headers: headers,
     })
       .then((response) => response.json())
       .then(({ data }) => {
@@ -23,6 +24,7 @@ export default class StepTwo extends React.Component {
       .catch((err) => console.error('ERROR', err));
   }
   getCars() {
+    const { action, actionCar, currentCar } = this.props;
     return this.state.cars.map((el, i) => (
       <CarCard
         display={
@@ -31,15 +33,15 @@ export default class StepTwo extends React.Component {
             ? ''
             : 'none'
         }
-        action={this.props.action}
-        getCar={this.props.actionCar}
+        action={action}
+        getCar={actionCar}
         title={el.name}
         costMin={el.priceMin}
         costMax={el.priceMax}
         carInfo={el}
         pic={el.thumbnail.path}
         key={i}
-        car={this.props.currentCar}
+        car={currentCar}
       />
     ));
   }
