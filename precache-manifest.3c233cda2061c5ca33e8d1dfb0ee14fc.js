@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "65a7568dc6f02613fa8ed9355f10982d",
+    "revision": "b9b75b9b0ada248ec4459e4d5957e644",
     "url": "/need-for-drive/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/need-for-drive/static/css/2.1be1aeea.chunk.css"
   },
   {
-    "revision": "326aa645bf9f5af81a40",
-    "url": "/need-for-drive/static/css/main.7f71c31e.chunk.css"
+    "revision": "64decb52a367757a6f54",
+    "url": "/need-for-drive/static/css/main.4dfb51a9.chunk.css"
   },
   {
     "revision": "3dd81ccccf77d77377fa",
@@ -20,7 +20,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/need-for-drive/static/js/2.9a72bf57.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "326aa645bf9f5af81a40",
+    "revision": "64decb52a367757a6f54",
     "url": "/need-for-drive/static/js/main.bae7e681.chunk.js"
   },
   {
