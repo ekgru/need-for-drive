@@ -5,7 +5,6 @@ export default function CarCard({
   costMin,
   costMax,
   pic,
-  action,
   car,
   getCar,
   carInfo,
@@ -26,7 +25,7 @@ export default function CarCard({
       <div className='car-card__info-card'>
         <h2 className='car-card__info-card__head'>{title}</h2>
         <p className='car-card__info-card__cost'>
-          {costMin} - {costMax}
+          {costMin} - {costMax}₽
         </p>
         <img
           className='car-card__info-card__img'

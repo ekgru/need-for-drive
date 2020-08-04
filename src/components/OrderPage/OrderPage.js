@@ -47,7 +47,7 @@ export default class OrderPage extends React.Component {
     });
   }
   getCurrentCar(info) {
-    this.setState({ carInfo: info });
+    this.setState({ carInfo: info, currentColor: 'Любой' });
   }
   stepNavigation() {
     +this.state.currentStep === +this.state.completedStep
@@ -85,7 +85,7 @@ export default class OrderPage extends React.Component {
     const steps = [
       <StepOne action={this.handleChange} city={city} point={point} />,
       <StepTwo
-      actionCar={this.getCurrentCar}
+        actionCar={this.getCurrentCar}
         api={API}
         headers={headers}
         action={this.handleChange}
