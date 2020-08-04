@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bcf0650f2f2629c99125545bf53e3f7f",
+    "revision": "696e5b25713d328cd916560b88034837",
     "url": "/need-for-drive/index.html"
   },
   {
-    "revision": "20a6c6d6653103291769",
+    "revision": "3dd81ccccf77d77377fa",
     "url": "/need-for-drive/static/css/2.1be1aeea.chunk.css"
   },
   {
-    "revision": "4b0a15de6b8674180758",
-    "url": "/need-for-drive/static/css/main.cb7b848e.chunk.css"
+    "revision": "ebefe2c24ccfaec787b7",
+    "url": "/need-for-drive/static/css/main.7c8c5b44.chunk.css"
   },
   {
-    "revision": "20a6c6d6653103291769",
-    "url": "/need-for-drive/static/js/2.3e3c3521.chunk.js"
+    "revision": "3dd81ccccf77d77377fa",
+    "url": "/need-for-drive/static/js/2.9a72bf57.chunk.js"
   },
   {
     "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/need-for-drive/static/js/2.3e3c3521.chunk.js.LICENSE.txt"
+    "url": "/need-for-drive/static/js/2.9a72bf57.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "4b0a15de6b8674180758",
-    "url": "/need-for-drive/static/js/main.2321af13.chunk.js"
+    "revision": "ebefe2c24ccfaec787b7",
+    "url": "/need-for-drive/static/js/main.495c3d46.chunk.js"
   },
   {
     "revision": "d626b68bd1aca0cbff82",
@@ -32,12 +32,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/need-for-drive/static/media/Cursor.a710fbef.svg"
   },
   {
+    "revision": "e3ff8c356fa9d60b75d1f57defed822c",
+    "url": "/need-for-drive/static/media/Facebook.e3ff8c35.svg"
+  },
+  {
     "revision": "65b12582a9af555be8a237b2e9bf627d",
     "url": "/need-for-drive/static/media/FakeMap.65b12582.jpg"
   },
   {
     "revision": "f2245ebb9520217efe387957369c639d",
     "url": "/need-for-drive/static/media/Geo.f2245ebb.svg"
+  },
+  {
+    "revision": "c9d373a5ab9392d414f0537b3637b02a",
+    "url": "/need-for-drive/static/media/Instagram.c9d373a5.svg"
   },
   {
     "revision": "6efdf9275e2822493f8356a1cc894064",
@@ -54,6 +62,10 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "58aef543c97bbaf6a9896e8484456d98",
     "url": "/need-for-drive/static/media/Roboto-Medium.58aef543.ttf"
+  },
+  {
+    "revision": "0b51a5ca7971677b0a92b44bd2e193cd",
+    "url": "/need-for-drive/static/media/Telegram.0b51a5ca.svg"
   },
   {
     "revision": "9c23a58302e982ac52c55141a95ac697",
