@@ -6,7 +6,7 @@ export default class Header extends React.Component {
   render() {
     return (
       <header className="header">
-        <Link className="header__site-name" to="/need-for-drive">
+        <Link className="header__site-name" to="/">
           Need for drive
         </Link>
         <span className="header__geolocation">

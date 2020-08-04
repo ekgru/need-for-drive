@@ -10,7 +10,7 @@ export default function Warning({ actionOk, actionCancel }) {
         <span>
           <Link
             className="button warn-btn fake-btn"
-            to={'/need-for-drive/order-page/final'}
+            to={'/order-page/final'}
             onClick={actionOk}
           >
             Подтвердить

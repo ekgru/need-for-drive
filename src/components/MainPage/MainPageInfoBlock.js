@@ -15,7 +15,7 @@ export default function MainPageInfoBlock() {
       </p>
       <Link
         className="button fake-btn big-btn"
-        to="/need-for-drive/order-page/"
+        to="/order-page/"
       >
         Забронировать
       </Link>
