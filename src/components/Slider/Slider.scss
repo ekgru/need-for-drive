@@ -30,8 +30,12 @@ $pointer: url("../../resources/Pointer.svg"), default;
   }
 }
 .swiper-pagination-bullet {
-  background-color: $mainAccent !important;
+  background-color: $grayLight;
   cursor: $pointer !important;
+  opacity: 1;
+  &-active{
+    background-color: $mainAccent!important;
+  }
 }
 .slide {
   display: flex;

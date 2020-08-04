@@ -4,13 +4,13 @@ import CustomInput from '../../CustomInput';
 export default function StepThree({
   action,
   actionClick,
-  color,
+  currentColor,
+  colors,
   options,
   tariff,
   dateFrom,
   dateTo,
 }) {
-  const colors = ['Любой', 'Красный', 'Голубой'];
   const tariffs = [
     { value: 'perMin', description: 'Поминутно, 7₽/мин' },
     { value: 'perDay', description: 'На сутки, 1999 ₽/сутки' },
@@ -26,13 +26,20 @@ export default function StepThree({
         <fieldset className='step-three__form__color-selector'>
           <legend>Цвет</legend>
           <br></br>
-          {colors.map((el, i) => (
+          <CustomInput
+              type='radio'
+              name='currentColor'
+              value={'Любой'}
+              checked={currentColor === 'Любой' ? true : false}
+              description={'Любой'}
+              onChangeAction={action}
+            /> {colors.map((el, i) => (
             <CustomInput
               key={i}
               type='radio'
-              name='color'
+              name='currentColor'
               value={el}
-              checked={color === el ? true : false}
+              checked={currentColor === el ? true : false}
               description={el}
               onChangeAction={action}
             />

@@ -10,8 +10,8 @@ export default function Total({ params, action }) {
     currentStep,
     city,
     point,
-    car,
-    color,
+    carInfo,
+    currentColor,
     dateFrom,
     dateTo,
     price,
@@ -20,13 +20,14 @@ export default function Total({ params, action }) {
     isRightWheel,
     tariff,
   } = params;
+  const {name} = carInfo;
   function isDisable(step) {
     const i = +step;
     switch (i) {
       case 0:
         return city && point ? false : true;
       case 1:
-        return car ? false : true;
+        return name ? false : true;
       case 2:
         return dateFrom && dateTo ? false : true;
       case 3:
@@ -70,17 +71,17 @@ export default function Total({ params, action }) {
               </span>
             </p>
           )}
-          {car && (
+          {name && (
             <p className='total__list__item'>
               <span className='text'>Модель</span>{' '}
               <span className='dots'></span>
-              <span className='text__dinamic'>{car}</span>
+              <span className='text__dinamic'>{name}</span>
             </p>
           )}
-          {car && color && (
+          {name && currentColor && (
             <p className='total__list__item'>
               <span className='text'>Цвет</span> <span className='dots'></span>
-              <span className='text__dinamic'>{color}</span>
+              <span className='text__dinamic'>{currentColor}</span>
             </p>
           )}
           {dateFrom !== 0 && dateTo !== 0 && (
@@ -90,15 +91,15 @@ export default function Total({ params, action }) {
               <span className='text__dinamic'>{getTime()}</span>
             </p>
           )}
-          {car && tariff && (
+          {name && tariff && (
             <p className='total__list__item'>
               <span className='text'>Тариф</span> <span className='dots'></span>
               <span className='text__dinamic'>
-                {tariff === 'perMin' ? 'Поминутно' : 'На сутки'}
+                {tariff === 'perMin' ? 'Поминутно' : 'Посуточно'}
               </span>
             </p>
           )}
-          {car && isFullTank && (
+          {name && isFullTank && (
             <p className='total__list__item'>
               <span className='text'>Полный бак</span>
               <span className='dots'></span>
