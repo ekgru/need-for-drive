@@ -3,7 +3,7 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
-  padding: 16px 32px;
+  padding: 16px 64px;
   &__site-name {
     color: $mainAccent;
     font-weight: bold;
@@ -36,5 +36,11 @@
     flex-direction: column;
     align-items: flex-end;
     text-align: right;
+  }
+}
+@media (max-width: $desktopMini) {
+  .header {
+    padding: 16px 32px;
+
   }
 }

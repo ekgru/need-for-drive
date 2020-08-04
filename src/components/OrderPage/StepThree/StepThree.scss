@@ -4,6 +4,9 @@
     &__date-selector {
       text-align: end;
     }
+    &__additional {
+      display: flex;
+    }
     &__color-selector,
     &__tariff {
       &__description {

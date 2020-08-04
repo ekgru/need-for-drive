@@ -132,7 +132,7 @@ export default function Total({ params, action }) {
           ) : (
             <Link
               className='button  big-btn red-btn fake-btn'
-              to='/need-for-drive'
+              to='/'
             >
               Отменить
             </Link>

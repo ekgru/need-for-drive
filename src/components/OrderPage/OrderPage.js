@@ -27,7 +27,7 @@ export default class OrderPage extends React.Component {
       dateTo: 0,
       rateId: '',
       price: 0,
-      isFullTank: true,
+      isFullTank: false,
       isNeedChildChair: false,
       isRightWheel: false,
     };
@@ -69,12 +69,14 @@ export default class OrderPage extends React.Component {
       color,
       completedStep,
       dateFrom,
+      car,
+      tariff,
       dateTo,
     } = this.state;
     /* eslint-disable react/jsx-key */
     const steps = [
       <StepOne action={this.handleChange} city={city} point={point} />,
-      <StepTwo action={this.handleChange} />,
+      <StepTwo action={this.handleChange} currentCar={car} />,
       <StepThree
         action={this.handleChange}
         actionClick={this.handleClick}
@@ -82,6 +84,7 @@ export default class OrderPage extends React.Component {
         dateFrom={dateFrom}
         dateTo={dateTo}
         options={[isFullTank, isNeedChildChair, isRightWheel]}
+        tariff={tariff}
       />,
       <StepFour carInfo={{}} />,
     ];
@@ -114,12 +117,12 @@ export default class OrderPage extends React.Component {
         <div className='order-page__container'>
           <section className='order-page__container__form'>
             <Switch>
-              <Route exact path='/need-for-drive/order-page/final'>
+              <Route exact path='/order-page/final'>
                 <FinalPage />
               </Route>
               <Route
                 exact
-                path={`/need-for-drive/order-page/`}
+                path={`/order-page/`}
                 render={() => steps[currentStep]}
               />
             </Switch>

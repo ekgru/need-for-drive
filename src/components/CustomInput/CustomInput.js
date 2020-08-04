@@ -7,6 +7,7 @@ export default function CustomInput({
   onChangeAction,
   onClickAction,
   value,
+  defaultChecked,
   checked,
   description,
   list,
@@ -67,7 +68,8 @@ export default function CustomInput({
         name={name}
         value={value}
         onChange={onChangeAction}
-        defaultChecked={checked}
+        checked={checked}
+        defaultChecked={defaultChecked}
       />
       <span>{description}</span>
     </label>
@@ -79,7 +81,7 @@ export default function CustomInput({
         name={name}
         value={value}
         onChange={onChangeAction}
-        defaultChecked={checked}
+        checked={checked}
       />
       <span>{description}</span>
     </label>
