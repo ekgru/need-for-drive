@@ -1,4 +1,4 @@
-@import "../../../variables.scss";
+@import '../../../variables.scss';
 
 .final-page {
   &__head {
@@ -9,7 +9,7 @@
   &__nav {
     border-top: 1px solid $grayLight;
     border-bottom: 1px solid $grayLight;
-    padding: 2px 32px;
+    padding: 2px 64px;
     p {
       color: $mainBlack;
       margin: 0px;
@@ -35,6 +35,9 @@
 }
 @media (max-width: $desktopMini) {
   .final-page {
+    &__nav {
+      padding: 2px 32px;
+    }
     &__container {
       &__info {
         padding: 16px 0px 0px 64px;
