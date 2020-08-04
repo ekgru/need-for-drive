@@ -11,7 +11,7 @@ export default function CarCard({
   display,
 }) {
   return (
-    <label className='car-card' style={{'display': display}}>
+    <label className='car-card' style={{ display: display }}>
       <input
         className='car-card__radio-btn'
         type='radio'
@@ -28,6 +28,8 @@ export default function CarCard({
           {costMin} - {costMax}₽
         </p>
         <img
+          crossOrigin='anonymous'
+          referrerPolicy='origin'
           className='car-card__info-card__img'
           src={`http://api-factory.simbirsoft1.com${pic}`}
           alt='car'
