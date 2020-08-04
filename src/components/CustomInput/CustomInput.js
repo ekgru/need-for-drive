@@ -5,7 +5,6 @@ export default function CustomInput({
   type,
   placeholder,
   onChangeAction,
-  onClickAction,
   value,
   defaultChecked,
   checked,
@@ -17,32 +16,31 @@ export default function CustomInput({
     <label className='label-for-text-input'>
       {description}
       <input
+        autoComplete='off'
         className='textInput'
         type={type}
         min={
           type === 'datetime-local'
-            ?( name === 'dateTo') && (dateFrom !==0)
-            ? `${new Date(dateFrom).getFullYear()}-${`${
-              new Date(dateFrom).getMonth() + 1
-            }`.padStart(2, 0)}-${`${new Date(dateFrom).getDate()
-            }`.padStart(2, 0)
-          }T${`${new Date(dateFrom).getHours()}`.padStart(2, 0)
-            }:${`${new Date(dateFrom).getMinutes()}`.padStart(2, 0)}` :
-            `${new Date().getFullYear()}-${`${
-                new Date().getMonth() + 1
-              }`.padStart(2, 0)}-${`${new Date().getDate()}`.padStart(2, 0)
-            }T${`${new Date().getHours()}`.padStart(2, 0)
-              }:${`${new Date().getMinutes()}`.padStart(2, 0)}`
+            ? name === 'dateTo' && dateFrom !== 0
+              ? `${new Date(dateFrom).getFullYear()}-${`${
+                  new Date(dateFrom).getMonth() + 1
+                }`.padStart(2, 0)}-${`${new Date(dateFrom).getDate()}`.padStart(
+                  2, 0)}T${`${new Date(dateFrom).getHours()}`.padStart(
+                  2, 0)}:${`${new Date(dateFrom).getMinutes()}`.padStart(2, 0)}`
+              : `${new Date().getFullYear()}-${`${
+                  new Date().getMonth() + 1
+                }`.padStart(2, 0)}-${`${new Date().getDate()}`.padStart(
+                  2, 0)}T${`${new Date().getHours()}`.padStart(
+                  2, 0)}:${`${new Date().getMinutes()}`.padStart(2, 0)}`
             : ''
         }
         max={
-          (type === 'datetime-local') && name==='dateTo' && dateFrom !== 0
+          type === 'datetime-local' && name === 'dateTo' && dateFrom !== 0
             ? `${new Date(dateFrom).getFullYear()}-${`${
                 new Date(dateFrom).getMonth() + 2
-              }`.padStart(2, 0)}-${`${new Date(dateFrom).getDate()
-              }`.padStart(2, 0)
-            }T${`${new Date(dateFrom).getHours()}`.padStart(2, 0)
-              }:${`${new Date(dateFrom).getMinutes()}`.padStart(2, 0)}`
+              }`.padStart(2, 0)}-${`${new Date(dateFrom).getDate()}`.padStart(
+                2, 0 )}T${`${new Date(dateFrom).getHours()}`.padStart(
+                2, 0 )}:${`${new Date(dateFrom).getMinutes()}`.padStart(2, 0)}`
             : ''
         }
         required='required'
@@ -53,7 +51,13 @@ export default function CustomInput({
         list={list}
       />
       {type === 'text' ? (
-        <button className='reset-btn' title='Очистить поле'>
+        <button
+          name={name}
+          value={''}
+          onClick={onChangeAction}
+          className='reset-btn'
+          title='Очистить поле'
+        >
           &times;
         </button>
       ) : (

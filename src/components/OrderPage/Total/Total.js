@@ -8,8 +8,8 @@ export default function Total({ params, action }) {
   const [warning, setWarning] = useState(false);
   const {
     currentStep,
-    city,
-    point,
+    cityId,
+    pointId,
     carInfo,
     currentColor,
     dateFrom,
@@ -20,16 +20,18 @@ export default function Total({ params, action }) {
     isRightWheel,
     tariff,
   } = params;
-  const {name} = carInfo;
+  const { name } = carInfo;
   function isDisable(step) {
     const i = +step;
     switch (i) {
       case 0:
-        return city && point ? false : true;
+        return cityId.id && pointId.id ? false : true;
       case 1:
-        return name ? false : true;
+        return cityId.id && pointId.id && name ? false : true;
       case 2:
-        return dateFrom && dateTo ? false : true;
+        return cityId.id && pointId.id && name && dateFrom && dateTo
+          ? false
+          : true;
       case 3:
         return false;
       default:
@@ -47,7 +49,8 @@ export default function Total({ params, action }) {
     if (tariff === 'perMin') {
       const result = (new Date(dateTo) - new Date(dateFrom)) / 60000;
       return `${Math.trunc(result / 60)} часов ${Math.trunc(
-        result % 60)} Минут`;
+        result % 60,
+      )} Минут`;
     } else {
       const result = (new Date(dateTo) - new Date(dateFrom)) / 3600000;
       return `${Math.round(result / 24)} дней`;
@@ -61,13 +64,13 @@ export default function Total({ params, action }) {
       <div className='total'>
         <h1 className='total__head'>Ваш заказ:</h1>
         <div className='total__list'>
-          {city && point && (
+          {cityId.id && pointId.id && (
             <p className='total__list__item'>
               <span className='text'>Пункт выдачи</span>
               <span className='dots'></span>
               <span className='text__dinamic'>
-                {city}
-                <br /> {point}
+                {cityId.name}
+                <br /> {pointId.name}
               </span>
             </p>
           )}
@@ -131,10 +134,7 @@ export default function Total({ params, action }) {
               disable={isDisable(currentStep)}
             />
           ) : (
-            <Link
-              className='button  big-btn red-btn fake-btn'
-              to='/'
-            >
+            <Link className='button  big-btn red-btn fake-btn' to='/'>
               Отменить
             </Link>
           )}
