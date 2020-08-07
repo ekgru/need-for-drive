@@ -1,7 +1,9 @@
 import React from 'react';
 import './StepOne.scss';
-import FakeMap from '../../../resources/FakeMap.jpg';
 import CustomInput from '../../CustomInput';
+import CarMap from './CarMap';
+import Loader from './Loader';
+
 export default class StepOne extends React.Component {
   constructor(props) {
     super(props);
@@ -27,16 +29,18 @@ export default class StepOne extends React.Component {
       })
       .catch((err) => console.error('ERROR', err));
   }
-  handleChange(event, name) {
+  handleChange(event, name, customValue) {
     const { cities, points } = this.state;
     const { getLocation } = this.props;
-    const { value } = event.target;
+    const value = event.target ? event.target.value : customValue;
+
     const resultObj =
       name === 'cityId'
         ? cities.filter((el) => el.name === value)
-        : points.filter((el) => el.name === value);
+        : points.filter((el) => el.address === value);
     getLocation(name, resultObj[0] ? resultObj[0] : { name: value, id: '' });
   }
+
   render() {
     const { city, point, action } = this.props;
     return (
@@ -45,45 +49,68 @@ export default class StepOne extends React.Component {
           <CustomInput
             name='cityId'
             description='Город'
+            placeholder='Выберите город'
             type='text'
-            placeholder='Введите название города'
             list='city'
             onChangeAction={(event) => this.handleChange(event, 'cityId')}
-            value={city}
+            value={city.name}
             delAction={action}
           />
           <datalist id='city'>
-            {this.state.cities.map((el, i) => (
-              <option key={i} id={el.id} value={el.name}></option>
-            ))}
+            {this.state.cities.map((el, i) =>
+              !point.id ? (
+                <option key={i} id={el.id} value={el.name}></option>
+              ) : el.name === point.cityId.name ? (
+                <option key={i} id={el.id} value={el.name}></option>
+              ) : (
+                ''
+              ),
+            )}
           </datalist>
           <br />
 
           <CustomInput
             name='point'
             description='Пункт Выдачи'
+            placeholder={
+              city.name && !city.id 
+                ? 'В данном городе услуга недоступна'
+                : 'Выберите точку выдачи'
+            }
+            disabled={city.name && !city.id ? true : false}
             type='text'
-            placeholder='Выберите пункт выдачи'
             list='point'
             onChangeAction={(event) => this.handleChange(event, 'pointId')}
-            value={point}
+            value={point.name}
           />
           <datalist id='point'>
             {this.state.points.map((el, i) =>
-              el.cityId.name === city ? (
-                <option key={i} id={el.id} value={el.name}></option>
+              el.cityId.name === city.name ? (
+                <option key={i} id={el.id} value={el.address}>
+                  {el.name}
+                </option>
+              ) : city.name === '' ? (
+                <option key={i} id={el.id} value={el.address}>
+                  {el.name}
+                </option>
               ) : (
                 ''
-              )
-            )}
+              ),
+            ) || <option value='Нет доступных точек выдачи'>Выберите другой город</option>}
           </datalist>
         </form>
 
         <div className='map-block'>
           <p className='map-block__description'>Выбрать на карте:</p>
-          <span>
-            <img className='map' src={FakeMap} alt='' />
-          </span>
+          {(this.state.cities.length && this.state.points.length && <span>
+              <CarMap
+                action={this.handleChange}
+                cities={this.state.cities}
+                points={this.state.points}
+                city={city.name}
+              />
+            ))
+          </span> || <Loader />)}
         </div>
       </div>
     );

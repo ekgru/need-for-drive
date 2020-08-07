@@ -21,10 +21,14 @@ path {
   fill: inherit !important;
   stroke: inherit !important;
 }
+span{
+  color: $grayLight;
+}
+ 
 * {
   cursor: url("./resources/Cursor.svg"), default;
   font-family: "Roboto";
-  color: $grayLight;
+  
   font-style: normal;
   user-select: none;   
 }

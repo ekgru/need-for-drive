@@ -46,7 +46,11 @@ export default class OrderPage extends React.Component {
     });
   }
   getLocation(name, info) {
-    this.setState({ [name]: info });
+    this.setState((prevState) =>
+      name === 'pointId'
+        ? { cityId: info.cityId || prevState.cityId, [name]: info }
+        : { [name]: info },
+    );
   }
   getCurrentCar(info) {
     this.setState({ carInfo: info, currentColor: 'Любой' });
@@ -63,9 +67,9 @@ export default class OrderPage extends React.Component {
           return { currentStep: +prevState.currentStep + 1 };
         });
   }
+  //https://cors-anywhere.herokuapp.com/
   render() {
-    const API =
-      'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/db/';
+    const API = 'http://api-factory.simbirsoft1.com/api/db/';
     const headers = {
       'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
     };
@@ -90,8 +94,8 @@ export default class OrderPage extends React.Component {
         api={API}
         headers={headers}
         action={this.handleChange}
-        city={cityId.name}
-        point={pointId.name}
+        city={cityId}
+        point={pointId}
         getLocation={this.getLocation}
       />,
       <StepTwo
