@@ -17,11 +17,6 @@ export default function Loader() {
         <div className='car-detail wheel'></div>
         <div className='car-detail wheel wheel2'></div>
       </div>
-
-      <div className='text'>
-        <span>Загружаем карту</span>
-        <span className='dot'>...</span>
-      </div>
     </div>
   );
 }

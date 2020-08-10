@@ -86,15 +86,6 @@ $spin-deg: 36deg;
   }
 }
 
-@keyframes dots {
-  from {
-    width: 0px;
-  }
-  to {
-    width: 15px;
-  }
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -109,10 +100,8 @@ $spin-deg: 36deg;
 }
 
 .loading-window {
-
   @extend .fadeIn;
-  border-radius: $border-radius-big;
-  border: 3px solid $border-color;
+
   color: $car-color;
   height: 200px;
   position: fixed;
@@ -122,28 +111,6 @@ $spin-deg: 36deg;
   display: block;
   position: relative;
   margin: 32px 16px;
-
-  .text {
-    font-size: $font-size-header;
-    position: absolute;
-    width: auto;
-    top: 75%;
-    left: 30%;
-    margin: 0 auto;
-    color: black;
-
-    span {
-      color: black;
-    }
-  }
-  .dot {
-    display: inline-block;
-    width: 5px;
-    overflow: hidden;
-    vertical-align: bottom;
-    animation: dots 1.5s linear infinite;
-    transition: 1;
-  }
 }
 .car {
   position: absolute;
