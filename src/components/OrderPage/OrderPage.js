@@ -15,10 +15,8 @@ export default class OrderPage extends React.Component {
     this.state = {
       currentStep: 0,
       completedStep: 0,
-      cityId: '',
-      city: '',
-      pointId: '',
-      point: '',
+      cityId: { id: '', name: '' },
+      pointId: { id: '', name: '' },
       car: '',
       carInfo: {},
       tariff: 'perMin',
@@ -35,6 +33,7 @@ export default class OrderPage extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.stepNavigation = this.stepNavigation.bind(this);
     this.getCurrentCar = this.getCurrentCar.bind(this);
+    this.getLocation = this.getLocation.bind(this);
   }
   handleChange(event) {
     const { name, value } = event.target;
@@ -45,6 +44,13 @@ export default class OrderPage extends React.Component {
     this.setState((prevState) => {
       return { [name]: !prevState[name] };
     });
+  }
+  getLocation(name, info) {
+    this.setState((prevState) =>
+      name === 'pointId'
+        ? { cityId: info.cityId || prevState.cityId, [name]: info }
+        : { [name]: info },
+    );
   }
   getCurrentCar(info) {
     this.setState({ carInfo: info, currentColor: 'Любой' });
@@ -67,8 +73,6 @@ export default class OrderPage extends React.Component {
       'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
     };
     const {
-      city,
-      point,
       isNeedChildChair,
       isRightWheel,
       isFullTank,
@@ -80,10 +84,19 @@ export default class OrderPage extends React.Component {
       carInfo,
       tariff,
       dateTo,
+      cityId,
+      pointId,
     } = this.state;
     /* eslint-disable react/jsx-key */
     const steps = [
-      <StepOne action={this.handleChange} city={city} point={point} />,
+      <StepOne
+        api={API}
+        headers={headers}
+        action={this.handleChange}
+        city={cityId}
+        point={pointId}
+        getLocation={this.getLocation}
+      />,
       <StepTwo
         actionCar={this.getCurrentCar}
         api={API}
@@ -130,7 +143,7 @@ export default class OrderPage extends React.Component {
           </div>
         )}
         <div className='order-page__container'>
-          <section className='order-page__container__form'>
+          <div className='order-page__container__form'>
             <Switch>
               <Route exact path='/order-page/final'>
                 <FinalPage />
@@ -141,10 +154,10 @@ export default class OrderPage extends React.Component {
                 render={() => steps[currentStep]}
               />
             </Switch>
-          </section>
-          <section className='order-page__container__total'>
+          </div>
+          <div className='order-page__container__total'>
             <Total action={this.stepNavigation} params={this.state} />
-          </section>
+          </div>
         </div>
       </div>
     );

@@ -96,9 +96,11 @@
     }
     &__container {
       flex-direction: column;
+    overflow-x: hidden;
+
 
       &__form {
-        padding: 8px;
+        padding: 16px;
       }
     }
   }
