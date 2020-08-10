@@ -11,6 +11,7 @@ export default function CustomInput({
   description,
   list,
   dateFrom,
+  disabled
 }) {
   return type === 'text' || type === 'datetime-local' || type === 'select' ? (
     <label className='label-for-text-input'>
@@ -49,6 +50,7 @@ export default function CustomInput({
         onChange={onChangeAction}
         value={value}
         list={list}
+        disabled={disabled}
       />
       {type === 'text' ? (
         <button

@@ -67,9 +67,8 @@ export default class OrderPage extends React.Component {
           return { currentStep: +prevState.currentStep + 1 };
         });
   }
-  //https://cors-anywhere.herokuapp.com/
   render() {
-    const API = 'http://api-factory.simbirsoft1.com/api/db/';
+    const API = 'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/db/';
     const headers = {
       'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
     };
@@ -144,7 +143,7 @@ export default class OrderPage extends React.Component {
           </div>
         )}
         <div className='order-page__container'>
-          <section className='order-page__container__form'>
+          <div className='order-page__container__form'>
             <Switch>
               <Route exact path='/order-page/final'>
                 <FinalPage />
@@ -155,10 +154,10 @@ export default class OrderPage extends React.Component {
                 render={() => steps[currentStep]}
               />
             </Switch>
-          </section>
-          <section className='order-page__container__total'>
+          </div>
+          <div className='order-page__container__total'>
             <Total action={this.stepNavigation} params={this.state} />
-          </section>
+          </div>
         </div>
       </div>
     );

@@ -40,7 +40,6 @@ export default class StepOne extends React.Component {
         : points.filter((el) => el.address === value);
     getLocation(name, resultObj[0] ? resultObj[0] : { name: value, id: '' });
   }
-
   render() {
     const { city, point, action } = this.props;
     return (
@@ -73,11 +72,19 @@ export default class StepOne extends React.Component {
             name='point'
             description='Пункт Выдачи'
             placeholder={
-              city.name && !city.id 
-                ? 'В данном городе услуга недоступна'
+              !city.name ||
+              !city.id ||
+              !this.state.points.find((el) => el.cityId.name === city.name)
+                ? 'Нет доступных пунктов'
                 : 'Выберите точку выдачи'
             }
-            disabled={city.name && !city.id ? true : false}
+            disabled={
+              !city.name ||
+              !city.id ||
+              !this.state.points.find((el) => el.cityId.name === city.name)
+                ? true
+                : false
+            }
             type='text'
             list='point'
             onChangeAction={(event) => this.handleChange(event, 'pointId')}
@@ -89,28 +96,26 @@ export default class StepOne extends React.Component {
                 <option key={i} id={el.id} value={el.address}>
                   {el.name}
                 </option>
-              ) : city.name === '' ? (
-                <option key={i} id={el.id} value={el.address}>
-                  {el.name}
-                </option>
               ) : (
                 ''
               ),
-            ) || <option value='Нет доступных точек выдачи'>Выберите другой город</option>}
+            )}
           </datalist>
         </form>
 
         <div className='map-block'>
           <p className='map-block__description'>Выбрать на карте:</p>
-          {(this.state.cities.length && this.state.points.length && <span>
+          {(this.state.cities.length && this.state.points.length && (
+            <div className='map-block__map-container'>
               <CarMap
                 action={this.handleChange}
                 cities={this.state.cities}
                 points={this.state.points}
-                city={city.name}
+                city={city}
+                point={point.address}
               />
-            ))
-          </span> || <Loader />)}
+            </div>
+          )) || <Loader />}
         </div>
       </div>
     );
