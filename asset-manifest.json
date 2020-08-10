@@ -1,22 +1,21 @@
 {
   "files": {
-    "main.css": "/need-for-drive/static/css/main.4dfb51a9.chunk.css",
-    "main.js": "/need-for-drive/static/js/main.bae7e681.chunk.js",
-    "main.js.map": "/need-for-drive/static/js/main.bae7e681.chunk.js.map",
+    "main.css": "/need-for-drive/static/css/main.433905c6.chunk.css",
+    "main.js": "/need-for-drive/static/js/main.35d915cd.chunk.js",
+    "main.js.map": "/need-for-drive/static/js/main.35d915cd.chunk.js.map",
     "runtime-main.js": "/need-for-drive/static/js/runtime-main.7c67051a.js",
     "runtime-main.js.map": "/need-for-drive/static/js/runtime-main.7c67051a.js.map",
     "static/css/2.1be1aeea.chunk.css": "/need-for-drive/static/css/2.1be1aeea.chunk.css",
-    "static/js/2.9a72bf57.chunk.js": "/need-for-drive/static/js/2.9a72bf57.chunk.js",
-    "static/js/2.9a72bf57.chunk.js.map": "/need-for-drive/static/js/2.9a72bf57.chunk.js.map",
+    "static/js/2.2ce30b86.chunk.js": "/need-for-drive/static/js/2.2ce30b86.chunk.js",
+    "static/js/2.2ce30b86.chunk.js.map": "/need-for-drive/static/js/2.2ce30b86.chunk.js.map",
     "index.html": "/need-for-drive/index.html",
-    "precache-manifest.3c233cda2061c5ca33e8d1dfb0ee14fc.js": "/need-for-drive/precache-manifest.3c233cda2061c5ca33e8d1dfb0ee14fc.js",
+    "precache-manifest.54f03f7d0a353b7ff648b2af80c173dd.js": "/need-for-drive/precache-manifest.54f03f7d0a353b7ff648b2af80c173dd.js",
     "service-worker.js": "/need-for-drive/service-worker.js",
     "static/css/2.1be1aeea.chunk.css.map": "/need-for-drive/static/css/2.1be1aeea.chunk.css.map",
-    "static/css/main.4dfb51a9.chunk.css.map": "/need-for-drive/static/css/main.4dfb51a9.chunk.css.map",
-    "static/js/2.9a72bf57.chunk.js.LICENSE.txt": "/need-for-drive/static/js/2.9a72bf57.chunk.js.LICENSE.txt",
+    "static/css/main.433905c6.chunk.css.map": "/need-for-drive/static/css/main.433905c6.chunk.css.map",
+    "static/js/2.2ce30b86.chunk.js.LICENSE.txt": "/need-for-drive/static/js/2.2ce30b86.chunk.js.LICENSE.txt",
     "static/media/index.scss": "/need-for-drive/static/media/Roboto-Medium.58aef543.ttf",
     "static/media/NavBar.scss": "/need-for-drive/static/media/Telegram.0b51a5ca.svg",
-    "static/media/FakeMap.jpg": "/need-for-drive/static/media/FakeMap.65b12582.jpg",
     "static/media/Geo.svg": "/need-for-drive/static/media/Geo.f2245ebb.svg",
     "static/media/car.png": "/need-for-drive/static/media/car.9c23a583.png",
     "static/media/slide_1.jpg": "/need-for-drive/static/media/slide_1.fe2f03dd.jpg",
@@ -27,8 +26,8 @@
   "entrypoints": [
     "static/js/runtime-main.7c67051a.js",
     "static/css/2.1be1aeea.chunk.css",
-    "static/js/2.9a72bf57.chunk.js",
-    "static/css/main.4dfb51a9.chunk.css",
-    "static/js/main.bae7e681.chunk.js"
+    "static/js/2.2ce30b86.chunk.js",
+    "static/css/main.433905c6.chunk.css",
+    "static/js/main.35d915cd.chunk.js"
   ]
 }
