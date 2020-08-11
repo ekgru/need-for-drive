@@ -115,7 +115,11 @@ export default class StepOne extends React.Component {
                 point={point.address}
               />
             </div>
-          )) || <Loader />}
+          )) || (
+            <div className='loader-container'>
+              <Loader />
+            </div>
+          )}
         </div>
       </div>
     );

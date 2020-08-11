@@ -1,9 +1,7 @@
 $border-color: #0ec261;
 $background-color: #333;
-$border-radius-big: 6px;
 $font-size-header: 16px;
-
-$car-color: $border-color;
+$car-color: #0ec261;
 $spin-deg: 36deg;
 @keyframes spin {
   0% {
@@ -98,10 +96,13 @@ $spin-deg: 36deg;
 .fadeIn {
   animation: fadeIn 0.4s both;
 }
-
+.loader-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 .loading-window {
   @extend .fadeIn;
-
   color: $car-color;
   height: 200px;
   position: fixed;

@@ -37,7 +37,12 @@ export default class OrderPage extends React.Component {
   }
   handleChange(event) {
     const { name, value } = event.target;
-    this.setState({ [name]: value });
+    name !== 'cityId'
+      ? this.setState({ [name]: value })
+      : this.setState({
+          cityId: { id: '', name: '' },
+          pointId: { id: '', name: '' },
+        });
   }
   handleClick(event) {
     const { name } = event.target;
@@ -68,7 +73,8 @@ export default class OrderPage extends React.Component {
         });
   }
   render() {
-    const API = 'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/db/';
+    const API =
+      'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/db/';
     const headers = {
       'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
     };

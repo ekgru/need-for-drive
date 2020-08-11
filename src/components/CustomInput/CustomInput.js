@@ -11,7 +11,8 @@ export default function CustomInput({
   description,
   list,
   dateFrom,
-  disabled
+  disabled,
+  delAction,
 }) {
   return type === 'text' || type === 'datetime-local' || type === 'select' ? (
     <label className='label-for-text-input'>
@@ -56,7 +57,7 @@ export default function CustomInput({
         <button
           name={name}
           value={''}
-          onClick={onChangeAction}
+          onClick={delAction ? delAction : onChangeAction}
           className='reset-btn'
           title='Очистить поле'
         >

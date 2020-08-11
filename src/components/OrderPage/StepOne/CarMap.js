@@ -49,10 +49,8 @@ export default class CarMap extends React.Component {
     const centerPointMark = pointMarks.find(
       (el) =>
         el.name
-          .replace('улица ', '')
-          .replace(' улица', '')
-          .replace('проспект ', '')
-          .replace(',', '') === point,
+          .replace(/(проспект|улица|[\.,])/gi, '')
+          .replace(/(\d+)(к\.?)(\d+)/i, '$1, корп.$3').trim() === point,
     );
     const centerCityMark = cityMarks.find((el) => el.name === city.name);
 
@@ -113,9 +111,8 @@ export default class CarMap extends React.Component {
                   key={i}
                   onClick={(event) => {
                     const name = el.name
-                      .replace('улица ', '')
-                      .replace('проспект ', '')
-                      .replace(',', '');
+                      .replace(/(проспект|улица|[\.,])/gi, '')
+                      .replace(/(\d+)(к\.?)(\d+)/i, '$1, корп.$3').trim();
                     action(event, 'pointId', name);
                     this.map.setCenter(
                       el.Point.pos.split(' ', 2).reverse(),
@@ -133,9 +130,8 @@ export default class CarMap extends React.Component {
                   }}
                   properties={{
                     iconCaption: el.name
-                      .replace('Улица ', '')
-                      .replace('проспект ', '')
-                      .replace(',', ''),
+                      .replace(/(проспект|улица|[\.,])/gi, '')
+                      .replace(/(\d+)(к\.?)(\d+)/i, '$1, корп.$3'),
                   }}
                 />
               ) : (
