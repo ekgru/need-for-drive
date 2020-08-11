@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './StepThree.scss';
 import CustomInput from '../../CustomInput';
 export default function StepThree({
@@ -10,11 +10,19 @@ export default function StepThree({
   tariff,
   dateFrom,
   dateTo,
+  api,
+  headers,
+  actionInfo,
 }) {
-  const tariffs = [
-    { value: 'perMin', description: 'Поминутно, 7₽/мин' },
-    { value: 'perDay', description: 'На сутки, 1999 ₽/сутки' },
-  ];
+  const [tariffs, setTarffs] = useState([]);
+  useEffect(() => {
+    fetch(`${api}rate`, {
+      headers: headers,
+    })
+      .then((response) => response.json())
+      .then(({ data }) => setTarffs(data));
+  }, []);
+console.log(tariffs);
   const additional = [
     { name: 'isFullTank', description: 'Полный бак, 500р' },
     { name: 'isNeedChildChair', description: 'Детское кресло, 200р' },
@@ -27,13 +35,14 @@ export default function StepThree({
           <legend>Цвет</legend>
           <br></br>
           <CustomInput
-              type='radio'
-              name='currentColor'
-              value={'Любой'}
-              checked={currentColor === 'Любой' ? true : false}
-              description={'Любой'}
-              onChangeAction={action}
-            /> {colors.map((el, i) => (
+            type='radio'
+            name='currentColor'
+            value={'Любой'}
+            checked={currentColor === 'Любой' ? true : false}
+            description={'Любой'}
+            onChangeAction={action}
+          />{' '}
+          {colors.map((el, i) => (
             <CustomInput
               key={i}
               type='radio'
@@ -71,11 +80,10 @@ export default function StepThree({
             <CustomInput
               key={i}
               type='radio'
-              name='tariff'
-              value={el.value}
-              checked={tariff === el.value ? true : false}
-              description={el.description}
-              onChangeAction={action}
+              checked={tariff === el.rateTypeId.name ? true : false}
+              description={`${el.rateTypeId.name},
+               ${el.price}₽/${el.rateTypeId.unit}`}
+              onChangeAction={()=>actionInfo('rateId', el)}
             />
           ))}
         </fieldset>

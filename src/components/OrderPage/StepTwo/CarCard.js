@@ -18,7 +18,7 @@ export default function CarCard({
         name='car'
         value={title}
         onChange={() => {
-          getCar(carInfo);
+          getCar('carInfo', carInfo);
         }}
         checked={title === car ? 'checked' : ''}
       />

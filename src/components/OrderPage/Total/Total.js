@@ -14,11 +14,10 @@ export default function Total({ params, action }) {
     currentColor,
     dateFrom,
     dateTo,
-    price,
     isFullTank,
     isNeedChildChair,
     isRightWheel,
-    tariff,
+    rateId,
   } = params;
   const { name } = carInfo;
   function isDisable(step) {
@@ -45,15 +44,22 @@ export default function Total({ params, action }) {
     'Заказать',
     'Отменить',
   ];
+  const mins = (new Date(dateTo) - new Date(dateFrom)) / 60000;
   function getTime() {
-    if (tariff === 'perMin') {
-      const result = (new Date(dateTo) - new Date(dateFrom)) / 60000;
-      return `${Math.trunc(result / 60)} часов ${Math.trunc(
-        result % 60,
-      )} Минут`;
+    if (rateId.rateTypeId.name === 'Поминутно') {
+      return `${Math.trunc(mins / 60)} часов ${Math.trunc(mins % 60)} Минут`;
     } else {
-      const result = (new Date(dateTo) - new Date(dateFrom)) / 3600000;
+      const result = mins / 60;
       return `${Math.round(result / 24)} дней`;
+    }
+  }
+  function getPrice() {
+    const optionsCost =
+      (isFullTank && 500) + (isNeedChildChair && 200) + (isRightWheel && 1600);
+    if (rateId.rateTypeId.name === 'Поминутно') {
+      return `${Math.round(mins * rateId.price + optionsCost)} ₽`;
+    } else {
+      return `${Math.round((mins / 1440) * rateId.price + optionsCost)} ₽`;
     }
   }
   return (
@@ -94,12 +100,10 @@ export default function Total({ params, action }) {
               <span className='text__dinamic'>{getTime()}</span>
             </p>
           )}
-          {name && tariff && (
+          {name && rateId.rateTypeId && (
             <p className='total__list__item'>
               <span className='text'>Тариф</span> <span className='dots'></span>
-              <span className='text__dinamic'>
-                {tariff === 'perMin' ? 'Поминутно' : 'Посуточно'}
-              </span>
+              <span className='text__dinamic'>{rateId.rateTypeId.name}</span>
             </p>
           )}
           {name && isFullTank && (
@@ -124,7 +128,12 @@ export default function Total({ params, action }) {
             </p>
           )}
           <p className='total__sum'>
-            <span>Итого:</span> {price}
+            <span>Итого:</span>{' '}
+            { !carInfo.priceMin
+              ? `от 8 000 до 12 000 ₽`
+              : mins > 0 && rateId.price
+              ? getPrice()
+              : `${carInfo.priceMin} ₽ - ${carInfo.priceMax} ₽`}
           </p>
           {+currentStep !== 4 ? (
             <Button

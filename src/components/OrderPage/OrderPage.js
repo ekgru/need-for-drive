@@ -19,11 +19,10 @@ export default class OrderPage extends React.Component {
       pointId: { id: '', name: '' },
       car: '',
       carInfo: {},
-      tariff: 'perMin',
       currentColor: 'Любой',
       dateFrom: 0,
       dateTo: 0,
-      rateId: '',
+      rateId: { rateTypeId: {}, price: 0 },
       price: 0,
       isFullTank: false,
       isNeedChildChair: false,
@@ -32,7 +31,7 @@ export default class OrderPage extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.stepNavigation = this.stepNavigation.bind(this);
-    this.getCurrentCar = this.getCurrentCar.bind(this);
+    this.getInfo = this.getInfo.bind(this);
     this.getLocation = this.getLocation.bind(this);
   }
   handleChange(event) {
@@ -57,8 +56,8 @@ export default class OrderPage extends React.Component {
         : { [name]: info },
     );
   }
-  getCurrentCar(info) {
-    this.setState({ carInfo: info, currentColor: 'Любой' });
+  getInfo(name, info) {
+    this.setState({ [name]: info });
   }
   stepNavigation() {
     +this.state.currentStep === +this.state.completedStep
@@ -88,7 +87,7 @@ export default class OrderPage extends React.Component {
       completedStep,
       dateFrom,
       carInfo,
-      tariff,
+      rateId,
       dateTo,
       cityId,
       pointId,
@@ -104,21 +103,24 @@ export default class OrderPage extends React.Component {
         getLocation={this.getLocation}
       />,
       <StepTwo
-        actionCar={this.getCurrentCar}
+        actionCar={this.getInfo}
         api={API}
         headers={headers}
         action={this.handleChange}
         currentCar={carInfo.name}
       />,
       <StepThree
+        api={API}
+        headers={headers}
         action={this.handleChange}
         actionClick={this.handleClick}
+        actionInfo={this.getInfo}
         currentColor={currentColor}
         colors={carInfo.colors}
         dateFrom={dateFrom}
         dateTo={dateTo}
         options={[isFullTank, isNeedChildChair, isRightWheel]}
-        tariff={tariff}
+        tariff={rateId.rateTypeId.name}
       />,
       <StepFour carInfo={{}} />,
     ];
