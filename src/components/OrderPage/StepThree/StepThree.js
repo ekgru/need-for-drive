@@ -20,9 +20,14 @@ export default function StepThree({
       headers: headers,
     })
       .then((response) => response.json())
-      .then(({ data }) => setTarffs(data));
+      .then(({ data }) => {
+        setTarffs(data);
+        if (!tariff) {
+          actionInfo('rateId', data[0]);
+        }
+      })
+      .catch((err) => console.error('ERROR', err));
   }, []);
-console.log(tariffs);
   const additional = [
     { name: 'isFullTank', description: 'Полный бак, 500р' },
     { name: 'isNeedChildChair', description: 'Детское кресло, 200р' },
@@ -83,7 +88,7 @@ console.log(tariffs);
               checked={tariff === el.rateTypeId.name ? true : false}
               description={`${el.rateTypeId.name},
                ${el.price}₽/${el.rateTypeId.unit}`}
-              onChangeAction={()=>actionInfo('rateId', el)}
+              onChangeAction={() => actionInfo('rateId', el)}
             />
           ))}
         </fieldset>

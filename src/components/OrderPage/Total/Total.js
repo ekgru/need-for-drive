@@ -4,7 +4,14 @@ import Warning from './Warning';
 import './Total.scss';
 import { Link } from 'react-router-dom';
 
-export default function Total({ params, action }) {
+export default function Total({
+  params,
+  action,
+  getPrice,
+  orderData,
+  api,
+  getInfo,
+}) {
   const [warning, setWarning] = useState(false);
   const {
     currentStep,
@@ -28,7 +35,7 @@ export default function Total({ params, action }) {
       case 1:
         return cityId.id && pointId.id && name ? false : true;
       case 2:
-        return cityId.id && pointId.id && name && dateFrom && dateTo
+        return cityId.id && pointId.id && name && dateFrom && dateTo && rateId
           ? false
           : true;
       case 3:
@@ -53,19 +60,16 @@ export default function Total({ params, action }) {
       return `${Math.round(result / 24)} дней`;
     }
   }
-  function getPrice() {
-    const optionsCost =
-      (isFullTank && 500) + (isNeedChildChair && 200) + (isRightWheel && 1600);
-    if (rateId.rateTypeId.name === 'Поминутно') {
-      return `${Math.round(mins * rateId.price + optionsCost)} ₽`;
-    } else {
-      return `${Math.round((mins / 1440) * rateId.price + optionsCost)} ₽`;
-    }
-  }
   return (
     <>
       {warning && +currentStep === 3 && (
-        <Warning actionCancel={() => setWarning(!warning)} actionOk={action} />
+        <Warning
+          api={api}
+          actionCancel={() => setWarning(!warning)}
+          actionOk={action}
+          data={orderData}
+          getInfo={getInfo}
+        />
       )}
       <div className='total'>
         <h1 className='total__head'>Ваш заказ:</h1>
@@ -100,7 +104,7 @@ export default function Total({ params, action }) {
               <span className='text__dinamic'>{getTime()}</span>
             </p>
           )}
-          {name && rateId.rateTypeId && (
+          {name && rateId.rateTypeId.name && (
             <p className='total__list__item'>
               <span className='text'>Тариф</span> <span className='dots'></span>
               <span className='text__dinamic'>{rateId.rateTypeId.name}</span>
@@ -129,10 +133,10 @@ export default function Total({ params, action }) {
           )}
           <p className='total__sum'>
             <span>Итого:</span>{' '}
-            { !carInfo.priceMin
+            {!carInfo.priceMin
               ? `от 8 000 до 12 000 ₽`
               : mins > 0 && rateId.price
-              ? getPrice()
+              ? `${getPrice()} ₽`
               : `${carInfo.priceMin} ₽ - ${carInfo.priceMax} ₽`}
           </p>
           {+currentStep !== 4 ? (
