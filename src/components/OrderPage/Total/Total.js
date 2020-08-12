@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import Button from '../../Button';
 import Warning from './Warning';
 import './Total.scss';
-import { Link } from 'react-router-dom';
-
 export default function Total({
   params,
   action,
@@ -17,7 +15,7 @@ export default function Total({
     currentStep,
     cityId,
     pointId,
-    carInfo,
+    carId,
     currentColor,
     dateFrom,
     dateTo,
@@ -25,8 +23,11 @@ export default function Total({
     isNeedChildChair,
     isRightWheel,
     rateId,
+    price,
+    color,
+    id,
   } = params;
-  const { name } = carInfo;
+  const { name } = carId;
   function isDisable(step) {
     const i = +step;
     switch (i) {
@@ -62,11 +63,11 @@ export default function Total({
   }
   return (
     <>
-      {warning && +currentStep === 3 && (
+      {warning && (
         <Warning
+          orderId={id}
           api={api}
-          actionCancel={() => setWarning(!warning)}
-          actionOk={action}
+          actionReturn={() => setWarning(!warning)}
           data={orderData}
           getInfo={getInfo}
         />
@@ -91,10 +92,10 @@ export default function Total({
               <span className='text__dinamic'>{name}</span>
             </p>
           )}
-          {name && currentColor && (
+          {(color || (name && currentColor)) && (
             <p className='total__list__item'>
               <span className='text'>Цвет</span> <span className='dots'></span>
-              <span className='text__dinamic'>{currentColor}</span>
+              <span className='text__dinamic'>{color || currentColor}</span>
             </p>
           )}
           {dateFrom !== 0 && dateTo !== 0 && (
@@ -133,13 +134,15 @@ export default function Total({
           )}
           <p className='total__sum'>
             <span>Итого:</span>{' '}
-            {!carInfo.priceMin
-              ? `от 8 000 до 12 000 ₽`
-              : mins > 0 && rateId.price
-              ? `${getPrice()} ₽`
-              : `${carInfo.priceMin} ₽ - ${carInfo.priceMax} ₽`}
+            {!price
+              ? !carId.priceMin
+                ? `от 8 000 до 12 000 ₽`
+                : mins > 0 && rateId.price
+                ? `${getPrice()} ₽`
+                : `${carId.priceMin} ₽ - ${carId.priceMax} ₽`
+              : `${price} ₽`}
           </p>
-          {+currentStep !== 4 ? (
+          {!id ? (
             <Button
               type={`big-btn`}
               title={titles[currentStep]}
@@ -147,9 +150,11 @@ export default function Total({
               disable={isDisable(currentStep)}
             />
           ) : (
-            <Link className='button  big-btn red-btn fake-btn' to='/'>
-              Отменить
-            </Link>
+            <Button
+              title='Отменить'
+              type='big-btn red-btn'
+              action={() => setWarning(!warning)}
+            ></Button>
           )}
         </div>
       </div>

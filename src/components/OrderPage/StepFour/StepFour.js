@@ -1,7 +1,7 @@
 import React from 'react';
 import './StepFour.scss';
-export default function StepFour({ carInfo, dateFrom }) {
-  const { name, number, tank, thumbnail } = carInfo;
+export default function StepFour({ carId, dateFrom }) {
+  const { name, number, tank, thumbnail } = carId;
   const options = {
     day: 'numeric',
     month: 'numeric',

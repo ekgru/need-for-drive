@@ -36,7 +36,7 @@ export default class StepTwo extends React.Component {
         title={el.name}
         costMin={el.priceMin}
         costMax={el.priceMax}
-        carInfo={el}
+        carId={el}
         pic={el.thumbnail.path}
         key={i}
         car={this.props.currentCar}

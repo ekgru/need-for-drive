@@ -1,13 +1,11 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+
 import Button from '../../Button';
 
-export default function Warning({
-  actionCancel,
-  data,
-  api,
-  getInfo,
-  actionOk,
-}) {
+export default function Warning({ actionReturn, data, getInfo, orderId }) {
+  const history = useHistory();
+  const api = 'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/db/';
   function ok() {
     fetch(`${api}order`, {
       method: 'POST',
@@ -21,21 +19,30 @@ export default function Warning({
       .then(({ data }) => getInfo(`orderId`, data.id))
       .catch((err) => console.error('ERROR', err));
 
-    actionCancel();
-    actionOk();
+    actionReturn();
+  }
+  function cancel() {
+    localStorage.removeItem('orderId');
+    getInfo('orderId', '');
+    history.push('/');
+    actionReturn();
   }
   return (
     <div className='warning'>
       <div className='warning__btns-block'>
-        <h1 className='warning__btns-block__head'> Подтвердить заказ?</h1>
+        <h1 className='warning__btns-block__head'>
+          {orderId ? 'Отменить заказ?' : 'Подтвердить заказ?'}
+        </h1>
         <span>
-          <Button title='Подтвердить' type='warn-btn' action={() => ok()}>
-            Подтвердить
-          </Button>
           <Button
-            title='Отменить'
+            title={orderId ? 'Отменить' : 'Подтвердить'}
+            type='warn-btn'
+            action={() => (orderId ? cancel() : ok())}
+          ></Button>
+          <Button
+            title={orderId ? 'Вернуться' : 'Отменить'}
             type='warn-btn red-btn'
-            action={actionCancel}
+            action={actionReturn}
           />
         </span>
       </div>

@@ -19,7 +19,7 @@ export default class OrderPage extends React.Component {
       cityId: { id: '', name: '' },
       pointId: { id: '', name: '' },
       car: '',
-      carInfo: {},
+      carId: {},
       currentColor: 'Любой',
       dateFrom: 0,
       dateTo: 0,
@@ -37,9 +37,11 @@ export default class OrderPage extends React.Component {
     this.getPrice = this.getPrice.bind(this);
   }
   componentDidMount() {
-    const id = localStorage.getItem('orderId');
-    if (id) {
-      this.setState({ orderId: id });
+    if (!this.state.orderId) {
+      const id = localStorage.getItem('orderId');
+      if (id) {
+        this.setState({ orderId: id });
+      }
     }
   }
   handleChange(event) {
@@ -57,6 +59,7 @@ export default class OrderPage extends React.Component {
       return { [name]: !prevState[name] };
     });
   }
+
   getLocation(name, info) {
     this.setState((prevState) =>
       name === 'pointId'
@@ -66,7 +69,9 @@ export default class OrderPage extends React.Component {
   }
   getInfo(name, info) {
     this.setState({ [name]: info });
-    localStorage.setItem('orderId', info);
+    if (name === 'orderId') {
+      localStorage.setItem('orderId', info);
+    }
   }
   stepNavigation() {
     +this.state.currentStep === +this.state.completedStep
@@ -100,12 +105,11 @@ export default class OrderPage extends React.Component {
       isNeedChildChair,
       isRightWheel,
       isFullTank,
-      orderNumber,
       currentStep,
       currentColor,
       completedStep,
       dateFrom,
-      carInfo,
+      carId,
       rateId,
       dateTo,
       cityId,
@@ -113,7 +117,7 @@ export default class OrderPage extends React.Component {
       orderId,
     } = this.state;
 
-    const API = 'http://api-factory.simbirsoft1.com/api/db/';
+    const API = 'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/db/';
     const headers = {
       'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
     };
@@ -126,6 +130,7 @@ export default class OrderPage extends React.Component {
         action={this.handleChange}
         city={cityId}
         point={pointId}
+        orderId={orderId}
         getLocation={this.getLocation}
       />,
       <StepTwo
@@ -133,7 +138,7 @@ export default class OrderPage extends React.Component {
         api={API}
         headers={headers}
         action={this.handleChange}
-        currentCar={carInfo.name}
+        currentCar={carId.name}
       />,
       <StepThree
         api={API}
@@ -142,13 +147,13 @@ export default class OrderPage extends React.Component {
         actionClick={this.handleClick}
         actionInfo={this.getInfo}
         currentColor={currentColor}
-        colors={carInfo.colors}
+        colors={carId.colors}
         dateFrom={dateFrom}
         dateTo={dateTo}
         options={[isFullTank, isNeedChildChair, isRightWheel]}
         tariff={rateId.rateTypeId.name}
       />,
-      <StepFour carInfo={carInfo} dateFrom={dateFrom} />,
+      <StepFour carId={carId} dateFrom={dateFrom} />,
     ];
     const navigation = [
       { value: 0, description: 'Местоположение' },
@@ -159,10 +164,10 @@ export default class OrderPage extends React.Component {
     const orderData = {
       cityId: { id: cityId.id },
       pointId: { id: pointId.id },
-      carId: { id: carInfo.id },
+      carId: { id: carId.id },
       color: currentColor,
-      dateFrom: new Date(dateFrom),
-      dateTo: new Date(dateTo),
+      dateFrom: (+(new Date(dateFrom))),
+      dateTo: (+(new Date(dateTo))),
       rateId: { id: rateId.id },
       price: this.getPrice(),
       isFullTank: isFullTank,
@@ -172,9 +177,11 @@ export default class OrderPage extends React.Component {
     return (
       <div className='order-page'>
         <Header />
-        {currentStep === 4 ? (
+        {orderId ? (
           <div className='final-page__nav'>
-            <p>Заказ номер {orderNumber || 'RU58491823'}</p>
+            <p>
+              Заказ номер {`RU${orderId.replace(/\D/gm, '') || 'RU58491823'}`}
+            </p>
           </div>
         ) : (
           <div className='order-page__nav'>
@@ -190,42 +197,44 @@ export default class OrderPage extends React.Component {
           </div>
         )}
         <div className='order-page__container'>
-          <div className='order-page__container__form'>
-            <Switch>
-              {orderId ? (
-                <Redirect
-                  from='/order-page/'
-                  to={`/order-page/order/${orderId}`}
-                />
-              ) : (
-                ''
-              )}
-              {orderId && (
-                <Route exact path={`/order-page/order${orderId}`}>
-                  <FinalPage api={API} headers={headers} orderId={orderId} />
-                </Route>
-              )}
+          <Switch>
+            <Route exact path={`/order-page/order/:orderId`}>
+              <FinalPage api={API} getInfo={this.getInfo} headers={headers} />
+            </Route>
+          </Switch>
+
+          <Switch>
+            {!orderId && (
+              <Redirect from='/order-page/order/' to={`/order-page/`} />
+            )}
+            {orderId && (
               <Redirect
-                from='/order-page/order'
-                to={orderId ? `/order-page/order/${orderId}` : `/order-page/`}
+                from='/order-page/'
+                to={`/order-page/order/${orderId}`}
               />
-              <Route
-                exact
-                path={`/order-page/`}
-                render={() => steps[currentStep]}
-              />
-            </Switch>
-          </div>
-          <div className='order-page__container__total'>
-            <Total
-              api={API}
-              action={this.stepNavigation}
-              params={this.state}
-              getPrice={this.getPrice}
-              orderData={orderData}
-              getInfo={this.getInfo}
+            )}
+            <Route
+              exact
+              path={`/order-page/`}
+              render={() => (
+                <div className='order-page__container__form'>
+                  {steps[currentStep]}
+                </div>
+              )}
             />
-          </div>
+          </Switch>
+          {!orderId && (
+            <div className='order-page__container__total'>
+              <Total
+                api={API}
+                action={this.stepNavigation}
+                params={this.state}
+                getPrice={this.getPrice}
+                orderData={orderData}
+                getInfo={this.getInfo}
+              />
+            </div>
+          )}
         </div>
       </div>
     );
