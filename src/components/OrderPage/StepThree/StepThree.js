@@ -62,6 +62,7 @@ export default function StepThree({
         <fieldset className='step-three__form__date-selector'>
           <legend>Дата аренды</legend>
           <CustomInput
+          dateTo={dateTo}
             onChangeAction={action}
             name='dateFrom'
             description={'С'}

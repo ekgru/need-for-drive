@@ -11,6 +11,7 @@ export default function CustomInput({
   description,
   list,
   dateFrom,
+  dateTo,
   disabled,
   delAction,
 }) {
@@ -23,26 +24,30 @@ export default function CustomInput({
         type={type}
         min={
           type === 'datetime-local'
-            ? name === 'dateTo' && dateFrom !== 0
-              ? `${new Date(dateFrom).getFullYear()}-${`${
-                  new Date(dateFrom).getMonth() + 1
-                }`.padStart(2, 0)}-${`${new Date(dateFrom).getDate()}`.padStart(
-                  2, 0)}T${`${new Date(dateFrom).getHours()}`.padStart(
-                  2, 0)}:${`${new Date(dateFrom).getMinutes()}`.padStart(2, 0)}`
+            ? name === 'dateTo' && dateFrom !== 0?
+              `${dateFrom}`
               : `${new Date().getFullYear()}-${`${
                   new Date().getMonth() + 1
                 }`.padStart(2, 0)}-${`${new Date().getDate()}`.padStart(
-                  2, 0)}T${`${new Date().getHours()}`.padStart(
-                  2, 0)}:${`${new Date().getMinutes()}`.padStart(2, 0)}`
+                  2,
+                  0,
+                )}T${`${new Date().getHours()}`.padStart(
+                  2,
+                  0,
+                )}:${`${new Date().getMinutes()}`.padStart(2, 0)}`
             : ''
         }
         max={
-          type === 'datetime-local' && name === 'dateTo' && dateFrom !== 0
-            ? `${new Date(dateFrom).getFullYear()}-${`${
-                new Date(dateFrom).getMonth() + 2
-              }`.padStart(2, 0)}-${`${new Date(dateFrom).getDate()}`.padStart(
-                2, 0 )}T${`${new Date(dateFrom).getHours()}`.padStart(
-                2, 0 )}:${`${new Date(dateFrom).getMinutes()}`.padStart(2, 0)}`
+          type === 'datetime-local'
+            ? name === 'dateTo' && dateFrom !== 0
+              ? `${new Date(dateFrom).getFullYear()}-${`${
+                  new Date(dateFrom).getMonth() + 2
+                }`.padStart(2, 0)}-${`${new Date(dateFrom).getDate()}`.padStart(
+                  2,
+                  0,
+                )}T${`${new Date(dateFrom).getHours()}`.padStart(
+                  2, 0)}:${`${new Date(dateFrom).getMinutes()}`.padStart(2, 0)}`
+              : `${dateTo}`
             : ''
         }
         required='required'
