@@ -12,6 +12,7 @@
       color: $mainBlack;
     }
     &__number {
+      text-transform: uppercase;
       font-weight: 300;
       font-size: 14px;
       color: $mainBlack;
@@ -32,12 +33,35 @@
       }
     }
   }
+  &__car{
+    img{
+      max-width: 370px;
+    }
+  }
+}
+@media (max-width: $desktopMini){
+  .step-four { &__car{
+    img{
+      max-width: 320px;
+    }
+  }
+}
 }
 @media (max-width: $tablet) {
   .step-four {
-    padding-right: 32px;}
+    padding-right: 32px;
+    &__car{
+      img{
+        max-width: 300px;
+      }
+    }}
 }
 @media (max-width: $smart) {
   .step-four {
-    padding-right: 16px;}
+    padding-right: 16px;
+    &__car{
+      img{
+        max-width: 300px;
+      }
+    }}
 }

@@ -1,28 +1,40 @@
 import React from 'react';
 import './StepFour.scss';
-import fakeCar from '../../../resources/car.png';
-export default function StepFour({ carInfo, fuel, available }) {
-  const { brand, number, img } = carInfo;
+export default function StepFour({ carId, dateFrom }) {
+  const { name, number, tank, thumbnail } = carId;
+  const options = {
+    day: 'numeric',
+    month: 'numeric',
+    year: 'numeric',
+    timezone: 'UTC',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+  };
   return (
-    <div className="step-four">
-      <div className="step-four__info-block">
-        <h1 className="step-four__info-block__brand">
-          {brand || 'Информация недоступна'}
-        </h1>
-        <p className="step-four__info-block__number">
-          {number || 'А 000 AA 00'}
+    <div className='step-four'>
+      <div className='step-four__info-block'>
+        <h1 className='step-four__info-block__brand'>{name}</h1>
+        <p className='step-four__info-block__number'>
+          {number ? number.replace(/(\d{3})/, ' $1 ') : 'A 000 AA'}
         </p>
-        <p className="step-four__info-block__fuel">
+        <p className='step-four__info-block__fuel'>
           <span>Топливо </span>
-          {fuel || 'N'}%
+          {tank}%
         </p>
-        <p className="step-four__info-block__avilable">
+        <p className='step-four__info-block__avilable'>
           <span>Доступна с </span>
-          {available || '00.00.0000 00:00'}
+          {new Date(dateFrom).toLocaleString('ru', options)}
         </p>
       </div>
-      <div className="step-four__car">
-        <img src={img || fakeCar} alt="car" />
+      <div className='step-four__car'>
+        <img
+          crossOrigin='anonymous'
+          referrerPolicy='origin'
+          className='car-card__info-card__img'
+          src={`http://api-factory.simbirsoft1.com${thumbnail.path}`}
+          alt='car'
+        />
       </div>
     </div>
   );

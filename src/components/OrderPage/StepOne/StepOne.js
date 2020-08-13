@@ -9,11 +9,13 @@ export default class StepOne extends React.Component {
     super(props);
     this.state = { cities: [], points: [] };
     this.handleChange = this.handleChange.bind(this);
+    this.controller = new AbortController();
   }
   componentDidMount() {
     const { api, headers } = this.props;
     fetch(`${api}city`, {
       headers: headers,
+      signal: this.controller.signal,
     })
       .then((response) => response.json())
       .then(({ data }) => {
@@ -22,12 +24,16 @@ export default class StepOne extends React.Component {
       .catch((err) => console.error('ERROR', err));
     fetch(`${api}point/`, {
       headers: headers,
+      signal: this.controller.signal,
     })
       .then((response) => response.json())
       .then(({ data }) => {
         this.setState({ points: data });
       })
       .catch((err) => console.error('ERROR', err));
+  }
+  componentWillUnmount() {
+    this.controller.abort();
   }
   handleChange(event, name, customValue) {
     const { cities, points } = this.state;

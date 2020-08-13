@@ -1,26 +1,37 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Button from '../../Button';
 import Warning from './Warning';
 import './Total.scss';
-import { Link } from 'react-router-dom';
-
-export default function Total({ params, action }) {
+export default function Total({
+  params,
+  action,
+  getPrice,
+  orderData,
+  api,
+  getInfo,
+}) {
   const [warning, setWarning] = useState(false);
   const {
     currentStep,
     cityId,
     pointId,
-    carInfo,
+    carId,
     currentColor,
     dateFrom,
     dateTo,
-    price,
     isFullTank,
     isNeedChildChair,
     isRightWheel,
-    tariff,
+    rateId,
+    price,
+    color,
+    id,
+    orderStatusId,
   } = params;
-  const { name } = carInfo;
+  const { name } = carId;
+  const history = useHistory();
+
   function isDisable(step) {
     const i = +step;
     switch (i) {
@@ -29,7 +40,7 @@ export default function Total({ params, action }) {
       case 1:
         return cityId.id && pointId.id && name ? false : true;
       case 2:
-        return cityId.id && pointId.id && name && dateFrom && dateTo
+        return cityId.id && pointId.id && name && dateFrom && dateTo && rateId
           ? false
           : true;
       case 3:
@@ -45,21 +56,25 @@ export default function Total({ params, action }) {
     'Заказать',
     'Отменить',
   ];
+  const mins = (new Date(dateTo) - new Date(dateFrom)) / 60000;
   function getTime() {
-    if (tariff === 'perMin') {
-      const result = (new Date(dateTo) - new Date(dateFrom)) / 60000;
-      return `${Math.trunc(result / 60)} часов ${Math.trunc(
-        result % 60,
-      )} Минут`;
+    if (rateId.rateTypeId.name === 'Поминутно') {
+      return `${Math.trunc(mins / 60)} часов ${Math.trunc(mins % 60)} Минут`;
     } else {
-      const result = (new Date(dateTo) - new Date(dateFrom)) / 3600000;
+      const result = mins / 60;
       return `${Math.round(result / 24)} дней`;
     }
   }
   return (
     <>
-      {warning && +currentStep === 3 && (
-        <Warning actionCancel={() => setWarning(!warning)} actionOk={action} />
+      {warning && (
+        <Warning
+          orderId={id}
+          api={api}
+          actionReturn={() => setWarning(!warning)}
+          data={orderData}
+          getInfo={getInfo}
+        />
       )}
       <div className='total'>
         <h1 className='total__head'>Ваш заказ:</h1>
@@ -81,10 +96,10 @@ export default function Total({ params, action }) {
               <span className='text__dinamic'>{name}</span>
             </p>
           )}
-          {name && currentColor && (
+          {(color || (name && currentColor)) && (
             <p className='total__list__item'>
               <span className='text'>Цвет</span> <span className='dots'></span>
-              <span className='text__dinamic'>{currentColor}</span>
+              <span className='text__dinamic'>{color || currentColor}</span>
             </p>
           )}
           {dateFrom !== 0 && dateTo !== 0 && (
@@ -94,12 +109,10 @@ export default function Total({ params, action }) {
               <span className='text__dinamic'>{getTime()}</span>
             </p>
           )}
-          {name && tariff && (
+          {name && rateId.rateTypeId.name && (
             <p className='total__list__item'>
               <span className='text'>Тариф</span> <span className='dots'></span>
-              <span className='text__dinamic'>
-                {tariff === 'perMin' ? 'Поминутно' : 'Посуточно'}
-              </span>
+              <span className='text__dinamic'>{rateId.rateTypeId.name}</span>
             </p>
           )}
           {name && isFullTank && (
@@ -124,9 +137,16 @@ export default function Total({ params, action }) {
             </p>
           )}
           <p className='total__sum'>
-            <span>Итого:</span> {price}
+            <span>Итого:</span>{' '}
+            {!price
+              ? !carId.priceMin
+                ? `от 8 000 до 12 000 ₽`
+                : mins > 0 && rateId.price
+                ? `${getPrice()} ₽`
+                : `${carId.priceMin} ₽ - ${carId.priceMax} ₽`
+              : `${price} ₽`}
           </p>
-          {+currentStep !== 4 ? (
+          {!id ? (
             <Button
               type={`big-btn`}
               title={titles[currentStep]}
@@ -134,9 +154,27 @@ export default function Total({ params, action }) {
               disable={isDisable(currentStep)}
             />
           ) : (
-            <Link className='button  big-btn red-btn fake-btn' to='/'>
-              Отменить
-            </Link>
+            orderStatusId && (
+              <Button
+                title={
+                  orderStatusId.name === 'cancelled'
+                    ? 'Сделать новый заказ'
+                    : 'Отменить'
+                }
+                type={`big-btn ${
+                  orderStatusId.name === 'cancelled' ? '' : 'red-btn'
+                } `}
+                action={
+                  orderStatusId.name === 'cancelled'
+                    ? () => {
+                        localStorage.removeItem('orderId');
+                        history.push(`/order-page/`);
+                        getInfo('orderId', '');
+                      }
+                    : () => setWarning(!warning)
+                }
+              ></Button>
+            )
           )}
         </div>
       </div>
