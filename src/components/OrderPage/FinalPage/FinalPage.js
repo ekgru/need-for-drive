@@ -7,6 +7,7 @@ import Loader from '../StepOne/Loader';
 export default function FinalPage({ getInfo, orderStatus }) {
   const { orderId } = useParams();
   const [orderInfo, setOrderInfo] = useState([]);
+  const [isLoad, setLoad] = useState(false);
   const api =
     'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/db/';
   const headers = {
@@ -15,6 +16,7 @@ export default function FinalPage({ getInfo, orderStatus }) {
   const history = useHistory();
 
   useEffect(() => {
+    setLoad(false);
     const controller = new AbortController();
     fetch(`${api}order/${orderId}`, {
       method: 'GET',
@@ -26,6 +28,7 @@ export default function FinalPage({ getInfo, orderStatus }) {
         setOrderInfo(data);
         getInfo('orderId', orderId);
         getInfo('orderStatus', data.orderStatusId.name);
+        setLoad(!isLoad);
         return data;
       })
       .catch(() => {
@@ -35,8 +38,7 @@ export default function FinalPage({ getInfo, orderStatus }) {
         history.push('/order-page/');
       });
     return () => controller.abort();
-  }, []);
-
+  }, [orderStatus]);
   const getStatus = (status) => {
     switch (status) {
       case 'new':
@@ -54,19 +56,21 @@ export default function FinalPage({ getInfo, orderStatus }) {
   return (
     <>
       <div className='order-page__container__form'>
-        {orderInfo.id ? (
+        {isLoad ? (
           <>
-            <h1 className='final-page__head'>{getStatus(orderStatus)}</h1>
+            <h1 className='final-page__head'>
+              {getStatus(orderInfo.orderStatusId.name)}
+            </h1>
             <StepFour carId={orderInfo.carId} dateFrom={orderInfo.dateFrom} />
           </>
         ) : (
           <div className='loader-container'>
-          <Loader />
-        </div>
+            <Loader />
+          </div>
         )}
       </div>
       <div className='order-page__container__total'>
-        {orderInfo.id && <Total getInfo={getInfo} params={orderInfo} />}
+        {isLoad && <Total getInfo={getInfo} params={orderInfo} />}
       </div>
     </>
   );

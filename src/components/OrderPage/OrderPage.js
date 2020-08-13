@@ -181,7 +181,7 @@ export default class OrderPage extends React.Component {
     return (
       <div className='order-page'>
         <Header />
-        {orderId ? (
+        {orderId? (
           <div className='final-page__nav'>
             <p>
               Заказ номер {`RU${orderId.replace(/\D/gm, '') || 'RU58491823'}`}

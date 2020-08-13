@@ -24,11 +24,9 @@ export default function Warning({ actionReturn, data, getInfo, orderId }) {
       })
       .catch((err) => console.error('ERROR', err));
 
-    actionReturn();
+    // actionReturn();
   }
   function cancel() {
-    localStorage.removeItem('orderId');
-    getInfo('orderId', '');
     fetch(`${api}order/${orderId}`, {
       method: 'PUT',
       headers: headers,
@@ -38,10 +36,9 @@ export default function Warning({ actionReturn, data, getInfo, orderId }) {
           id: '5e26a1f5099b810b946c5d8c',
         },
       }),
-    });
+    }).catch((err) => console.error('ERROR', err));
     getInfo('orderStatus', 'cancelled');
-    history.push(`/order-page/order/${orderId}`);
-    actionReturn();
+   actionReturn();
   }
   return (
     <div className='warning'>
