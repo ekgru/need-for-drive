@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Button from '../../Button';
 import Warning from './Warning';
 import './Total.scss';
@@ -26,8 +27,11 @@ export default function Total({
     price,
     color,
     id,
+    orderStatusId,
   } = params;
   const { name } = carId;
+  const history = useHistory();
+
   function isDisable(step) {
     const i = +step;
     switch (i) {
@@ -150,11 +154,27 @@ export default function Total({
               disable={isDisable(currentStep)}
             />
           ) : (
-            <Button
-              title='Отменить'
-              type='big-btn red-btn'
-              action={() => setWarning(!warning)}
-            ></Button>
+            orderStatusId && (
+              <Button
+                title={
+                  orderStatusId.name === 'cancelled'
+                    ? 'Сделать новый заказ'
+                    : 'Отменить'
+                }
+                type={`big-btn ${
+                  orderStatusId.name === 'cancelled' ? '' : 'red-btn'
+                } `}
+                action={
+                  orderStatusId.name === 'cancelled'
+                    ? () => {
+                        localStorage.removeItem('orderId');
+                        history.push(`/order-page/`);
+                        getInfo('orderId', '');
+                      }
+                    : () => setWarning(!warning)
+                }
+              ></Button>
+            )
           )}
         </div>
       </div>

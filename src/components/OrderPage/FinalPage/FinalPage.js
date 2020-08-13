@@ -3,11 +3,12 @@ import StepFour from '../StepFour';
 import './FinalPage.scss';
 import { useParams, useHistory } from 'react-router-dom';
 import Total from '../Total';
-export default function FinalPage({ getInfo }) {
+import Loader from '../StepOne/Loader';
+export default function FinalPage({ getInfo, orderStatus }) {
   const { orderId } = useParams();
   const [orderInfo, setOrderInfo] = useState([]);
-  const [carInfo, setCarInfo] = useState([]);
-  const api = 'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/db/';
+  const api =
+    'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/db/';
   const headers = {
     'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
   };
@@ -23,38 +24,50 @@ export default function FinalPage({ getInfo }) {
       .then((res) => res.json())
       .then(({ data }) => {
         setOrderInfo(data);
+        getInfo('orderId', orderId);
+        getInfo('orderStatus', data.orderStatusId.name);
         return data;
       })
-      .then(({ carId }) =>
-        fetch(`${api}car/${carId.id}`, {
-          method: 'GET',
-          headers: headers,
-          signal: controller.signal,
-        }),
-      )
-      .then((res) => res.json())
-      .then(({ data }) => setCarInfo(data))
       .catch(() => {
         localStorage.removeItem('orderId');
         getInfo('orderId', '');
+        getInfo('orderStatus', '');
         history.push('/order-page/');
       });
-    getInfo('orderId', orderId);
     return () => controller.abort();
   }, []);
+
+  const getStatus = (status) => {
+    switch (status) {
+      case 'new':
+        return 'Ваш заказ создан:';
+      case 'issued':
+        return 'Ваш заказ принят и обрабатывается:';
+      case 'confirmed':
+        return 'Ваш заказ подтвержден:';
+      case 'cancelled':
+        return 'Ваш заказ отменен:';
+      default:
+        return 'Ваш заказ:';
+    }
+  };
   return (
     <>
-      {orderInfo.carId && carInfo.name && (
-        <>
-          <div className='order-page__container__form'>
-            <h1 className='final-page__head'>Ваш заказ подтвержден:</h1>
-            <StepFour carId={carInfo} dateFrom={orderInfo.dateFrom} />
-          </div>
-          <div className='order-page__container__total'>
-            <Total getInfo={getInfo} params={orderInfo} />
-          </div>
-        </>
-      )}
+      <div className='order-page__container__form'>
+        {orderInfo.id ? (
+          <>
+            <h1 className='final-page__head'>{getStatus(orderStatus)}</h1>
+            <StepFour carId={orderInfo.carId} dateFrom={orderInfo.dateFrom} />
+          </>
+        ) : (
+          <div className='loader-container'>
+          <Loader />
+        </div>
+        )}
+      </div>
+      <div className='order-page__container__total'>
+        {orderInfo.id && <Total getInfo={getInfo} params={orderInfo} />}
+      </div>
     </>
   );
 }

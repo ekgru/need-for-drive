@@ -14,6 +14,7 @@ export default class OrderPage extends React.Component {
     super();
     this.state = {
       orderId: '',
+      orderStatus: '',
       currentStep: 0,
       completedStep: 0,
       cityId: { id: '', name: '' },
@@ -115,9 +116,11 @@ export default class OrderPage extends React.Component {
       cityId,
       pointId,
       orderId,
+      orderStatus,
     } = this.state;
 
-    const API = 'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/db/';
+    const API =
+      'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/db/';
     const headers = {
       'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
     };
@@ -162,12 +165,13 @@ export default class OrderPage extends React.Component {
       { value: 3, description: 'Итого' },
     ];
     const orderData = {
+      orderStatusId: { name: 'new', id: '5e26a191099b810b946c5d89' },
       cityId: { id: cityId.id },
       pointId: { id: pointId.id },
       carId: { id: carId.id },
       color: currentColor,
-      dateFrom: (+(new Date(dateFrom))),
-      dateTo: (+(new Date(dateTo))),
+      dateFrom: +new Date(dateFrom),
+      dateTo: +new Date(dateTo),
       rateId: { id: rateId.id },
       price: this.getPrice(),
       isFullTank: isFullTank,
@@ -199,14 +203,16 @@ export default class OrderPage extends React.Component {
         <div className='order-page__container'>
           <Switch>
             <Route exact path={`/order-page/order/:orderId`}>
-              <FinalPage api={API} getInfo={this.getInfo} headers={headers} />
+              <FinalPage
+                api={API}
+                orderStatus={orderStatus}
+                getInfo={this.getInfo}
+                headers={headers}
+              />
             </Route>
           </Switch>
 
           <Switch>
-            {!orderId && (
-              <Redirect from='/order-page/order/' to={`/order-page/`} />
-            )}
             {orderId && (
               <Redirect
                 from='/order-page/'
@@ -217,24 +223,24 @@ export default class OrderPage extends React.Component {
               exact
               path={`/order-page/`}
               render={() => (
-                <div className='order-page__container__form'>
-                  {steps[currentStep]}
-                </div>
+                <>
+                  <div className='order-page__container__form'>
+                    {steps[currentStep]}
+                  </div>
+                  <div className='order-page__container__total'>
+                    <Total
+                      api={API}
+                      action={this.stepNavigation}
+                      params={this.state}
+                      getPrice={this.getPrice}
+                      orderData={orderData}
+                      getInfo={this.getInfo}
+                    />
+                  </div>
+                </>
               )}
             />
           </Switch>
-          {!orderId && (
-            <div className='order-page__container__total'>
-              <Total
-                api={API}
-                action={this.stepNavigation}
-                params={this.state}
-                getPrice={this.getPrice}
-                orderData={orderData}
-                getInfo={this.getInfo}
-              />
-            </div>
-          )}
         </div>
       </div>
     );
