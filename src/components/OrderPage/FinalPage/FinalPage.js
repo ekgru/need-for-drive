@@ -28,7 +28,7 @@ export default function FinalPage({ getInfo, orderStatus }) {
         setOrderInfo(data);
         getInfo('orderId', orderId);
         getInfo('orderStatus', data.orderStatusId.name);
-        setLoad(!isLoad);
+        setLoad(true);
         return data;
       })
       .catch(() => {
