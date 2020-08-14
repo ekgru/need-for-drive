@@ -1,0 +1,101 @@
+@import '../../../variables.scss';
+$logo: url('../../../resources/Logo.svg');
+.authorization {
+    padding: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__heading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 17px;
+    .logo {
+      display: inline-block;
+      width: 45px;
+      height: 45px;
+      margin-right: 24px;
+      mask-size: cover;
+      background: $mainAccent;
+      mask: $logo;
+    }
+    &__head {
+      font-weight: 300;
+      font-size: 24px;
+      margin: 0px;
+      color: $mainBlack;
+    }
+  }
+  &__login-block {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0px 1px 0px rgba(90, 97, 105, 0.11),
+      0px 2px 4px rgba(90, 97, 105, 0.12), 0px 5px 5px rgba(90, 97, 105, 0.06),
+      0px 3.5px 35px rgba(90, 97, 105, 0.1);
+    border-radius: 9px;
+    &__name {
+      font-weight: 300;
+      font-size: 17.5px;
+      line-height: 20px;
+    }
+    &__form {
+      display: flex;
+      flex-direction: column;
+      &__fieldset {
+        padding: 8px 0px;
+      }
+      &__input {
+        min-width: 320px;
+        height: 29px;
+        border-radius: 3px;
+        outline: none;
+        border: 0.5px solid #becad6;
+        font-size: 11px;
+        line-height: 13px;
+        color: $mainBlack;
+      }
+      &__buttons-block {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 0px 3px 0px;
+      }
+    }
+  }
+}
+
+/// перенести в отдельный компонент
+.link {
+  font-size: 10.5px;
+  line-height: 12px;
+  color: $blue;
+  text-decoration: none;
+  &:hover {
+    color: lighten($blue, 10);
+  }
+}
+.admin-button {
+  box-sizing: content-box;
+  width: 110px;
+  height: 29px;
+  color: #fff;
+  outline: none;
+  border-radius: 4px;
+  &.blue {
+    background: $blue;
+    border: 0.5px solid $blue;
+    &:hover {
+      background: darken($blue, 10);
+      border: 0.5px solid darken($blue, 10);
+    }
+    &:focus {
+      background: darken($blue, 15);
+      border: 0.5px solid darken($blue, 15);
+    }
+  }
+}
