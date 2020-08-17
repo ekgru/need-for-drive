@@ -1,0 +1,88 @@
+@import '../../../variables.scss';
+$carList: url('../../../resources/CarList.svg');
+$orders: url('../../../resources/Orders.svg');
+$overview: url('../../../resources/Overview.svg');
+$forms: url('../../../resources/Forms.svg');
+$person: url('../../../resources/Person.svg');
+$error: url('../../../resources/Error.svg');
+$edit: url('../../../resources/Edit.svg');
+
+.sidebar {
+
+  &__head {
+    box-sizing: border-box;
+    height: 67.5px;
+    background: #fff;
+    border-bottom: solid 2px $backgroundAdmin;
+    width: 100%;
+    color: $adminFontColor;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 49px;
+
+    .logo {
+      height: 22px;
+      width: 22px;
+      -webkit-mask-position: 0 0;
+      -webkit-mask-size: 22px 22px;
+      margin-right: 7px;
+    }
+  }
+  &__link {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 26px;
+    font-family: $adminFont;
+    color: $adminFontColor;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 17px;
+    text-decoration: none;
+    height: 57.5px;
+    background: #fff;
+    border-bottom: solid 2px $backgroundAdmin;
+    width: 100%;
+    &:hover, &:active, &:focus {
+        box-shadow: inset 4px 0px $blue;
+        color: $blue;
+      span {
+        background: $blue;
+      }
+      
+    }
+    &__icon {
+      margin-right: 12px;
+      display: inline-block;
+      width: 13px;
+      height: 13px;
+      mask-size: cover;
+      background: $adminFontColor;
+      -webkit-mask-position: 0 0;
+      -webkit-mask-size: 16px 16px;
+      &.carList {
+        mask: $carList;
+      }
+      &.orders {
+        mask: $orders;
+      }
+      &.overview {
+        mask: $overview;
+      }
+      &.forms {
+        mask: $forms;
+      }
+      &.person {
+        mask: $person;
+      }
+      &.error {
+        mask: $error;
+      }
+      &.edit {
+        mask: $edit;
+      }
+    }
+  }
+}
