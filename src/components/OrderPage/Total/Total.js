@@ -10,6 +10,7 @@ export default function Total({
   orderData,
   api,
   getInfo,
+  cleanOrder,
 }) {
   const [warning, setWarning] = useState(false);
   const {
@@ -158,7 +159,7 @@ export default function Total({
               <Button
                 title={
                   orderStatusId.name === 'cancelled'
-                    ? 'Сделать новый заказ'
+                    ? 'Вернуться на главную'
                     : 'Отменить'
                 }
                 type={`big-btn ${
@@ -168,7 +169,7 @@ export default function Total({
                   orderStatusId.name === 'cancelled'
                     ? () => {
                         localStorage.removeItem('orderId');
-                        history.push(`/order-page/`);
+                        history.push(`/`);
                         getInfo('orderId', '');
                       }
                     : () => setWarning(!warning)
