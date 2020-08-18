@@ -13,7 +13,7 @@ $edit: url('../../../resources/Edit.svg');
     box-sizing: border-box;
     height: 67.5px;
     background: #fff;
-    border-bottom: solid 2px $backgroundAdmin;
+    border-bottom: $adminBorder;
     width: 100%;
     color: $adminFontColor;
     display: flex;
@@ -43,7 +43,7 @@ $edit: url('../../../resources/Edit.svg');
     text-decoration: none;
     height: 57.5px;
     background: #fff;
-    border-bottom: solid 2px $backgroundAdmin;
+    border-bottom: $adminBorder;
     width: 100%;
     &:hover, &:active, &:focus {
         box-shadow: inset 4px 0px $blue;

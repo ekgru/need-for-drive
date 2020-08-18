@@ -25,10 +25,10 @@ export default function Authorization() {
             />
           </fieldset>
           <span className='authorization__login-block__form__buttons-block'>
-            <a className='link' href='#'>
+            <a className='admin__link' href='#'>
               Запросить доступ
             </a>
-            <button className='admin-button blue' type='submit'>
+            <button className='admin__button blue' type='submit'>
               Войти
             </button>
           </span>

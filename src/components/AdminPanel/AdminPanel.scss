@@ -37,6 +37,7 @@ $logo: url('../../resources/Logo.svg');
       z-index: 1;
       grid-area: 2 / 2 / 3 / 3;
       background-color: $backgroundAdmin;
+      padding: 28px;
     }
     &__bottombar {
       z-index: 1;
@@ -51,37 +52,71 @@ $logo: url('../../resources/Logo.svg');
   }
 }
 
-.link {
-  font-family: $adminFont;
-  font-size: 10.5px;
-  line-height: 12px;
-  color: $blue;
-  text-decoration: none;
-  &:hover {
-    color: lighten($blue, 10);
+.admin {
+  &__button {
+    font-family: $adminFont;
+    font-weight: normal;
+    font-size: 11.5px;
+    line-height: 13px;
+    box-sizing: content-box;
+    width: 110px;
+    height: 29px;
+    color: #fff;
+    outline: none;
+    border-radius: 4px;
+    &.blue {
+      background: $blue;
+      border: 0.5px solid $blue;
+      &:hover {
+        background: darken($blue, 10);
+        border: 0.5px solid darken($blue, 10);
+      }
+      &:focus {
+        background: darken($blue, 15);
+        border: 0.5px solid darken($blue, 15);
+      }
+    }
+    &:disabled {
+      background: $grayButton;
+      border: 0.5px solid darken($grayButton, 15);
+    }
   }
-}
-.admin-button {
-  font-family: $adminFont;
-  font-weight: normal;
-  font-size: 11.5px;
-  line-height: 13px;
-  box-sizing: content-box;
-  width: 110px;
-  height: 29px;
-  color: #fff;
-  outline: none;
-  border-radius: 4px;
-  &.blue {
-    background: $blue;
-    border: 0.5px solid $blue;
+  &__link {
+    font-family: $adminFont;
+    font-size: 10.5px;
+    line-height: 12px;
+    margin-right: 16px;
+    color: $blue;
+    text-decoration: none;
     &:hover {
-      background: darken($blue, 10);
-      border: 0.5px solid darken($blue, 10);
+      color: darken($blue, 10);
     }
-    &:focus {
-      background: darken($blue, 15);
-      border: 0.5px solid darken($blue, 15);
+    &:active {
+      color: darken($blue, 20);
     }
+  }
+  &__select {
+    font-family: $adminFont;
+    padding: 8px;
+    outline: none;
+    width: 110px;
+    border: $adminBorder;
+    box-sizing: border-box;
+    border-radius: 4px;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 13px;
+    &:hover, &:active, &:focus {
+      outline: none;
+    }
+    
+  }
+  &__heading {
+    box-sizing: border-box;
+    font-family: $adminFont;
+    color: $adminFontColor;
+    font-weight: normal;
+    font-size: 29px;
+    line-height: 33px;
   }
 }

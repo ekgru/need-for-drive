@@ -1,0 +1,112 @@
+@import '../../../variables.scss';
+.order-block {
+  box-sizing: border-box;
+  background: #fff;
+  height: 386px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 9px;
+  box-shadow: 0px 2px 0px #5a61691c, 0px 4px 8px #5a61691f,
+    0px 10px 10px #5a61690f, 0px 7px 70px #5a61691a;
+  &__sort {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 21px;
+    height: 59px;
+    border-bottom: $adminBorder;
+    span {
+      select {
+        margin: 0px 7.5px;
+        option {
+          height: 16px !important;
+        }
+      }
+    }
+  }
+  &__info {
+    font-family: $adminFont;
+    color: $adminFontColor;
+    flex: 1 1;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 28px;
+    &__img {
+      width: 200px;
+    }
+    &__text {
+      color: $grayDark;
+      font-weight: normal;
+      font-size: 14px;
+      line-height: 16px;
+      span {
+        color: $mainBlack;
+      }
+    }
+    &__cost {
+      font-family: $adminFont;
+      font-weight: normal;
+      font-size: 28px;
+      line-height: 30px;
+      color: $mainBlack;
+    }
+    &__buttons {
+      border-radius: 4px;
+      font-family: $adminFont;
+      color: $adminFontColor;
+      button {
+        padding: 7px;
+        width: 80px;
+        outline: none;
+        color: $adminFontColor;
+        background: #fff;
+        font-family: $adminFont;
+        font-weight: normal;
+        font-size: 11px;
+        line-height: 13px;
+        &:hover{
+          background: darken(#fff, 5);
+        }
+        &:focus, &:active {
+          background: darken(#fff, 10);
+        }
+      }
+      &__ok {
+        border: none;
+        border-top: $adminBorder;
+        border-bottom: $adminBorder;
+        border-left: $adminBorder;
+        border-radius: 4px 0px 0px 4px;
+        span {
+          color: $mainAccent;
+          font-weight: bold;
+        }
+      }
+      &__cancel {
+        border: $adminBorder !important;
+        span {
+          color: $red;
+          font-weight: bold;
+        }
+      }
+      &__edit {
+        border: none;
+        border-top: $adminBorder;
+        border-bottom: $adminBorder;
+        border-right: $adminBorder;
+        border-radius: 0px 4px 4px 0px;
+        span {
+          color: $grayDark;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  &__pagination {
+    border-top: $adminBorder;
+    height: 59px;
+  }
+}

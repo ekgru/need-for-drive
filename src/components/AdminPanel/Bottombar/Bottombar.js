@@ -5,10 +5,10 @@ export default function Bottombar() {
   return (
     <>
       <div className='admin-panel__container__bottombar__link-block'>
-        <Link className='link' to='/'>
+        <Link className='admin__link' to='/'>
           Главная страница
         </Link>
-        <Link className='link' to='/order-page/'>
+        <Link className='admin__link' to='/order-page/'>
           Страница заказов
         </Link>
       </div>
