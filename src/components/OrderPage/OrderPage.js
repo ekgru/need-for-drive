@@ -14,7 +14,7 @@ export default class OrderPage extends React.Component {
     super();
     this.state = {
       orderId: '',
-      orderStatus: '',
+      orderStatus: 'new',
       currentStep: 0,
       completedStep: 0,
       cityId: { id: '', name: '' },
@@ -36,6 +36,7 @@ export default class OrderPage extends React.Component {
     this.getInfo = this.getInfo.bind(this);
     this.getLocation = this.getLocation.bind(this);
     this.getPrice = this.getPrice.bind(this);
+    this.cleanState = this.cleanState.bind(this);
   }
   componentDidMount() {
     if (!this.state.orderId) {
@@ -100,7 +101,26 @@ export default class OrderPage extends React.Component {
     );
     return result;
   }
-
+  cleanState() {
+    this.setState({
+      orderId: '',
+      orderStatus: 'new',
+      currentStep: 0,
+      completedStep: 0,
+      cityId: { id: '', name: '' },
+      pointId: { id: '', name: '' },
+      car: '',
+      carId: {},
+      currentColor: 'Любой',
+      dateFrom: 0,
+      dateTo: 0,
+      rateId: { rateTypeId: {}, price: 0 },
+      price: 0,
+      isFullTank: false,
+      isNeedChildChair: false,
+      isRightWheel: false,
+    });
+  }
   render() {
     const {
       isNeedChildChair,
@@ -181,7 +201,7 @@ export default class OrderPage extends React.Component {
     return (
       <div className='order-page'>
         <Header />
-        {orderId? (
+        {orderId ? (
           <div className='final-page__nav'>
             <p>
               Заказ номер {`RU${orderId.replace(/\D/gm, '') || 'RU58491823'}`}
@@ -235,6 +255,7 @@ export default class OrderPage extends React.Component {
                       getPrice={this.getPrice}
                       orderData={orderData}
                       getInfo={this.getInfo}
+                      cleanOrder={this.cleanState}
                     />
                   </div>
                 </>
