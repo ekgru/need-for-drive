@@ -1,4 +1,4 @@
-@import "../../variables.scss";
+@import '../../variables.scss';
 
 .order-page {
   overflow: hidden;
@@ -20,6 +20,10 @@
       background: transparent;
       border: none;
       outline: none;
+      span {
+        color: inherit;
+        padding: 8px;
+      }
       &:active,
       &:hover {
         color: darken($mainAccent, 10);
@@ -96,8 +100,7 @@
     }
     &__container {
       flex-direction: column;
-    overflow-x: hidden;
-
+      overflow-x: hidden;
 
       &__form {
         padding: 16px;

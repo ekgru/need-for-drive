@@ -30,14 +30,15 @@ export default class OrderPage extends React.Component {
       isNeedChildChair: false,
       isRightWheel: false,
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.stepNavigation = this.stepNavigation.bind(this);
     this.getInfo = this.getInfo.bind(this);
     this.getLocation = this.getLocation.bind(this);
     this.getPrice = this.getPrice.bind(this);
-    this.cleanState = this.cleanState.bind(this);
   }
+
   componentDidMount() {
     if (!this.state.orderId) {
       const id = localStorage.getItem('orderId');
@@ -46,6 +47,7 @@ export default class OrderPage extends React.Component {
       }
     }
   }
+
   handleChange(event) {
     const { name, value } = event.target;
     name !== 'cityId'
@@ -55,6 +57,7 @@ export default class OrderPage extends React.Component {
           pointId: { id: '', name: '' },
         });
   }
+
   handleClick(event) {
     const { name } = event.target;
     this.setState((prevState) => {
@@ -69,12 +72,14 @@ export default class OrderPage extends React.Component {
         : { [name]: info },
     );
   }
+
   getInfo(name, info) {
     this.setState({ [name]: info });
     if (name === 'orderId') {
       localStorage.setItem('orderId', info);
     }
   }
+
   stepNavigation() {
     +this.state.currentStep === +this.state.completedStep
       ? this.setState((prevState) => {
@@ -87,9 +92,11 @@ export default class OrderPage extends React.Component {
           return { currentStep: +prevState.currentStep + 1 };
         });
   }
+
   getPrice() {
     const mins =
-      (new Date(this.state.dateTo) - new Date(this.state.dateFrom)) / 60000;
+      (new Date(this.state.dateTo) - new Date(this.state.dateFrom)) /
+      60000;
     const options =
       (this.state.isFullTank && 500) +
       (this.state.isNeedChildChair && 200) +
@@ -101,26 +108,7 @@ export default class OrderPage extends React.Component {
     );
     return result;
   }
-  cleanState() {
-    this.setState({
-      orderId: '',
-      orderStatus: 'new',
-      currentStep: 0,
-      completedStep: 0,
-      cityId: { id: '', name: '' },
-      pointId: { id: '', name: '' },
-      car: '',
-      carId: {},
-      currentColor: 'Любой',
-      dateFrom: 0,
-      dateTo: 0,
-      rateId: { rateTypeId: {}, price: 0 },
-      price: 0,
-      isFullTank: false,
-      isNeedChildChair: false,
-      isRightWheel: false,
-    });
-  }
+
   render() {
     const {
       isNeedChildChair,
@@ -178,12 +166,14 @@ export default class OrderPage extends React.Component {
       />,
       <StepFour carId={carId} dateFrom={dateFrom} />,
     ];
+
     const navigation = [
       { value: 0, description: 'Местоположение' },
       { value: 1, description: 'Модель' },
       { value: 2, description: 'Дополнительно' },
       { value: 3, description: 'Итого' },
     ];
+
     const orderData = {
       orderStatusId: { name: 'new', id: '5e26a191099b810b946c5d89' },
       cityId: { id: cityId.id },
@@ -198,20 +188,19 @@ export default class OrderPage extends React.Component {
       isNeedChildChair: isNeedChildChair,
       isRightWheel: isRightWheel,
     };
+
     return (
       <div className='order-page'>
         <Header />
         {orderId ? (
           <div className='final-page__nav'>
-            <p>
-              Заказ номер {`RU${orderId.replace(/\D/gm, '') || 'RU58491823'}`}
-            </p>
+            <p>Заказ номер {`RU${orderId.replace(/\D/gm, '')}`}</p>
           </div>
         ) : (
           <div className='order-page__nav'>
-            {navigation.map((el, i) => (
+            {navigation.map((el) => (
               <NavElement
-                key={i}
+                key={el.value}
                 value={el.value}
                 description={el.description}
                 action={this.handleChange}
@@ -255,7 +244,6 @@ export default class OrderPage extends React.Component {
                       getPrice={this.getPrice}
                       orderData={orderData}
                       getInfo={this.getInfo}
-                      cleanOrder={this.cleanState}
                     />
                   </div>
                 </>

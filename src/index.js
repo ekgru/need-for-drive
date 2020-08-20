@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
-    <HashRouter hashType={'slash'}>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </HashRouter>,
-    document.getElementById('root'),
+  <BrowserRouter>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </BrowserRouter>,
+  document.getElementById('root')
 );
 
 serviceWorker.unregister();
