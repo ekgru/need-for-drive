@@ -6,7 +6,6 @@ export default class CarMap extends React.Component {
     super(props);
     this.getMarks = this.getMarks.bind(this);
     this.onLoadMap = this.onLoadMap.bind(this);
-
     this.state = {
       cityMarks: [],
       pointMarks: [],
@@ -31,15 +30,31 @@ export default class CarMap extends React.Component {
         }),
     );
   }
-
+  getPointName(string) {
+    return string
+      .replace(/(проспект|улица|[\.,])/gi, '')
+      .replace(/(\d+)(к\.?)(\d+)/i, '$1, корп.$3');
+  }
   onLoadMap(ymaps) {
     this.ymaps = ymaps;
     this.getMarks('pointMarks');
     this.getMarks('cityMarks');
   }
-
+  placemarkHandeler(el) {
+    const name = this.getPointName(el.name).trim();
+    this.props.action('', 'pointId', name);
+    this.map.setCenter(el.Point.pos.split(' ', 2).reverse(), 17, {
+      checkZoomRange: true,
+    });
+  }
+  cityHandler(el) {
+    this.props.action('', 'cityId', el.name);
+    this.map.setCenter(el.Point.pos.split(' ', 2).reverse(), 10, {
+      checkZoomRange: true,
+    });
+  }
   render() {
-    const { point, city, action } = this.props;
+    const { point, city } = this.props;
     const { pointMarks, cityMarks } = this.state;
     const params = {
       ns: 'use-load-option',
@@ -47,10 +62,7 @@ export default class CarMap extends React.Component {
     };
     const modules = ['geolocation', 'geocode', 'geoObject.addon.hint'];
     const centerPointMark = pointMarks.find(
-      (el) =>
-        el.name
-          .replace(/(проспект|улица|[\.,])/gi, '')
-          .replace(/(\d+)(к\.?)(\d+)/i, '$1, корп.$3').trim() === point,
+      (el) => this.getPointName(el.name).trim() === point,
     );
     const centerCityMark = cityMarks.find((el) => el.name === city.name);
 
@@ -85,13 +97,8 @@ export default class CarMap extends React.Component {
           {!city.id &&
             cityMarks.map((el, i) => (
               <Circle
-                key={i}
-                onClick={(event) => {
-                  action(event, 'cityId', el.name);
-                  this.map.setCenter(el.Point.pos.split(' ', 2).reverse(), 10, {
-                    checkZoomRange: true,
-                  });
-                }}
+                key={el.Point.pos}
+                onClick={this.cityHandler.bind(this, el)}
                 geometry={[el.Point.pos.split(' ', 2).reverse(), 20000]}
                 options={{
                   interactiveZIndex: true,
@@ -108,20 +115,8 @@ export default class CarMap extends React.Component {
             pointMarks.map((el, i) =>
               el.description.split(', ', 1)[0] === city.name ? (
                 <Placemark
-                  key={i}
-                  onClick={(event) => {
-                    const name = el.name
-                      .replace(/(проспект|улица|[\.,])/gi, '')
-                      .replace(/(\d+)(к\.?)(\d+)/i, '$1, корп.$3').trim();
-                    action(event, 'pointId', name);
-                    this.map.setCenter(
-                      el.Point.pos.split(' ', 2).reverse(),
-                      17,
-                      {
-                        checkZoomRange: true,
-                      },
-                    );
-                  }}
+                  key={el.Point.pos}
+                  onClick={this.placemarkHandeler.bind(this, el)}
                   geometry={el.Point.pos.split(' ', 2).reverse()}
                   options={{
                     preset: 'islands#autoCircleIcon',
@@ -129,9 +124,7 @@ export default class CarMap extends React.Component {
                     iconShadow: true,
                   }}
                   properties={{
-                    iconCaption: el.name
-                      .replace(/(проспект|улица|[\.,])/gi, '')
-                      .replace(/(\d+)(к\.?)(\d+)/i, '$1, корп.$3'),
+                    iconCaption: this.getPointName(el.name),
                   }}
                 />
               ) : (

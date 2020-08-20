@@ -1,5 +1,10 @@
 import React from 'react';
-import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+import SwiperCore, {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+} from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
@@ -41,11 +46,22 @@ const content = [
 export default function Slider() {
   const sliderContent = content.map((el, i) => (
     <SwiperSlide key={el.text.length * i}>
-      <Slide head={el.head} text={el.text} img={el.img} key={i} color={el.color} />
+      <Slide
+        head={el.head}
+        text={el.text}
+        img={el.img}
+        key={i}
+        color={el.color}
+      />
     </SwiperSlide>
   ));
   return (
-    <Swiper loop={true} slidesPerView={1} navigation pagination={{ clickable: true }}>
+    <Swiper
+      loop={true}
+      slidesPerView={1}
+      navigation
+      pagination={{ clickable: true }}
+    >
       {sliderContent}
     </Swiper>
   );

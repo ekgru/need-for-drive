@@ -17,9 +17,7 @@ export default function CarCard({
         type='radio'
         name='car'
         value={title}
-        onChange={() => {
-          getCar('carId', carId);
-        }}
+        onChange={getCar.bind(this, 'carId', carId)}
         checked={title === car ? 'checked' : ''}
       />
       <div className='car-card__info-card'>

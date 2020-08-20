@@ -20,7 +20,7 @@ export default function StepFour({ carId, dateFrom }) {
         </p>
         <p className='step-four__info-block__fuel'>
           <span>Топливо </span>
-          {tank}%
+          {tank || '0'}%
         </p>
         <p className='step-four__info-block__avilable'>
           <span>Доступна с </span>
