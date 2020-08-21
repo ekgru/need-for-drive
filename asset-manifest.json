@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/need-for-drive/static/css/main.46ed46d2.chunk.css",
-    "main.js": "/need-for-drive/static/js/main.9a6eab04.chunk.js",
-    "main.js.map": "/need-for-drive/static/js/main.9a6eab04.chunk.js.map",
+    "main.js": "/need-for-drive/static/js/main.09adf57c.chunk.js",
+    "main.js.map": "/need-for-drive/static/js/main.09adf57c.chunk.js.map",
     "runtime-main.js": "/need-for-drive/static/js/runtime-main.7c67051a.js",
     "runtime-main.js.map": "/need-for-drive/static/js/runtime-main.7c67051a.js.map",
     "static/css/2.1be1aeea.chunk.css": "/need-for-drive/static/css/2.1be1aeea.chunk.css",
-    "static/js/2.1f72cc0a.chunk.js": "/need-for-drive/static/js/2.1f72cc0a.chunk.js",
-    "static/js/2.1f72cc0a.chunk.js.map": "/need-for-drive/static/js/2.1f72cc0a.chunk.js.map",
+    "static/js/2.cc69f8e1.chunk.js": "/need-for-drive/static/js/2.cc69f8e1.chunk.js",
+    "static/js/2.cc69f8e1.chunk.js.map": "/need-for-drive/static/js/2.cc69f8e1.chunk.js.map",
     "index.html": "/need-for-drive/index.html",
-    "precache-manifest.9ae3aab51a1814b73ec9c13c9b2c1f43.js": "/need-for-drive/precache-manifest.9ae3aab51a1814b73ec9c13c9b2c1f43.js",
+    "precache-manifest.69cbc7d7b80636dedab817cf20829d57.js": "/need-for-drive/precache-manifest.69cbc7d7b80636dedab817cf20829d57.js",
     "service-worker.js": "/need-for-drive/service-worker.js",
     "static/css/2.1be1aeea.chunk.css.map": "/need-for-drive/static/css/2.1be1aeea.chunk.css.map",
     "static/css/main.46ed46d2.chunk.css.map": "/need-for-drive/static/css/main.46ed46d2.chunk.css.map",
-    "static/js/2.1f72cc0a.chunk.js.LICENSE.txt": "/need-for-drive/static/js/2.1f72cc0a.chunk.js.LICENSE.txt",
+    "static/js/2.cc69f8e1.chunk.js.LICENSE.txt": "/need-for-drive/static/js/2.cc69f8e1.chunk.js.LICENSE.txt",
     "static/media/index.scss": "/need-for-drive/static/media/Roboto-Medium.58aef543.ttf",
     "static/media/NavBar.scss": "/need-for-drive/static/media/Telegram.0b51a5ca.svg",
     "static/media/Geo.svg": "/need-for-drive/static/media/Geo.f2245ebb.svg",
@@ -25,8 +25,8 @@
   "entrypoints": [
     "static/js/runtime-main.7c67051a.js",
     "static/css/2.1be1aeea.chunk.css",
-    "static/js/2.1f72cc0a.chunk.js",
+    "static/js/2.cc69f8e1.chunk.js",
     "static/css/main.46ed46d2.chunk.css",
-    "static/js/main.9a6eab04.chunk.js"
+    "static/js/main.09adf57c.chunk.js"
   ]
 }
