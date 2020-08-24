@@ -1,7 +1,8 @@
 @import '../../../variables.scss';
 $logo: url('../../../resources/Logo.svg');
 .authorization {
-  padding: 150px;
+  margin-top: auto;
+  margin-bottom: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -109,5 +110,12 @@ $logo: url('../../../resources/Logo.svg');
       background: darken($blue, 15);
       border: 0.5px solid darken($blue, 15);
     }
+  }
+}
+
+
+@media (max-width: 350px){
+  .authorization__login-block__form__input{
+    min-width: 240px;
   }
 }
