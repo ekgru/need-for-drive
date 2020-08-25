@@ -34,10 +34,29 @@ $logo: url('../../resources/Logo.svg');
     }
 
     &__content {
+      &::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+        background: #ffffff;
+      }
+
+      &::-webkit-scrollbar-button {
+        height: 0px;
+      }
+      &::-webkit-scrollbar-track-piece {
+        background: transparentize($blue, 0.7);
+      }
+      &::-webkit-scrollbar-thumb {
+        border-radius: 2px;
+        background: $blue;
+      }
+      overflow: auto;
       z-index: 1;
       grid-area: 2 / 2 / 3 / 3;
       background-color: $backgroundAdmin;
-      padding: 28px;
+      padding: 0px 28px;
+      display: flex;
+      flex-direction: column;
     }
     &__bottombar {
       z-index: 1;
@@ -96,6 +115,7 @@ $logo: url('../../resources/Logo.svg');
     }
   }
   &__select {
+    background: #fff;
     font-family: $adminFont;
     padding: 8px;
     outline: none;
@@ -106,10 +126,11 @@ $logo: url('../../resources/Logo.svg');
     font-weight: normal;
     font-size: 12px;
     line-height: 13px;
-    &:hover, &:active, &:focus {
+    &:hover,
+    &:active,
+    &:focus {
       outline: none;
     }
-    
   }
   &__heading {
     box-sizing: border-box;
@@ -118,5 +139,33 @@ $logo: url('../../resources/Logo.svg');
     font-weight: normal;
     font-size: 29px;
     line-height: 33px;
+  }
+}
+
+@media (max-width: $tablet) {
+  .admin-panel {
+    &__container {
+      grid-template-columns: 57.5px 1fr;
+      grid-template-rows: 68.5px 1fr 68.5px;
+      &__content {
+        padding: 14px;
+      }
+    }
+  }
+}
+@media (max-width: $smart) {
+  .admin {
+    &__heading {
+      margin: 5px 15px;
+      font-size: 20px;
+    }
+  }
+  .admin-panel {
+    &__container {
+      &__content {
+        background: #fff;
+        padding: 0px;
+      }
+    }
   }
 }
