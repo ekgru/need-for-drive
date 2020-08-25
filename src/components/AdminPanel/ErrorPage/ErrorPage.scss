@@ -15,15 +15,18 @@
     font-size: 75px;
     line-height: 88px;
     color: #cacedb;
+    text-align: center;
   }
   &__description {
     font-size: 50px;
     line-height: 57px;
     color: $adminFontColor;
+    text-align: center;
   }
   &__small-text {
     font-size: 20px;
     line-height: 23px;
     color: $adminFontColor;
+    text-align: center;
   }
 }
