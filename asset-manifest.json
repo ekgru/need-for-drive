@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/need-for-drive/static/css/main.bdd10a8f.chunk.css",
-    "main.js": "/need-for-drive/static/js/main.be62ec79.chunk.js",
-    "main.js.map": "/need-for-drive/static/js/main.be62ec79.chunk.js.map",
+    "main.js": "/need-for-drive/static/js/main.fc51d82f.chunk.js",
+    "main.js.map": "/need-for-drive/static/js/main.fc51d82f.chunk.js.map",
     "runtime-main.js": "/need-for-drive/static/js/runtime-main.7c67051a.js",
     "runtime-main.js.map": "/need-for-drive/static/js/runtime-main.7c67051a.js.map",
     "static/css/2.1be1aeea.chunk.css": "/need-for-drive/static/css/2.1be1aeea.chunk.css",
-    "static/js/2.7fb1ac4a.chunk.js": "/need-for-drive/static/js/2.7fb1ac4a.chunk.js",
-    "static/js/2.7fb1ac4a.chunk.js.map": "/need-for-drive/static/js/2.7fb1ac4a.chunk.js.map",
+    "static/js/2.fb854a2f.chunk.js": "/need-for-drive/static/js/2.fb854a2f.chunk.js",
+    "static/js/2.fb854a2f.chunk.js.map": "/need-for-drive/static/js/2.fb854a2f.chunk.js.map",
     "index.html": "/need-for-drive/index.html",
-    "precache-manifest.69f78d185c56d43ffbc3d2e986190924.js": "/need-for-drive/precache-manifest.69f78d185c56d43ffbc3d2e986190924.js",
+    "precache-manifest.e2b24b0ab13978f07ad28c1efd30b7eb.js": "/need-for-drive/precache-manifest.e2b24b0ab13978f07ad28c1efd30b7eb.js",
     "service-worker.js": "/need-for-drive/service-worker.js",
     "static/css/2.1be1aeea.chunk.css.map": "/need-for-drive/static/css/2.1be1aeea.chunk.css.map",
     "static/css/main.bdd10a8f.chunk.css.map": "/need-for-drive/static/css/main.bdd10a8f.chunk.css.map",
-    "static/js/2.7fb1ac4a.chunk.js.LICENSE.txt": "/need-for-drive/static/js/2.7fb1ac4a.chunk.js.LICENSE.txt",
+    "static/js/2.fb854a2f.chunk.js.LICENSE.txt": "/need-for-drive/static/js/2.fb854a2f.chunk.js.LICENSE.txt",
     "static/media/Sidebar.scss": "/need-for-drive/static/media/Person.39670054.svg",
     "static/media/index.scss": "/need-for-drive/static/media/Rubik-Regular.b3d0902b.ttf",
     "static/media/NavBar.scss": "/need-for-drive/static/media/Telegram.0b51a5ca.svg",
@@ -30,8 +30,8 @@
   "entrypoints": [
     "static/js/runtime-main.7c67051a.js",
     "static/css/2.1be1aeea.chunk.css",
-    "static/js/2.7fb1ac4a.chunk.js",
+    "static/js/2.fb854a2f.chunk.js",
     "static/css/main.bdd10a8f.chunk.css",
-    "static/js/main.be62ec79.chunk.js"
+    "static/js/main.fc51d82f.chunk.js"
   ]
 }
