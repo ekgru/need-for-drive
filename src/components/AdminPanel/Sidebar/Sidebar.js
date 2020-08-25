@@ -15,7 +15,7 @@ export default function Sidebar() {
     <>
       <a className='sidebar__head'>
         <span className='logo'></span>
-        Need for drive
+        <p>Need for drive</p>
       </a>
       {menu.map((el, i) => (
         <SidebarLink title={el.name} icon={el.icon} key={i} />

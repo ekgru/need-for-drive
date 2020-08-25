@@ -8,6 +8,9 @@ $notifications: url('../../../resources/Notifications.svg');
   .searching-form {
     padding-left: 24px;
     .shape {
+      position: absolute;
+      top: 28px;
+      left: 72px;
       display: inline-block;
       width: 13px;
       height: 13px;
@@ -79,6 +82,17 @@ $notifications: url('../../../resources/Notifications.svg');
       font-weight: normal;
       font-size: 15px;
       line-height: 17px;
+    }
+  }
+}
+
+@media (max-width: $smart) {
+  .admin-panel__container__topbar {
+    .user-block {
+      width: 57px !important;
+      &__user-name {
+        display: none;
+      }
     }
   }
 }
