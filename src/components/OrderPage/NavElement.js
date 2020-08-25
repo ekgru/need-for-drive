@@ -14,8 +14,9 @@ export default function NavElement({
         onClick={action}
         disabled={value > completedStep ? 'disabled' : ''}
       >
-        {description} {value !== 3 && <span> ► </span>}
+        {description}
       </button>
+      {value !== 3 && <span>►</span>}
     </>
   );
 }

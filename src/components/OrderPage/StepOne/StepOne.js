@@ -11,10 +11,8 @@ export default class StepOne extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.controller = new AbortController();
   }
-
   componentDidMount() {
     const { api, headers } = this.props;
-
     fetch(`${api}city`, {
       headers: headers,
       signal: this.controller.signal,
@@ -24,7 +22,6 @@ export default class StepOne extends React.Component {
         this.setState({ cities: data });
       })
       .catch((err) => console.error('ERROR', err));
-
     fetch(`${api}point/`, {
       headers: headers,
       signal: this.controller.signal,
@@ -35,29 +32,22 @@ export default class StepOne extends React.Component {
       })
       .catch((err) => console.error('ERROR', err));
   }
-
   componentWillUnmount() {
     this.controller.abort();
   }
-
   handleChange(event, name, customValue) {
     const { cities, points } = this.state;
     const { getLocation } = this.props;
-    const value = event ? event.target.value : customValue;
+    const value = event.target ? event.target.value : customValue;
+
     const resultObj =
       name === 'cityId'
         ? cities.filter((el) => el.name === value)
         : points.filter((el) => el.address === value);
-
-    getLocation(
-      name,
-      resultObj[0] ? resultObj[0] : { name: value, id: '' },
-    );
+    getLocation(name, resultObj[0] ? resultObj[0] : { name: value, id: '' });
   }
-
   render() {
     const { city, point, action } = this.props;
-
     return (
       <div className='step-one'>
         <form className='step-one__form'>

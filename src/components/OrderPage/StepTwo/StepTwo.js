@@ -11,10 +11,8 @@ export default class StepTwo extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
   }
-
   componentDidMount() {
     this.getCars();
-
     fetch(`${this.props.api}car`, {
       headers: this.props.headers,
     })
@@ -24,9 +22,8 @@ export default class StepTwo extends React.Component {
       })
       .catch((err) => console.error('ERROR', err));
   }
-
   getCars() {
-    return this.state.cars.map((el) => (
+    return this.state.cars.map((el, i) => (
       <CarCard
         display={
           this.state.category === 'all' ||
@@ -41,7 +38,7 @@ export default class StepTwo extends React.Component {
         costMax={el.priceMax}
         carId={el}
         pic={el.thumbnail.path}
-        key={el.id}
+        key={i}
         car={this.props.currentCar}
       />
     ));
@@ -50,7 +47,6 @@ export default class StepTwo extends React.Component {
   handleChange(event) {
     this.setState({ category: event.target.value });
   }
-
   render() {
     const categories = [
       { value: 'all', check: true, description: 'Все модели' },

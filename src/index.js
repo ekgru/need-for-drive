@@ -6,12 +6,12 @@ import * as serviceWorker from './serviceWorker';
 import { HashRouter } from 'react-router-dom';
 
 ReactDOM.render(
-  <HashRouter>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </HashRouter>,
-  document.getElementById('root'),
+    <HashRouter hashType={'slash'}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </HashRouter>,
+    document.getElementById('root'),
 );
 
 serviceWorker.unregister();

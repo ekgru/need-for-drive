@@ -10,7 +10,6 @@ export default function Warning({ actionReturn, data, getInfo, orderId }) {
     'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
     'Content-Type': 'application/json',
   };
-
   function ok() {
     fetch(`${api}order`, {
       method: 'POST',
@@ -24,8 +23,9 @@ export default function Warning({ actionReturn, data, getInfo, orderId }) {
         history.push(`/order-page/order/${data.id}`);
       })
       .catch((err) => console.error('ERROR', err));
-  }
 
+    // actionReturn();
+  }
   function cancel() {
     fetch(`${api}order/${orderId}`, {
       method: 'PUT',
@@ -38,9 +38,8 @@ export default function Warning({ actionReturn, data, getInfo, orderId }) {
       }),
     }).catch((err) => console.error('ERROR', err));
     getInfo('orderStatus', 'cancelled');
-    actionReturn();
+   actionReturn();
   }
-
   return (
     <div className='warning'>
       <div className='warning__btns-block'>
@@ -51,7 +50,7 @@ export default function Warning({ actionReturn, data, getInfo, orderId }) {
           <Button
             title={orderId ? 'Отменить' : 'Подтвердить'}
             type='warn-btn'
-            action={orderId ? cancel : ok}
+            action={() => (orderId ? cancel() : ok())}
           ></Button>
           <Button
             title={orderId ? 'Вернуться' : 'Отменить'}
