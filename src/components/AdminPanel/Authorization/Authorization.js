@@ -13,14 +13,14 @@ export default function Authorization() {
           <fieldset className='authorization__login-block__form__fieldset'>
             <legend>Почта</legend>
             <input
-              className='authorization__login-block__form__input'
+              className='admin__input'
               type='text'
             />
           </fieldset>
           <fieldset className='authorization__login-block__form__fieldset'>
             <legend>Пароль</legend>
             <input
-              className='authorization__login-block__form__input'
+              className='admin__input'
               type='password'
             />
           </fieldset>

@@ -101,6 +101,49 @@ $logo: url('../../resources/Logo.svg');
       border: 0.5px solid darken($grayButton, 15);
     }
   }
+  &__radio{
+    input{
+      position: absolute;
+    z-index: -1;
+    opacity: 0;
+    &:not(:disabled):active + span::before {
+      box-shadow: inset 0 0 4px 0.25rem $blue;
+    }
+    &:focus + span::before {
+      box-shadow: inset 0 0 3px 0.25rem $blue;
+    }
+    &:checked + span::before {
+      box-shadow: inset 0 0 0 0.25rem $blue;
+      border: none;
+    }
+    &:checked + span {
+      color: $adminFontColor;
+    }
+    }
+    span {
+      color: $grayDark;
+      margin: 0px 8px;
+      display: inline-flex;
+      align-items: center;
+      user-select: none;
+      &::before {
+        box-sizing: border-box;
+        content: "";
+        display: inline-block;
+        width: 13px;
+        height: 13px;
+        flex-shrink: 0;
+        flex-grow: 0;
+        border: 1px solid $grayButton;
+        border-radius: 50%;
+        margin-right: 0.5em;
+        margin-bottom: 1px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 50% 50%;
+      }
+    }
+  }
   &__link {
     font-family: $adminFont;
     font-size: 10.5px;
@@ -144,6 +187,18 @@ $logo: url('../../resources/Logo.svg');
     font-weight: normal;
     font-size: 29px;
     line-height: 33px;
+  }
+  &__input {
+    font-family: $adminFont;
+    min-width: 320px;
+    height: 29px;
+    border-radius: 3px;
+    outline: none;
+    border: $adminBorder;
+    font-size: 14px;
+    line-height: 13px;
+    color: $mainBlack;
+    padding-left: 11px;
   }
   &__textarea {
     font-weight: normal;

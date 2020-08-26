@@ -8,10 +8,24 @@ export default class CarEditCard extends React.Component {
     this.state = {
       model: '',
       type: '',
-      colors: ['Красный', 'Синий'],
+      colors: [],
       file: '',
       category: '',
+      addColor: '',
+      description: '',
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.addColor = this.addColor.bind(this);
+  }
+  handleChange(event) {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
+  }
+  addColor() {
+    this.setState((prevState) => ({
+      colors: [...prevState.colors, prevState.addColor],
+      addColor: '',
+    }));
   }
   render() {
     const procentes =
@@ -19,7 +33,8 @@ export default class CarEditCard extends React.Component {
       +(this.state.type && 20) +
       +(this.state.colors[0] && 20) +
       +(this.state.file && 20) +
-      +(this.state.category && 20);
+      +(this.state.description && 20);
+
     return (
       <>
         <h1 className='admin__heading'>Карточка автомобиля</h1>
@@ -33,13 +48,15 @@ export default class CarEditCard extends React.Component {
               // src={`http://api-factory.simbirsoft1.com${thumbnail.path}`}
               alt='car'
             />
+            <h2>{this.state.model || 'Название автомобиля'}</h2>
+            <h3>{this.state.type || 'Тип автомобиля'}</h3>
             <form
               action=''
               className='car-edit__container__car-block__file-form'
             >
               <label className='admin__file-loader' htmlFor='fileLoader'>
                 <span className='admin__file-loader__text'>
-                  {this.state.file || 'Выберите файл...'}
+                  {this.state.file.name || 'Выберите файл...'}
                 </span>
                 <input
                   id='fileLoader'
@@ -48,7 +65,7 @@ export default class CarEditCard extends React.Component {
                   accept='image/*'
                   required
                   onChange={(event) =>
-                    this.setState({ file: event.target.value })
+                    this.setState({ file: event.target.files[0] })
                   }
                 />
                 <span className='admin__file-loader__button'>Обзор</span>
@@ -59,11 +76,11 @@ export default class CarEditCard extends React.Component {
                 Заполнено:
               </p>
               <p className='car-edit__container__car-block__counter__text'>
-                {procentes}%
+                {procentes || 0}%
               </p>
               <span className='car-edit__container__car-block__counter__container'>
                 <span
-                  style={{ width: `${procentes}%` }}
+                  style={{ width: `${procentes || 0}%` }}
                   className='car-edit__container__car-block__counter__container__line'
                 ></span>
               </span>
@@ -79,53 +96,78 @@ export default class CarEditCard extends React.Component {
                 rows='5'
                 maxLength='196'
                 placeholder='Введите описание автомобиля'
+                value={this.state.description}
+                onChange={this.handleChange}
               />
             </div>
           </div>
 
           <div className='car-edit__container__additional-block'>
-            <form action=''>
-              <span>
+            <form className='car-edit__container__additional-block__form'>
+              <h2>Настройки автомобиля</h2>
+              <span className='car-edit__container__additional-block__form__group'>
                 <fieldset>
                   <legend>Модель автомобиля</legend>
                   <input
+                    onChange={this.handleChange}
                     type='text'
-                    name='carName'
+                    className='admin__input'
+                    name='model'
+                    value={this.state.model}
                     placeholder='Введите модель автомобиля'
                   />
                 </fieldset>
                 <fieldset>
                   <legend>Тип автомобиля</legend>
                   <input
+                    onChange={this.handleChange}
                     type='text'
-                    name='carType'
+                    className='admin__input'
+                    name='type'
                     placeholder='Введите тип автомобиля'
+                    value={this.state.type}
                   />
                 </fieldset>
               </span>
-              <span>
+              <span className='car-edit__container__additional-block__form__group'>
                 <fieldset>
                   <legend>Класс автомобиля</legend>
-                  <label>
+                  <label className='admin__radio'>
                     <input type='radio' name='category' id='econom' />
                     <span>Эконом</span>
                   </label>
-                  <label>
-                    <input type='radio' name='category' id='premium' />
+                  <label className='admin__radio'>
+                    <input
+                      type='radio'
+                      name='category'
+                      defaultChecked
+                      id='premium'
+                    />
                     <span>Премиум</span>
                   </label>
                 </fieldset>
               </span>
-              <span>
+              <span className='car-edit__container__additional-block__form__group'>
                 <fieldset>
                   <legend>Доступные цвета</legend>
-                  <input
-                    type='text'
-                    name='color'
-                    placeholder='Введите цвет'
-                  />
+                  <span>
+                    <input
+                      type='text'
+                      className='admin__input'
+                      name='addColor'
+                      placeholder='Введите цвет'
+                      onChange={this.handleChange}
+                      value={this.state.addColor}
+                    />
+                    <button
+                      className='plus-btn'
+                      type='button'
+                      disabled={this.state.addColor ? false : true}
+                      onClick={this.addColor}
+                    ><span></span></button>
+                  </span>
                 </fieldset>
-                {this.state.colors.map((el, i) => (
+                {this.state.colors.map((el) => (
                   <label key={el}>
                     <input type='checkbox' readOnly checked />
                     <span>{el}</span>

@@ -45,17 +45,7 @@
         }
         padding: 8px 0px;
       }
-      &__input {
-        font-family: $adminFont;
-        min-width: 320px;
-        height: 29px;
-        border-radius: 3px;
-        outline: none;
-        border: $adminBorder;
-        font-size: 14px;
-        line-height: 13px;
-        color: $mainBlack;
-      }
+      
       &__buttons-block {
         display: flex;
         flex-direction: row;
