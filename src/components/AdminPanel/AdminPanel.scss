@@ -57,6 +57,7 @@ $logo: url('../../resources/Logo.svg');
       padding: 0px 28px;
       display: flex;
       flex-direction: column;
+      justify-content: center;
     }
     &__bottombar {
       z-index: 1;
@@ -132,6 +133,10 @@ $logo: url('../../resources/Logo.svg');
       outline: none;
     }
   }
+  &__hello-text {
+    @include bigHeadingAdmin;
+    text-align: center;
+  }
   &__heading {
     box-sizing: border-box;
     font-family: $adminFont;
@@ -139,6 +144,53 @@ $logo: url('../../resources/Logo.svg');
     font-weight: normal;
     font-size: 29px;
     line-height: 33px;
+  }
+  &__textarea {
+    font-weight: normal;
+    font-size: 12.5px;
+    line-height: 148%;
+    resize: none;
+    width: 100%;
+    border: $adminBorder;
+    border-radius: 4px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  &__file-loader {
+    width: fit-content;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    border: $adminBorder;
+    border-radius: 4px;
+    input {
+      display: none;
+    }
+    &__text,
+    &__button {
+      padding: 9px 13px;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 15px;
+    }
+    &__text {
+      width: 166px;
+      display: block;
+      border-right: $adminBorder;
+    }
+    &__button {
+      background: #E9ECEF;
+      text-align: center;
+      width: 66px;
+      font-weight: normal;
+     
+      &:hover{
+        background: darken(#E9ECEF, 10);
+      }
+      &:active, &:focus{
+        background: darken(#E9ECEF, 20);
+      }
+    }
   }
 }
 
@@ -158,6 +210,10 @@ $logo: url('../../resources/Logo.svg');
     &__heading {
       margin: 5px 15px;
       font-size: 20px;
+    }
+    &__hello-text {
+      font-size: 30px;
+      line-height: 28px;
     }
   }
   .admin-panel {

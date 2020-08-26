@@ -78,6 +78,7 @@ export default function Orders() {
                     description={el.description}
                     name={el.name}
                     checked={true}
+                    readOnly={true}
                   />
                   <br />
                 </Fragment>

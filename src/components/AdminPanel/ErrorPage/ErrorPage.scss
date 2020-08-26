@@ -11,10 +11,7 @@
     font-weight: normal;
   }
   &__code {
-    font-weight: 500;
-    font-size: 75px;
-    line-height: 88px;
-    color: #cacedb;
+    @include bigHeadingAdmin;
     text-align: center;
   }
   &__description {

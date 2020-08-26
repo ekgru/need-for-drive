@@ -7,6 +7,7 @@ import Topbar from './TopBar';
 import Bottombar from './Bottombar';
 import Orders from './Orders';
 import ErrorPage from './ErrorPage';
+import CarEditCard from './CarEditCard';
 export default class AdminPanel extends React.Component {
   constructor() {
     super();
@@ -26,9 +27,21 @@ export default class AdminPanel extends React.Component {
                 <Sidebar />
               </div>
               <div className='admin-panel__container__content'>
-                <ErrorPage/>
                 <Switch>
-                  <Route path='/admin/orders' component={Orders} />
+                  <Route exact path='/admin/'>
+                    <h1 className='admin__hello-text'>
+                      Добро пожаловать, {/* username || */ 'администратор'}
+                      !
+                    </h1>
+                  </Route>
+                  <Route
+                    exact
+                    path='/admin/car-edit-card'
+                    component={CarEditCard}
+                  />
+                  <Route exact path='/admin/orders' component={Orders} />
+
+                  <Route path='/admin/*' component={ErrorPage} />
                 </Switch>
               </div>
               <div className='admin-panel__container__bottombar'>

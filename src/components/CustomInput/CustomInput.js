@@ -14,6 +14,7 @@ export default function CustomInput({
   dateTo,
   disabled,
   delAction,
+  readOnly,
 }) {
   return type === 'text' || type === 'datetime-local' || type === 'select' ? (
     <label className='label-for-text-input'>
@@ -88,6 +89,7 @@ export default function CustomInput({
   ) : (
     <label className='checkbox__description'>
       <input
+      readOnly={readOnly}
         className='checkbox'
         type='checkbox'
         name={name}

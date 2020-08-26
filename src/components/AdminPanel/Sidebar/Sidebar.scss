@@ -43,7 +43,7 @@ $edit: url('../../../resources/Edit.svg');
     width: 100%;
     &:hover,
     &:active,
-    &:focus {
+    &:focus ,&.active{
       box-shadow: inset 4px 0px $blue;
       color: $blue;
       span {
