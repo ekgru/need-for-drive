@@ -50,6 +50,7 @@ $logo: url('../../resources/Logo.svg');
         border-radius: 2px;
         background: $blue;
       }
+      position: relative;
       overflow: auto;
       z-index: 1;
       grid-area: 2 / 2 / 3 / 3;
@@ -57,7 +58,6 @@ $logo: url('../../resources/Logo.svg');
       padding: 0px 28px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
     }
     &__bottombar {
       z-index: 1;
@@ -81,10 +81,10 @@ $logo: url('../../resources/Logo.svg');
     box-sizing: content-box;
     width: 110px;
     height: 29px;
-    color: #fff;
     outline: none;
     border-radius: 4px;
     &.blue {
+      color: #fff;
       background: $blue;
       border: 0.5px solid $blue;
       &:hover {
@@ -96,29 +96,55 @@ $logo: url('../../resources/Logo.svg');
         border: 0.5px solid darken($blue, 15);
       }
     }
+    &.red {
+      color: #fff;
+      background: $red;
+      border: 0.5px solid $red;
+      &:hover {
+        background: darken($red, 10);
+        border: 0.5px solid darken($red, 10);
+      }
+      &:focus {
+        background: darken($red, 15);
+        border: 0.5px solid darken($red, 15);
+      }
+    }
+    &.gray {
+      color: $mainBlack;
+      background: $grayButton;
+      border: 0.5px solid $grayButton;
+      &:hover {
+        background: darken($grayButton, 10);
+        border: 0.5px solid darken($grayButton, 10);
+      }
+      &:focus {
+        background: darken($grayButton, 15);
+        border: 0.5px solid darken($grayButton, 15);
+      }
+    }
     &:disabled {
       background: $grayButton;
       border: 0.5px solid darken($grayButton, 15);
     }
   }
-  &__radio{
-    input{
+  &__radio {
+    input {
       position: absolute;
-    z-index: -1;
-    opacity: 0;
-    &:not(:disabled):active + span::before {
-      box-shadow: inset 0 0 4px 0.25rem $blue;
-    }
-    &:focus + span::before {
-      box-shadow: inset 0 0 3px 0.25rem $blue;
-    }
-    &:checked + span::before {
-      box-shadow: inset 0 0 0 0.25rem $blue;
-      border: none;
-    }
-    &:checked + span {
-      color: $adminFontColor;
-    }
+      z-index: -1;
+      opacity: 0;
+      &:not(:disabled):active + span::before {
+        box-shadow: inset 0 0 4px 0.25rem $blue;
+      }
+      &:focus + span::before {
+        box-shadow: inset 0 0 3px 0.25rem $blue;
+      }
+      &:checked + span::before {
+        box-shadow: inset 0 0 0 0.25rem $blue;
+        border: none;
+      }
+      &:checked + span {
+        color: $adminFontColor;
+      }
     }
     span {
       color: $grayDark;
@@ -128,7 +154,7 @@ $logo: url('../../resources/Logo.svg');
       user-select: none;
       &::before {
         box-sizing: border-box;
-        content: "";
+        content: '';
         display: inline-block;
         width: 13px;
         height: 13px;
@@ -234,22 +260,23 @@ $logo: url('../../resources/Logo.svg');
       border-right: $adminBorder;
     }
     &__button {
-      background: #E9ECEF;
+      background: #e9ecef;
       text-align: center;
       width: 66px;
       font-weight: normal;
-     
-      &:hover{
-        background: darken(#E9ECEF, 10);
+
+      &:hover {
+        background: darken(#e9ecef, 10);
       }
-      &:active, &:focus{
-        background: darken(#E9ECEF, 20);
+      &:active,
+      &:focus {
+        background: darken(#e9ecef, 20);
       }
     }
   }
 }
 
-@media (max-width: $tablet) {
+@media (max-width: 1150px) {
   .admin-panel {
     &__container {
       grid-template-columns: 57.5px 1fr;

@@ -27,18 +27,18 @@ export default class CarEditCard extends React.Component {
       addColor: '',
     }));
   }
+
   render() {
     const procentes =
       +(this.state.model && 20) +
       +(this.state.type && 20) +
-      +(this.state.colors[0] && 20) +
+      +(this.state.colors.length && 20) +
       +(this.state.file && 20) +
       +(this.state.description && 20);
-
     return (
       <>
         <h1 className='admin__heading'>Карточка автомобиля</h1>
-        <span className='car-edit__container'>
+        <div className='car-edit__container'>
           <div className='car-edit__container__car-block'>
             <img
               crossOrigin='anonymous'
@@ -142,6 +142,7 @@ export default class CarEditCard extends React.Component {
                       name='category'
                       defaultChecked
                       id='premium'
+                      onChange={this.handleChange}
                     />
                     <span>Премиум</span>
                   </label>
@@ -164,7 +165,9 @@ export default class CarEditCard extends React.Component {
                       type='button'
                       disabled={this.state.addColor ? false : true}
                       onClick={this.addColor}
-                    ><span></span></button>
+                    >
+                      <span></span>
+                    </button>
                   </span>
                 </fieldset>
                 {this.state.colors.map((el) => (
@@ -175,8 +178,18 @@ export default class CarEditCard extends React.Component {
                 ))}
               </span>
             </form>
+            <div className='car-edit__container__additional-block__btn-bar'>
+              <span>
+                <button className='admin__button blue'>Сохранить</button>
+                <button className='admin__button gray'>Отменить</button>
+              </span>
+              <span>
+                {' '}
+                <button className='admin__button red'>Удалить</button>
+              </span>
+            </div>
           </div>
-        </span>
+        </div>
       </>
     );
   }
