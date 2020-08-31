@@ -50,6 +50,7 @@ $logo: url('../../resources/Logo.svg');
         border-radius: 2px;
         background: $blue;
       }
+      position: relative;
       overflow: auto;
       z-index: 1;
       grid-area: 2 / 2 / 3 / 3;
@@ -80,10 +81,10 @@ $logo: url('../../resources/Logo.svg');
     box-sizing: content-box;
     width: 110px;
     height: 29px;
-    color: #fff;
     outline: none;
     border-radius: 4px;
     &.blue {
+      color: #fff;
       background: $blue;
       border: 0.5px solid $blue;
       &:hover {
@@ -95,9 +96,78 @@ $logo: url('../../resources/Logo.svg');
         border: 0.5px solid darken($blue, 15);
       }
     }
+    &.red {
+      color: #fff;
+      background: $red;
+      border: 0.5px solid $red;
+      &:hover {
+        background: darken($red, 10);
+        border: 0.5px solid darken($red, 10);
+      }
+      &:focus {
+        background: darken($red, 15);
+        border: 0.5px solid darken($red, 15);
+      }
+    }
+    &.gray {
+      color: $mainBlack;
+      background: $grayButton;
+      border: 0.5px solid $grayButton;
+      &:hover {
+        background: darken($grayButton, 10);
+        border: 0.5px solid darken($grayButton, 10);
+      }
+      &:focus {
+        background: darken($grayButton, 15);
+        border: 0.5px solid darken($grayButton, 15);
+      }
+    }
     &:disabled {
       background: $grayButton;
       border: 0.5px solid darken($grayButton, 15);
+    }
+  }
+  &__radio {
+    input {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+      &:not(:disabled):active + span::before {
+        box-shadow: inset 0 0 4px 0.25rem $blue;
+      }
+      &:focus + span::before {
+        box-shadow: inset 0 0 3px 0.25rem $blue;
+      }
+      &:checked + span::before {
+        box-shadow: inset 0 0 0 0.25rem $blue;
+        border: none;
+      }
+      &:checked + span {
+        color: $adminFontColor;
+      }
+    }
+    span {
+      color: $grayDark;
+      margin: 0px 8px;
+      display: inline-flex;
+      align-items: center;
+      user-select: none;
+      &::before {
+        box-sizing: border-box;
+        content: '';
+        display: inline-block;
+        width: 13px;
+        height: 13px;
+        flex-shrink: 0;
+        flex-grow: 0;
+        border: 1px solid $grayButton;
+        border-radius: 50%;
+        margin-right: 0.5em;
+        margin-bottom: 1px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 50% 50%;
+      }
     }
   }
   &__link {
@@ -132,6 +202,10 @@ $logo: url('../../resources/Logo.svg');
       outline: none;
     }
   }
+  &__hello-text {
+    @include bigHeadingAdmin;
+    text-align: center;
+  }
   &__heading {
     box-sizing: border-box;
     font-family: $adminFont;
@@ -140,9 +214,69 @@ $logo: url('../../resources/Logo.svg');
     font-size: 29px;
     line-height: 33px;
   }
+  &__input {
+    font-family: $adminFont;
+    min-width: 320px;
+    height: 29px;
+    border-radius: 3px;
+    outline: none;
+    border: $adminBorder;
+    font-size: 14px;
+    line-height: 13px;
+    color: $mainBlack;
+    padding-left: 11px;
+  }
+  &__textarea {
+    font-weight: normal;
+    font-size: 12.5px;
+    line-height: 148%;
+    resize: none;
+    width: 100%;
+    border: $adminBorder;
+    border-radius: 4px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  &__file-loader {
+    width: fit-content;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    border: $adminBorder;
+    border-radius: 4px;
+    input {
+      display: none;
+    }
+    &__text,
+    &__button {
+      padding: 9px 13px;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 15px;
+    }
+    &__text {
+      width: 166px;
+      display: block;
+      border-right: $adminBorder;
+    }
+    &__button {
+      background: #e9ecef;
+      text-align: center;
+      width: 66px;
+      font-weight: normal;
+
+      &:hover {
+        background: darken(#e9ecef, 10);
+      }
+      &:active,
+      &:focus {
+        background: darken(#e9ecef, 20);
+      }
+    }
+  }
 }
 
-@media (max-width: $tablet) {
+@media (max-width: 1150px) {
   .admin-panel {
     &__container {
       grid-template-columns: 57.5px 1fr;
@@ -158,6 +292,10 @@ $logo: url('../../resources/Logo.svg');
     &__heading {
       margin: 5px 15px;
       font-size: 20px;
+    }
+    &__hello-text {
+      font-size: 30px;
+      line-height: 28px;
     }
   }
   .admin-panel {
