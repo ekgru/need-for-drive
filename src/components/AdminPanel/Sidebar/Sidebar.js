@@ -6,7 +6,7 @@ export default function Sidebar() {
     { name: 'Карточка автомобиля', url: '/admin/car-edit-card', icon: 'edit' },
     { name: 'Список авто', url: '/admin/car-list', icon: 'carList' },
     { name: 'Заказы', url: '/admin/orders', icon: 'orders' },
-    { name: 'Точки выдачи', url: '/admin/points', icon: 'overview' },
+    { name: 'Добавление точек выдачи', url: '/admin/points', icon: 'overview' },
     { name: 'Тарифы', url: '/admin/rate', icon: 'forms' },
     { name: 'Меню 3', url: '/admin/menu3', icon: 'person' },
     { name: 'Меню 4', url: '/admin/menu4', icon: 'error' },

@@ -8,6 +8,7 @@ import Bottombar from './Bottombar';
 import Orders from './Orders';
 import ErrorPage from './ErrorPage';
 import CarEditCard from './CarEditCard';
+import CityPointCard from './CityPointCard';
 export default class AdminPanel extends React.Component {
   constructor() {
     super();
@@ -40,6 +41,11 @@ export default class AdminPanel extends React.Component {
                     component={CarEditCard}
                   />
                   <Route exact path='/admin/orders' component={Orders} />
+                  <Route
+                    exact
+                    path='/admin/points'
+                    component={CityPointCard}
+                  />
 
                   <Route path='/admin/*' component={ErrorPage} />
                 </Switch>
