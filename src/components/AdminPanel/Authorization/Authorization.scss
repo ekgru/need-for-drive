@@ -45,7 +45,21 @@
         }
         padding: 8px 0px;
       }
-      
+      &__fieldset.error {
+        display: flex;
+        input {
+          border-color: $red;
+          box-shadow: 0px 2.5px 5.5px rgba(196, 24, 60, 0.1);
+        }
+        span {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 10px;
+          line-height: 11px;
+          color: $red;
+        }
+      }
+
       &__buttons-block {
         display: flex;
         flex-direction: row;
@@ -55,4 +69,27 @@
       }
     }
   }
+}
+@media(max-width: $smart){
+  .authorization{
+    box-sizing:border-box;
+    width: 100%;
+    padding: 10px;
+  &__login-block{
+    width: 100%;
+    box-sizing: border-box;
+    &__form{
+      width: 100%;
+      fieldset{
+        width: 100%;
+        box-sizing: border-box;
+        input{
+          box-sizing: border-box;
+          width: 100%;
+          min-width: 100px;
+          height: 35px;
+        }
+      }
+    }
+  }}
 }
