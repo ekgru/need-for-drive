@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
+import { Switch, Route, Redirect} from 'react-router-dom';
 import Authorization from './Authorization';
 import './AdminPanel.scss';
 import Sidebar from './Sidebar';
@@ -16,23 +16,23 @@ export default function AdminPanel() {
   useEffect(() => {
     isAuth();
   }, []);
+  function getCookie(name) {
+    const matches = document.cookie.match(
+      new RegExp(
+        '(?:^|; )' +
+          name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') +
+          '=([^;]*)',
+      ),
+    );
+    return matches ? matches[1] : undefined;
+  }
+  const api = 'http://api-factory.simbirsoft1.com/api/';
   function isAuth() {
     setLoad(true);
-    function getCookie(name) {
-      const matches = document.cookie.match(
-        new RegExp(
-          '(?:^|; )' +
-            name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') +
-            '=([^;]*)'
-        )
-      );
-      return matches ? matches[1] : undefined;
-    }
-    const api = 'http://api-factory.simbirsoft1.com/api/';
     const headers = {
       'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
       'Content-Type': 'application/json',
-      Authorization: 'Basic ' + getCookie('basicToken'),
+      'Authorization': 'Basic ' + getCookie('basicToken'),
     };
     const data = { refresh_token: getCookie('refreshToken') };
     fetch(`${api}auth/refresh`, {
@@ -42,8 +42,10 @@ export default function AdminPanel() {
     })
       .then((response) => response.json())
       .then((res) => {
-        document.cookie = `accessToken=${res.access_token}; max-age=${res.expires_in}; path='/need-fro-drive`;
-        document.cookie = `refreshToken=${res.refresh_token}; max-age=${res.expires_in}; path=/need-fro-drive`;
+        document.cookie = `accessToken=${res.access_token};
+         max-age=${res.expires_in}; path='/need-for-drive/admin`;
+        document.cookie = `refreshToken=${res.refresh_token};
+         max-age=${res.expires_in}; path=/need-for-drive/admin`;
         setAuth(true);
         setLoad(false);
       })
@@ -69,7 +71,7 @@ export default function AdminPanel() {
         <Route path='/admin/'>
           <div className='admin-panel__container'>
             <div className='admin-panel__container__topbar'>
-              <Topbar />
+              <Topbar api={api} getCookie={getCookie} isAuth={isAuth} />
             </div>
             <div className='admin-panel__container__sidebar'>
               <Sidebar />

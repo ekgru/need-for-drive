@@ -67,10 +67,52 @@ $notifications: url('../../../resources/Notifications.svg');
     }
   }
   .user-block {
+    overflow: hidden;
     width: 218px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 68.5px;
+    background: #fff;
+    transition: height 0.6s cubic-bezier(0.39, 0.58, 0.57, 1);
+    &:hover,
+    &:active,
+    &:focus {
+      height: 137px;
+      box-shadow: 0px 2px 0px #5a61691c, 0px 4px 8px #5a61691f,
+        0px 10px 10px #5a61690f;
+      .user-block__logout {
+        display: flex !important;
+      }
+    }
+    &__group {
+      width: 100%;
+      height: 68.5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: $adminBorder;
+    }
+    &__logout {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      height: 68.5px;
+      button {
+        width: 100%;
+        height: 100%;
+        outline: none;
+        box-sizing: border-box;
+        border: none;
+        font-family: $adminFont;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 17px;
+        color: $adminFontColor;
+        background: #fff;
+        &:hover{
+          background: rgb(243, 243, 243);
+        }
+      }
+    }
     &__user-pic {
       padding: 0px 15px;
       height: 40px;
@@ -83,9 +125,18 @@ $notifications: url('../../../resources/Notifications.svg');
       font-size: 15px;
       line-height: 17px;
     }
+    &__wrapper {
+      position: relative;
+      width: 10px;
+      span {
+        position: absolute;
+        margin: 0px 5px;
+        border: 5px solid transparent;
+        border-top: 5px solid $adminFontColor;
+      }
+    }
   }
 }
-
 @media (max-width: $smart) {
   .admin-panel__container__topbar {
     .user-block {
