@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import './Authorization.scss';
-export default function Authorization() {
+export default function Authorization({ setAuth }) {
   const history = useHistory();
   const [userPass, setPass] = useState('');
   const [userLogin, setLogin] = useState('');
@@ -27,7 +27,7 @@ export default function Authorization() {
   const headers = {
     'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
     'Content-Type': 'application/json',
-    'Authorization': 'Basic ' + basicToken,
+    Authorization: 'Basic ' + basicToken,
   };
 
   function auth(event) {
@@ -40,7 +40,7 @@ export default function Authorization() {
     })
       .then((response) => response.json())
       .then((res) => {
-        console.log(res);
+        setAuth(true);
         document.cookie = `basicToken=${basicToken};  max-age=${res.expires_in}`;
         document.cookie = `accessToken=${res.access_token}; max-age=${res.expires_in}`;
         document.cookie = `refreshToken=${res.refresh_token}; max-age=${res.expires_in}`;
