@@ -24,7 +24,7 @@ export default function Authorization({ setAuth }) {
     return randomString;
   }
   const basicToken = btoa(createRandomString(6) + ':4cbcea96de');
-  const api = 'http://api-factory.simbirsoft1.com/api/';
+  const api = 'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/';
   const headers = {
     'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
     'Content-Type': 'application/json',
