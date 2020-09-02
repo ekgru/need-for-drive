@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './Authorization.scss';
 import AdminLoader from '../AdminLoader';
-export default function Authorization({ setAuth }) {
+export default function Authorization({ isAuth }) {
   const history = useHistory();
   const [userPass, setPass] = useState('');
   const [userLogin, setLogin] = useState('');
@@ -24,11 +24,12 @@ export default function Authorization({ setAuth }) {
     return randomString;
   }
   const basicToken = btoa(createRandomString(6) + ':4cbcea96de');
-  const api = 'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/';
+  const api =
+    'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/';
   const headers = {
     'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
     'Content-Type': 'application/json',
-    'Authorization': 'Basic ' + basicToken,
+    Authorization: 'Basic ' + basicToken,
   };
 
   function auth(event) {
@@ -42,13 +43,13 @@ export default function Authorization({ setAuth }) {
     })
       .then((response) => response.json())
       .then((res) => {
-        setAuth(true);
         document.cookie = `basicToken=${basicToken};
-          max-age=${res.expires_in}`;
-        document.cookie = `accessToken=${res.access_token};
-         max-age=${res.expires_in}`;
-        document.cookie = `refreshToken=${res.refresh_token};
-         max-age=${res.expires_in}`;
+         max-age=${res.expires_in}; path='/need-for-drive/admin`;
+        document.cookie = `access_token=${res.access_token};
+         max-age=${res.expires_in}; path='/need-for-drive/admin`;
+        document.cookie = `refresh_token=${res.refresh_token};
+         max-age=${res.expires_in}; path='/need-for-drive/admin`;
+        isAuth();
         setLoad(false);
       })
       .then(() => history.push('/admin/'))
@@ -59,11 +60,11 @@ export default function Authorization({ setAuth }) {
       });
   }
   return (
-    <div className='authorization'>
+    <>
       {isLoad ? (
         <AdminLoader />
       ) : (
-        <>
+        <div className='authorization'>
           <span className='authorization__heading'>
             <span className='logo'></span>
             <h2 className='authorization__heading__head'>
@@ -123,8 +124,8 @@ export default function Authorization({ setAuth }) {
               </span>
             </form>
           </div>
-        </>
-      )}
-    </div>
+        </div>
+      )}{' '}
+    </>
   );
 }

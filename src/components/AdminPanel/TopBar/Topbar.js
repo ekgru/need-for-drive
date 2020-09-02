@@ -5,14 +5,17 @@ export default function Topbar({ api, isAuth, getCookie }) {
   function logout() {
     const headers = {
       'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
-      'Authorization': 'Bearer ' + getCookie('accessToken'),
+      'Authorization': 'Bearer ' + getCookie('access_token'),
     };
     fetch(`${api}auth/logout`, {
       method: 'POST',
       headers: headers,
     })
       .then(() => {
-        document.cookie = `basicToken='';  path='/need-for-drive`;
+        document.cookie = `basicToken=''; max-age=0; path='/need-for-drive/admin`;
+        document.cookie = `access_token=''; max-age=0; path='/need-for-drive/admin`;
+        document.cookie = `refresh_token=''; max-age=0; path='/need-for-drive/admin`;
+
         isAuth();
       })
       .catch((err) => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, Route, Redirect} from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Authorization from './Authorization';
 import './AdminPanel.scss';
 import Sidebar from './Sidebar';
@@ -13,9 +13,12 @@ import AdminLoader from './AdminLoader';
 export default function AdminPanel() {
   const [auth, setAuth] = useState(false);
   const [isLoad, setLoad] = useState(false);
+  const [userName, setUserName] = useState('');
+
   useEffect(() => {
-    isAuth();
+    checkAuth();
   }, []);
+
   function getCookie(name) {
     const matches = document.cookie.match(
       new RegExp(
@@ -26,33 +29,55 @@ export default function AdminPanel() {
     );
     return matches ? matches[1] : undefined;
   }
+
   const api = 'http://api-factory.simbirsoft1.com/api/';
-  function isAuth() {
+
+  function checkAuth() {
     setLoad(true);
     const headers = {
       'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
       'Content-Type': 'application/json',
-      'Authorization': 'Basic ' + getCookie('basicToken'),
     };
-    const data = { refresh_token: getCookie('refreshToken') };
-    fetch(`${api}auth/refresh`, {
-      method: 'POST',
-      headers: headers,
-      body: JSON.stringify(data),
+    fetch(`${api}auth/check`, {
+      method: 'GET',
+      headers: {
+        ...headers,
+        Authorization: 'Bearer ' + getCookie('access_token'),
+      },
     })
       .then((response) => response.json())
       .then((res) => {
-        document.cookie = `accessToken=${res.access_token};
-         max-age=${res.expires_in}; path='/need-for-drive/admin`;
-        document.cookie = `refreshToken=${res.refresh_token};
-         max-age=${res.expires_in}; path=/need-for-drive/admin`;
+        setUserName(res.username);
         setAuth(true);
         setLoad(false);
       })
       .catch((err) => {
-        console.error('ERROR', err);
-        setAuth(false);
-        setLoad(false);
+        const data = { refresh_token: getCookie('refresh_token') };
+
+        fetch(`${api}auth/refresh`, {
+          method: 'POST',
+          headers: {
+            ...headers,
+            Authorization: 'Basic ' + getCookie('basicToken'),
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => response.json())
+          .then((res) => {
+            document.cookie = `access_token=${res.access_token};
+        Max-Age=${res.expires_in}; path='/need-for-drive/admin`;
+            document.cookie = `refresh_token=${res.refresh_token};
+        Max-Age=${res.expires_in}; path=/need-for-drive/admin`;
+            setAuth(true);
+            setLoad(false);
+          })
+          .catch((err) => {
+            console.error('ERROR', err);
+
+            setAuth(false);
+
+            setLoad(false);
+          });
       });
   }
 
@@ -65,13 +90,18 @@ export default function AdminPanel() {
           ) : isLoad ? (
             <AdminLoader />
           ) : (
-            <Authorization setAuth={setAuth} />
+            <Authorization isAuth={checkAuth}/>
           )}
         </Route>
         <Route path='/admin/'>
           <div className='admin-panel__container'>
             <div className='admin-panel__container__topbar'>
-              <Topbar api={api} getCookie={getCookie} isAuth={isAuth} />
+              <Topbar
+                api={api}
+                userName={userName}
+                getCookie={getCookie}
+                isAuth={checkAuth}
+              />
             </div>
             <div className='admin-panel__container__sidebar'>
               <Sidebar />
@@ -81,7 +111,7 @@ export default function AdminPanel() {
                 {!auth && <Redirect to='/admin/autorization' />}
                 <Route exact path='/admin/'>
                   <h1 className='admin__hello-text'>
-                    Добро пожаловать, {/* username || */ 'администратор'}!
+                    Добро пожаловать, {userName || 'администратор'}!
                   </h1>
                 </Route>
                 <Route
