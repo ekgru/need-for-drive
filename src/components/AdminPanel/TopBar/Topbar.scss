@@ -86,9 +86,30 @@ $notifications: url('../../../resources/Notifications.svg');
       width: 100%;
       height: 68.5px;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
       border-bottom: $adminBorder;
+      &__user-info {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: $adminFontColor;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 17px;
+        &__user-pic {
+          padding: 0px 10px;
+          height: 40px;
+          width: 40px;
+          border-radius: 50%;
+        }
+        &__user-name {
+          font-family: $adminFont;
+          font-weight: normal;
+          font-size: 15px;
+          line-height: 17px;
+        }
+      }
     }
     &__logout {
       display: none;
@@ -108,29 +129,18 @@ $notifications: url('../../../resources/Notifications.svg');
         line-height: 17px;
         color: $adminFontColor;
         background: #fff;
-        &:hover{
+        &:hover {
           background: rgb(243, 243, 243);
         }
       }
     }
-    &__user-pic {
-      padding: 0px 15px;
-      height: 40px;
-      width: 40px;
-      border-radius: 50%;
-    }
-    &__user-name {
-      font-family: $adminFont;
-      font-weight: normal;
-      font-size: 15px;
-      line-height: 17px;
-    }
+
     &__wrapper {
       position: relative;
       width: 10px;
       span {
+        right: 10px;
         position: absolute;
-        margin: 0px 5px;
         border: 5px solid transparent;
         border-top: 5px solid $adminFontColor;
       }

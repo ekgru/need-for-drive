@@ -30,7 +30,8 @@ export default function AdminPanel() {
     return matches ? matches[1] : undefined;
   }
 
-  const api = 'http://api-factory.simbirsoft1.com/api/';
+  const api =
+    'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/';
 
   function checkAuth() {
     setLoad(true);
@@ -38,6 +39,7 @@ export default function AdminPanel() {
       'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
       'Content-Type': 'application/json',
     };
+
     fetch(`${api}auth/check`, {
       method: 'GET',
       headers: {
@@ -65,9 +67,11 @@ export default function AdminPanel() {
           .then((response) => response.json())
           .then((res) => {
             document.cookie = `access_token=${res.access_token};
-        Max-Age=${res.expires_in}; path='/need-for-drive/admin`;
+        max-age=${res.expires_in};
+        path='/need-for-drive/admin`;
             document.cookie = `refresh_token=${res.refresh_token};
-        Max-Age=${res.expires_in}; path=/need-for-drive/admin`;
+        max-age=${res.expires_in};
+        path=/need-for-drive/admin`;
             setAuth(true);
             setLoad(false);
           })
@@ -90,7 +94,7 @@ export default function AdminPanel() {
           ) : isLoad ? (
             <AdminLoader />
           ) : (
-            <Authorization isAuth={checkAuth}/>
+            <Authorization isAuth={checkAuth} />
           )}
         </Route>
         <Route path='/admin/'>

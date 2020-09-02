@@ -83,10 +83,12 @@ $logo: url('../../resources/Logo.svg');
     height: 29px;
     outline: none;
     border-radius: 4px;
+    transition: 0.5s linear;
     &.blue {
       color: #fff;
       background: $blue;
       border: 0.5px solid $blue;
+      
       &:hover {
         background: darken($blue, 10);
         border: 0.5px solid darken($blue, 10);
@@ -94,6 +96,10 @@ $logo: url('../../resources/Logo.svg');
       &:focus {
         background: darken($blue, 15);
         border: 0.5px solid darken($blue, 15);
+      }
+      &:disabled{
+        background: $grayLight;
+        border-color: $grayDark;
       }
     }
     &.red {
@@ -108,6 +114,10 @@ $logo: url('../../resources/Logo.svg');
         background: darken($red, 15);
         border: 0.5px solid darken($red, 15);
       }
+      &:disabled{
+        background: $grayLight;
+        border-color: $grayDark;
+      }
     }
     &.gray {
       color: $mainBlack;
@@ -121,11 +131,13 @@ $logo: url('../../resources/Logo.svg');
         background: darken($grayButton, 15);
         border: 0.5px solid darken($grayButton, 15);
       }
+      &:disabled{
+        background: $grayLight;
+        border-color: $grayDark;
+      }
     }
-    &:disabled {
-      background: $grayButton;
-      border: 0.5px solid darken($grayButton, 15);
-    }
+   
+    
   }
   &__radio {
     input {
@@ -275,6 +287,10 @@ box-shadow: 0px 2.5px 5.5px rgba(24, 93, 196, 0.1);
       &:active,
       &:focus {
         background: darken(#e9ecef, 20);
+      }
+      &:disabled{
+        background: lighten(#e9ecef, 10);
+        outline: none;
       }
     }
   }
