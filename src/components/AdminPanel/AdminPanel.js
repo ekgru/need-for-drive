@@ -10,6 +10,7 @@ import ErrorPage from './ErrorPage';
 import CarEditCard from './CarEditCard';
 import CityPointCard from './CityPointCard';
 import AdminLoader from './AdminLoader';
+
 export default function AdminPanel() {
   const [auth, setAuth] = useState(false);
   const [isLoad, setLoad] = useState(false);
@@ -32,14 +33,13 @@ export default function AdminPanel() {
 
   const api =
     'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/';
+  const headers = {
+    'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
+    'Content-Type': 'application/json',
+  };
 
   function checkAuth() {
     setLoad(true);
-    const headers = {
-      'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
-      'Content-Type': 'application/json',
-    };
-
     fetch(`${api}auth/check`, {
       method: 'GET',
       headers: {
@@ -53,7 +53,7 @@ export default function AdminPanel() {
         setAuth(true);
         setLoad(false);
       })
-      .catch((err) => {
+      .catch(() => {
         const data = { refresh_token: getCookie('refresh_token') };
 
         fetch(`${api}auth/refresh`, {
@@ -123,7 +123,13 @@ export default function AdminPanel() {
                   path='/admin/car-edit-card'
                   component={CarEditCard}
                 />
-                <Route exact path='/admin/orders' component={Orders} />
+                <Route exact path='/admin/orders'>
+                  <Orders
+                    api={api}
+                    headers={headers}
+                    getCookie={getCookie}
+                  />
+                </Route>
                 <Route
                   exact
                   path='/admin/points'

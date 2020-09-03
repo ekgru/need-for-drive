@@ -7,11 +7,14 @@ $logo: url('../../resources/Logo.svg');
   mask: $logo;
 }
 .admin-panel {
+  overflow: hidden;
   background-color: $backgroundAdmin;
   height: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
   &__container {
+    height: 100%;
     width: 100%;
     display: grid;
     grid-template-columns: 300px 1fr;

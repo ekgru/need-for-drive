@@ -2,17 +2,20 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './Authorization.scss';
 import AdminLoader from '../AdminLoader';
+
 export default function Authorization({ isAuth }) {
   const history = useHistory();
   const [userPass, setPass] = useState('');
   const [userLogin, setLogin] = useState('');
   const [error, setError] = useState(false);
   const [isLoad, setLoad] = useState(false);
+
   function handler(event) {
     const { name, value } = event.target;
     name === 'login' ? setLogin(value) : setPass(value);
     setError(false);
   }
+
   function createRandomString(sumString) {
     const symbolArr =
       '1234567890qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
@@ -23,13 +26,16 @@ export default function Authorization({ isAuth }) {
     }
     return randomString;
   }
+
   const basicToken = btoa(createRandomString(6) + ':4cbcea96de');
+
   const api =
     'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/';
+
   const headers = {
     'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
     'Content-Type': 'application/json',
-    Authorization: 'Basic ' + basicToken,
+    'Authorization': 'Basic ' + basicToken,
   };
 
   function auth(event) {
@@ -59,6 +65,7 @@ export default function Authorization({ isAuth }) {
         setLoad(false);
       });
   }
+
   return (
     <>
       {isLoad ? (
