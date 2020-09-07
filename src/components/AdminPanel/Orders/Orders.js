@@ -5,6 +5,7 @@ import fakeCar from '../../../resources/car.png';
 import { useHistory } from 'react-router-dom';
 import AdminLoader from '../AdminLoader';
 import AdminPagination from '../AdminPagination';
+import AdminRequest from '../AdminRequest';
 export default function Orders({ api, headers, getCookie }) {
   const options = [
     { name: 'isFullTank', description: 'Полный бак' },
@@ -37,30 +38,25 @@ export default function Orders({ api, headers, getCookie }) {
   function getOrderTable() {
     setLoad(true);
     const { carId, date, cityId, status } = filter;
-    fetch(
-      `${api}db/order?page=${page - 1}&limit=1&createdAt[$gt]=${date}${
+    const getTable = new AdminRequest(
+      `db/order?page=${page - 1}&limit=1&createdAt[$gt]=${date}${
         carId && '&carId=' + carId
       }${cityId && '&cityId=' + cityId}${
         status && '&orderStatusId=' + status
       }`,
-      {
-        method: 'GET',
-        headers: {
-          ...headers,
-          Authorization: 'Bearer ' + getCookie('access_token'),
-        },
-      },
-    )
-      .then((res) => res.json())
+      'GET',
+      `Bearer ${getCookie('access_token')}`,
+    );
+    getTable
+      .doRequest()
       .then((res) => {
-        console.log(res);
         setCurrentOrder(res.data[0]);
         setCountPages(res.count);
         setLoad(false);
       })
       .catch((err) => {
         history.push('/admin/error-page');
-        console.log(err);
+        console.error('ERROR', err);
       });
   }
 
@@ -78,7 +74,6 @@ export default function Orders({ api, headers, getCookie }) {
         break;
     }
   }
-
 
   function filterHandler(event) {
     const now = new Date();
@@ -117,33 +112,28 @@ export default function Orders({ api, headers, getCookie }) {
   }
 
   function createFilters() {
+    const getCars = new AdminRequest('db/car/', 'GET');
+    const getCities = new AdminRequest('db/city/', 'GET');
+    const getOrderStatus = new AdminRequest('db/orderStatus/', 'GET');
+
     if (!viewFilter) {
       let cars;
       let cities;
       let statuses;
-      fetch(`${api}db/city/`, {
-        method: 'GET',
-        headers: headers,
-      })
-        .then((response) => response.json())
+      getCities
+        .doRequest()
         .then(({ data }) => {
           cities = data;
         })
         .then(() => {
-          fetch(`${api}db/car/`, {
-            method: 'GET',
-            headers: headers,
-          })
-            .then((response) => response.json())
+          getCars
+            .doRequest()
             .then(({ data }) => {
               cars = data;
             })
             .then(() => {
-              fetch(`${api}db/orderStatus/`, {
-                method: 'GET',
-                headers: headers,
-              })
-                .then((response) => response.json())
+              getOrderStatus
+                .doRequest()
                 .then(({ data }) => {
                   statuses = data;
                 })
@@ -153,12 +143,9 @@ export default function Orders({ api, headers, getCookie }) {
                     cities: cities,
                     statuses: statuses,
                   }),
-                )
-                .catch((err) => console.error('ERROR', err));
-            })
-            .catch((err) => console.error('ERROR', err));
-        })
-        .catch((err) => console.error('ERROR', err));
+                );
+            });
+        });
       setViewFilter(!viewFilter);
     } else {
       setViewFilter(!viewFilter);
@@ -246,8 +233,9 @@ export default function Orders({ api, headers, getCookie }) {
                   referrerPolicy='origin'
                   className='order-block__info__img'
                   src={
-                    `http://api-factory.simbirsoft1.com${currentOrder.carId.thumbnail.path}` ||
-                    fakeCar
+                    currentOrder.carId.thumbnail.path
+                      ? `http://api-factory.simbirsoft1.com${currentOrder.carId.thumbnail.path}`
+                      : fakeCar
                   }
                   alt='car'
                 />

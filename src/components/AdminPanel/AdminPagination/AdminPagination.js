@@ -6,10 +6,10 @@ export default function AdminPagination({
   countPages,
 }) {
   return (
-    <div className='admin-pagination'>
+    <div className='admin__pagination'>
       {countPages != 1 && (
         <button
-          className='admin-pagination__button arrow'
+          className='admin__pagination__button arrow'
           onClick={paginationHandler}
           disabled={+page - 1 ? false : true}
           name='back'
@@ -18,7 +18,7 @@ export default function AdminPagination({
         </button>
       )}
       <button
-        className='admin-pagination__button'
+        className='admin__pagination__button'
         onClick={paginationHandler}
         value={1}
         disabled={+page === 1}
@@ -28,7 +28,7 @@ export default function AdminPagination({
       {page < 3 && countPages > 5 ? (
         <>
           <button
-            className='admin-pagination__button'
+            className='admin__pagination__button'
             onClick={paginationHandler}
             value={2}
             disabled={+page === 2}
@@ -36,20 +36,20 @@ export default function AdminPagination({
             2
           </button>
           <button
-            className='admin-pagination__button'
+            className='admin__pagination__button'
             onClick={paginationHandler}
             value={3}
             disabled={+page === 3}
           >
             3
           </button>
-          <p className='admin-pagination__dots'>...</p>
+          <p className='admin__pagination__dots'>...</p>
         </>
       ) : page > countPages - 3 && countPages > 5 ? (
         <>
-          <p className='admin-pagination__dots'>...</p>
+          <p className='admin__pagination__dots'>...</p>
           <button
-            className='admin-pagination__button'
+            className='admin__pagination__button'
             onClick={paginationHandler}
             disabled={+page === countPages - 2}
             value={+countPages - 2}
@@ -57,7 +57,7 @@ export default function AdminPagination({
             {+countPages - 2}
           </button>
           <button
-            className='admin-pagination__button'
+            className='admin__pagination__button'
             onClick={paginationHandler}
             disabled={+page === countPages - 1}
             value={+countPages - 1}
@@ -69,8 +69,9 @@ export default function AdminPagination({
         <>
           {countPages > 2 && (
             <button
-              className='admin-pagination__button'
+              className='admin__pagination__button'
               onClick={paginationHandler}
+              disabled={+page === 2}
               value={2}
             >
               2
@@ -78,8 +79,9 @@ export default function AdminPagination({
           )}
           {countPages > 3 && (
             <button
-              className='admin-pagination__button'
+              className='admin__pagination__button'
               onClick={paginationHandler}
+              disabled={+page === 3}
               value={3}
             >
               3
@@ -87,8 +89,9 @@ export default function AdminPagination({
           )}
           {countPages > 4 && (
             <button
-              className='admin-pagination__button'
+              className='admin__pagination__button'
               onClick={paginationHandler}
+              disabled={+page === 4}
               value={4}
             >
               4
@@ -97,16 +100,16 @@ export default function AdminPagination({
         </>
       ) : (
         <>
-          <p className='admin-pagination__dots'>...</p>
+          <p className='admin__pagination__dots'>...</p>
           <button
-            className='admin-pagination__button'
+            className='admin__pagination__button'
             onClick={paginationHandler}
             value={+page - 1}
           >
             {+page - 1}
           </button>
           <button
-            className='admin-pagination__button'
+            className='admin__pagination__button'
             onClick={paginationHandler}
             value={+page}
             disabled
@@ -114,7 +117,7 @@ export default function AdminPagination({
             {+page}
           </button>
           <button
-            className='admin-pagination__button'
+            className='admin__pagination__button'
             disabled={+page === +page + 1}
             onClick={paginationHandler}
             value={+page + 1}
@@ -122,13 +125,13 @@ export default function AdminPagination({
             {+page + 1}
           </button>
 
-          <p className='admin-pagination__dots'>...</p>
+          <p className='admin__pagination__dots'>...</p>
         </>
       )}
       {countPages != 1 && (
         <>
           <button
-            className='admin-pagination__button'
+            className='admin__pagination__button'
             onClick={paginationHandler}
             disabled={+page === +countPages}
             value={countPages}
@@ -136,7 +139,7 @@ export default function AdminPagination({
             {countPages}
           </button>
           <button
-            className='admin-pagination__button arrow'
+            className='admin__pagination__button arrow'
             onClick={paginationHandler}
             name='forward'
             disabled={+page + 1 > countPages ? true : false}
