@@ -13,7 +13,7 @@ export default function Topbar({
   function logout() {
     const headers = {
       'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
-      Authorization: 'Bearer ' + getCookie('access_token'),
+      'Authorization': 'Bearer ' + getCookie('access_token'),
     };
     setLoad(true);
     fetch(`${api}auth/logout`, {
