@@ -26,15 +26,14 @@ export default function AdminPanel() {
       new RegExp(
         '(?:^|; )' +
           name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') +
-          '=([^;]*)',
-      ),
+          '=([^;]*)'
+      )
     );
     return matches ? matches[1] : undefined;
   }
-//    'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/';
+  //    'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/';
 
-  const api =
-    'http://api-factory.simbirsoft1.com/api/';
+  const api = 'http://api-factory.simbirsoft1.com/api/';
   const headers = {
     'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
     'Content-Type': 'application/json',
@@ -114,26 +113,21 @@ export default function AdminPanel() {
             </div>
             <div className='admin-panel__container__content'>
               <Switch>
-                {!auth && <Redirect to='/admin/autorization' />}
+                {/* {!auth && <Redirect to='/admin/autorization' />} */}
                 <Route exact path='/admin/'>
                   <h1 className='admin__hello-text'>
                     Добро пожаловать, {userName || 'администратор'}!
                   </h1>
                 </Route>
-                <Route
-                  exact
-                  path='/admin/car-edit-card'
-                  component={CarEditCard}
-                />
+                <Route exact path='/admin/car-edit-card'>
+                  <CarEditCard getCookie={getCookie} />{' '}
+                </Route>
+
                 <Route exact path='/admin/car-list'>
-                  <CarListPage
-                    getCookie={getCookie}
-                  />
+                  <CarListPage getCookie={getCookie} />
                 </Route>
                 <Route exact path='/admin/orders'>
-                  <Orders
-                    getCookie={getCookie}
-                  />
+                  <Orders getCookie={getCookie} />
                 </Route>
                 <Route
                   exact

@@ -19,6 +19,7 @@
     @include adminBlock;
     &__img {
       padding: 22px;
+      width: 100%;
     }
     h2 {
       font-weight: normal;
@@ -102,6 +103,9 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        label {
+          display: flex;
+        }
         fieldset {
           padding-left: 0px;
         }
@@ -181,39 +185,40 @@
           .admin__button {
             width: 100%;
             border-radius: 0px;
-            margin:0px;
+            margin: 0px;
           }
         }
       }
     }
   }
 }
-@media (max-width: 888px){
-  .car-edit__container{
-    &__car-block{
+@media (max-width: 888px) {
+  .car-edit__container {
+    &__car-block {
       margin-right: 19px;
     }
-  &__additional-block__form__group{
-    fieldset{
-      box-sizing: border-box;
-      width: 100%;
-      padding-right: 16px;
-      .admin__input{
-        min-width: 200px;
+    &__additional-block__form__group {
+      fieldset {
+        box-sizing: border-box;
         width: 100%;
+        padding-right: 16px;
+        .admin__input {
+          min-width: 200px;
+          width: 100%;
+        }
       }
     }
-  }}
+  }
 }
-@media (max-width: $smart){
-  .car-edit__container{
+@media (max-width: $smart) {
+  .car-edit__container {
     flex-direction: column;
-    &__car-block, &__additional-block{
+    &__car-block,
+    &__additional-block {
       width: 100%;
       border: 0px;
       border-radius: 0px;
-box-shadow: none;
+      box-shadow: none;
     }
   }
-
 }

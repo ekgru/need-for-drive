@@ -1,21 +1,24 @@
 import React from 'react';
 import './CarEditCard.scss';
 import fakeCar from '../../../resources/car.png';
+import AdminRequest from '../AdminRequest';
 
 export default class CarEditCard extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       model: '',
       type: '',
       colors: [],
       file: '',
-      category: '',
+      category: '5e25c99a099b810b946c5d63',
       addColor: '',
       description: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.addColor = this.addColor.bind(this);
+    this.createNewCar = this.createNewCar.bind(this);
+    this.fileHandler = this.fileHandler.bind(this);
   }
   handleChange(event) {
     const { name, value } = event.target;
@@ -27,6 +30,32 @@ export default class CarEditCard extends React.Component {
       addColor: '',
     }));
   }
+  fileHandler(event) {
+    this.setState({
+      // file: new FormData(document.getElementById('file-form')),
+      file: event.target.files[0],
+    });
+  }
+  createNewCar() {
+    const { model, file, description, category, colors } = this.state;
+    const data = {
+      priceMax: 50000,
+      prixeMin: 1000,
+      name: model,
+      thumbnail: new FormData(document.getElementById('file-form')),
+      description: description,
+      categoryId: { id: category },
+      colors: colors,
+    };
+    const req = new AdminRequest(
+      `db/car`,
+      'POST',
+      `Bearer ${this.props.getCookie('access_token')}`,
+      data
+    );
+    req.doRequest().then((res) => console.log(res));
+    console.log(data)
+  }
 
   render() {
     const procentes =
@@ -35,6 +64,7 @@ export default class CarEditCard extends React.Component {
       +(this.state.colors.length && 20) +
       +(this.state.file && 20) +
       +(this.state.description && 20);
+
     return (
       <>
         <h1 className='admin__heading'>Карточка автомобиля</h1>
@@ -44,19 +74,25 @@ export default class CarEditCard extends React.Component {
               crossOrigin='anonymous'
               referrerPolicy='origin'
               className='car-edit__container__car-block__img'
-              src={fakeCar}
+              src={
+                this.state.file
+                  ? URL.createObjectURL(this.state.file)
+                  : fakeCar
+              }
               // src={`http://api-factory.simbirsoft1.com${thumbnail.path}`}
               alt='car'
             />
             <h2>{this.state.model || 'Название автомобиля'}</h2>
             <h3>{this.state.type || 'Тип автомобиля'}</h3>
             <form
-              action=''
+              id='file-form'
               className='car-edit__container__car-block__file-form'
             >
               <label className='admin__file-loader' htmlFor='fileLoader'>
                 <span className='admin__file-loader__text'>
-                  {this.state.file.name || 'Выберите файл...'}
+                  {this.state.file
+                    ? this.state.file.name
+                    : 'Выберите файл...'}
                 </span>
                 <input
                   id='fileLoader'
@@ -64,9 +100,7 @@ export default class CarEditCard extends React.Component {
                   name='file'
                   accept='image/*'
                   required
-                  onChange={(event) =>
-                    this.setState({ file: event.target.files[0] })
-                  }
+                  onChange={this.fileHandler}
                 />
                 <span className='admin__file-loader__button'>Обзор</span>
               </label>
@@ -133,7 +167,13 @@ export default class CarEditCard extends React.Component {
                 <fieldset>
                   <legend>Класс автомобиля</legend>
                   <label className='admin__radio'>
-                    <input type='radio' name='category' id='econom' />
+                    <input
+                      type='radio'
+                      name='category'
+                      value='5e25c98d099b810b946c5d62'
+                      id='econom'
+                      onChange={this.handleChange}
+                    />
                     <span>Эконом</span>
                   </label>
                   <label className='admin__radio'>
@@ -142,6 +182,7 @@ export default class CarEditCard extends React.Component {
                       name='category'
                       defaultChecked
                       id='premium'
+                      value='5e25c99a099b810b946c5d63'
                       onChange={this.handleChange}
                     />
                     <span>Премиум</span>
@@ -180,11 +221,15 @@ export default class CarEditCard extends React.Component {
             </form>
             <div className='car-edit__container__additional-block__btn-bar'>
               <span>
-                <button className='admin__button blue'>Сохранить</button>
+                <button
+                  className='admin__button blue'
+                  onClick={this.createNewCar}
+                >
+                  Сохранить
+                </button>
                 <button className='admin__button gray'>Отменить</button>
               </span>
               <span>
-                {' '}
                 <button className='admin__button red'>Удалить</button>
               </span>
             </div>
