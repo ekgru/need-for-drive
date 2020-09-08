@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import {
+  Switch,
+  Route,
+  Redirect,
+  useHistory,
+  useParams,
+} from 'react-router-dom';
 import Authorization from './Authorization';
 import './AdminPanel.scss';
 import Sidebar from './Sidebar';
@@ -14,7 +20,7 @@ export default function AdminPanel() {
   const [auth, setAuth] = useState(false);
   const [isLoad, setLoad] = useState(false);
   const [userName, setUserName] = useState('');
-
+  const history = useHistory();
   useEffect(() => {
     checkAuth();
   }, []);
@@ -24,22 +30,19 @@ export default function AdminPanel() {
       new RegExp(
         '(?:^|; )' +
           name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') +
-          '=([^;]*)',
-      ),
+          '=([^;]*)'
+      )
     );
     return matches ? matches[1] : undefined;
   }
 
-  const api =
-    'http://api-factory.simbirsoft1.com/api/';
+  const api = 'http://api-factory.simbirsoft1.com/api/';
 
   function checkAuth() {
-    setLoad(true);
     const headers = {
       'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
       'Content-Type': 'application/json',
     };
-
     fetch(`${api}auth/check`, {
       method: 'GET',
       headers: {
@@ -54,89 +57,66 @@ export default function AdminPanel() {
         setLoad(false);
       })
       .catch((err) => {
-        const data = { refresh_token: getCookie('refresh_token') };
-
-        fetch(`${api}auth/refresh`, {
-          method: 'POST',
-          headers: {
-            ...headers,
-            Authorization: 'Basic ' + getCookie('basicToken'),
-          },
-          body: JSON.stringify(data),
-        })
-          .then((response) => response.json())
-          .then((res) => {
-            document.cookie = `access_token=${res.access_token};
-        max-age=${res.expires_in};
-        path='/need-for-drive/admin`;
-            document.cookie = `refresh_token=${res.refresh_token};
-        max-age=${res.expires_in};
-        path=/need-for-drive/admin`;
-            setAuth(true);
-            setLoad(false);
-          })
-          .catch((err) => {
-            console.error('ERROR', err);
-
-            setAuth(false);
-
-            setLoad(false);
-          });
+        setAuth(false);
+        history.push('/admin/authorization');
+        setLoad(false);
       });
   }
 
   return (
     <div className='admin-panel'>
       <Switch>
-        <Route path='/admin/autorization'>
-          {auth && !isLoad ? (
-            <Redirect to='/admin/' />
-          ) : isLoad ? (
+        <Route path='/admin/authorization'>
+          {isLoad ? (
             <AdminLoader />
           ) : (
-            <Authorization isAuth={checkAuth} />
+            <Authorization isAuth={checkAuth} auth={auth} />
           )}
         </Route>
         <Route path='/admin/'>
-          <div className='admin-panel__container'>
-            <div className='admin-panel__container__topbar'>
-              <Topbar
-                api={api}
-                userName={userName}
-                getCookie={getCookie}
-                isAuth={checkAuth}
-              />
-            </div>
-            <div className='admin-panel__container__sidebar'>
-              <Sidebar />
-            </div>
-            <div className='admin-panel__container__content'>
-              <Switch>
-                {!auth && <Redirect to='/admin/autorization' />}
-                <Route exact path='/admin/'>
-                  <h1 className='admin__hello-text'>
-                    Добро пожаловать, {userName || 'администратор'}!
-                  </h1>
-                </Route>
-                <Route
-                  exact
-                  path='/admin/car-edit-card'
-                  component={CarEditCard}
+          {isLoad ? (
+            <AdminLoader />
+          ) : (
+            <div className='admin-panel__container'>
+              <div className='admin-panel__container__topbar'>
+                <Topbar
+                  api={api}
+                  userName={userName}
+                  getCookie={getCookie}
+                  setLoad={setLoad}
+                  isAuth={checkAuth}
                 />
-                <Route exact path='/admin/orders' component={Orders} />
-                <Route
-                  exact
-                  path='/admin/points'
-                  component={CityPointCard}
-                />
+              </div>
+              <div className='admin-panel__container__sidebar'>
+                <Sidebar />
+              </div>
+              <div className='admin-panel__container__content'>
+                <Switch>
+                  <Route exact path='/admin/'>
+                    <h1 className='admin__hello-text'>
+                      Добро пожаловать, {userName || 'администратор'}!
+                    </h1>
+                  </Route>
+                  <Route
+                    exact
+                    path='/admin/car-edit-card'
+                    component={CarEditCard}
+                  />
+                  <Route exact path='/admin/orders' component={Orders} />
+                  <Route
+                    exact
+                    path='/admin/points'
+                    component={CityPointCard}
+                  />
 
-                <Route path='/admin/*' component={ErrorPage} />
-              </Switch>
+                  <Route path='/admin/*' component={ErrorPage} />
+                </Switch>
+              </div>
+              <div className='admin-panel__container__bottombar'>
+                <Bottombar />
+              </div>
             </div>
-            <div className='admin-panel__container__bottombar'>
-              <Bottombar />
-            </div>
-          </div>
+          )}
         </Route>
       </Switch>
     </div>
