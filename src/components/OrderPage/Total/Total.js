@@ -72,7 +72,7 @@ export default function Total({
           : 1 < lastnumbers % 10 && lastnumbers % 10 < 5
           ? array[1]
           : lastnumbers % 10 === 1
-          ? array[3]
+          ? array[2]
           : array[0];
 
       return `${number} ${word} `;
