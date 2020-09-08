@@ -22,6 +22,7 @@ $notifications: url('../../../resources/Notifications.svg');
     }
     flex: 1 1;
     &__input {
+      cursor: text;
       box-sizing: border-box;
       width: 90%;
       font-family: $adminFont;

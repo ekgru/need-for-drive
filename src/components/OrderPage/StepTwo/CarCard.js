@@ -10,6 +10,10 @@ export default function CarCard({
   carId,
   display,
 }) {
+  function carHandler() {
+    getCar('carId', carId);
+  }
+
   return (
     <label className='car-card' style={{ display: display }}>
       <input
@@ -17,9 +21,7 @@ export default function CarCard({
         type='radio'
         name='car'
         value={title}
-        onChange={() => {
-          getCar('carId', carId);
-        }}
+        onChange={carHandler}
         checked={title === car ? 'checked' : ''}
       />
       <div className='car-card__info-card'>

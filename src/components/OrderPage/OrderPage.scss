@@ -20,6 +20,10 @@
       background: transparent;
       border: none;
       outline: none;
+      span {
+        color: inherit;
+        padding: 8px;
+      }
       &:active,
       &:hover {
         color: darken($mainAccent, 10);

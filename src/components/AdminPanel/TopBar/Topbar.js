@@ -1,13 +1,21 @@
 import React from 'react';
 import person from './../../../resources/Person.svg';
 import './Topbar.scss';
-export default function Topbar({ userName, api, isAuth, getCookie }) {
+import { useHistory } from 'react-router-dom';
+export default function Topbar({
+  userName,
+  api,
+  isAuth,
+  setLoad,
+  getCookie,
+}) {
+  const history = useHistory();
   function logout() {
     const headers = {
       'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
       'Authorization': 'Bearer ' + getCookie('access_token'),
     };
-
+    setLoad(true);
     fetch(`${api}auth/logout`, {
       method: 'POST',
       headers: headers,
@@ -22,11 +30,16 @@ export default function Topbar({ userName, api, isAuth, getCookie }) {
         document.cookie = `refresh_token='';
          max-age=0;
          path='/need-for-drive/admin`;
-
-        isAuth();
+      })
+      .then(() => {
+        setLoad(true);
+        history.push('/admin/authorization');
+        setLoad(false);
       })
       .catch((err) => {
-        isAuth();
+        setLoad(true);
+        history.push('/admin/authorization');
+        setLoad(false);
       });
   }
   return (
