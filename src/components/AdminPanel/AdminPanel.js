@@ -31,7 +31,7 @@ export default function AdminPanel() {
   }
 
   const api =
-    'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/';
+    'http://api-factory.simbirsoft1.com/api/';
 
   function checkAuth() {
     setLoad(true);

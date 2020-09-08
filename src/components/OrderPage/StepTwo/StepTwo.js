@@ -23,7 +23,7 @@ export default class StepTwo extends React.Component {
       .catch((err) => console.error('ERROR', err));
   }
   getCars() {
-    return this.state.cars.map((el, i) => (
+    return this.state.cars.map((el) => (
       <CarCard
         display={
           this.state.category === 'all' ||
@@ -38,7 +38,7 @@ export default class StepTwo extends React.Component {
         costMax={el.priceMax}
         carId={el}
         pic={el.thumbnail.path}
-        key={i}
+        key={el.id}
         car={this.props.currentCar}
       />
     ));

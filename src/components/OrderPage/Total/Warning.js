@@ -4,8 +4,7 @@ import Button from '../../Button';
 
 export default function Warning({ actionReturn, data, getInfo, orderId }) {
   const history = useHistory();
-  const api =
-    'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/db/';
+  const api = 'http://api-factory.simbirsoft1.com/api/db/';
   const headers = {
     'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
     'Content-Type': 'application/json',
@@ -23,8 +22,6 @@ export default function Warning({ actionReturn, data, getInfo, orderId }) {
         history.push(`/order-page/order/${data.id}`);
       })
       .catch((err) => console.error('ERROR', err));
-
-    // actionReturn();
   }
   function cancel() {
     fetch(`${api}order/${orderId}`, {
@@ -38,7 +35,7 @@ export default function Warning({ actionReturn, data, getInfo, orderId }) {
       }),
     }).catch((err) => console.error('ERROR', err));
     getInfo('orderStatus', 'cancelled');
-   actionReturn();
+    actionReturn();
   }
   return (
     <div className='warning'>
@@ -50,7 +47,7 @@ export default function Warning({ actionReturn, data, getInfo, orderId }) {
           <Button
             title={orderId ? 'Отменить' : 'Подтвердить'}
             type='warn-btn'
-            action={() => (orderId ? cancel() : ok())}
+            action={orderId ? cancel : ok}
           ></Button>
           <Button
             title={orderId ? 'Вернуться' : 'Отменить'}
