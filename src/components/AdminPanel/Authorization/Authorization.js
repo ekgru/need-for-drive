@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './Authorization.scss';
 import AdminLoader from '../AdminLoader';
-
-export default function Authorization({ isAuth }) {
+export default function Authorization() {
   const history = useHistory();
   const [userPass, setPass] = useState('');
   const [userLogin, setLogin] = useState('');
@@ -29,9 +28,7 @@ export default function Authorization({ isAuth }) {
 
   const basicToken = btoa(createRandomString(6) + ':4cbcea96de');
 
-  const api =
-    'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/';
-
+  const api = 'http://api-factory.simbirsoft1.com/api/';
   const headers = {
     'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
     'Content-Type': 'application/json',
@@ -42,6 +39,7 @@ export default function Authorization({ isAuth }) {
     event.preventDefault();
     setLoad(true);
     const data = { username: userLogin, password: userPass };
+
     fetch(`${api}auth/login`, {
       method: 'POST',
       headers: headers,
@@ -55,7 +53,6 @@ export default function Authorization({ isAuth }) {
          max-age=${res.expires_in}; path='/need-for-drive/admin`;
         document.cookie = `refresh_token=${res.refresh_token};
          max-age=${res.expires_in}; path='/need-for-drive/admin`;
-        isAuth();
         setLoad(false);
       })
       .then(() => history.push('/admin/'))
@@ -132,7 +129,7 @@ export default function Authorization({ isAuth }) {
             </form>
           </div>
         </div>
-      )}{' '}
+      )}
     </>
   );
 }

@@ -120,7 +120,7 @@ export default class OrderPage extends React.Component {
     } = this.state;
 
     const API =
-      'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/db/';
+      'http://api-factory.simbirsoft1.com/api/db/';
     const headers = {
       'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
     };
@@ -184,7 +184,7 @@ export default class OrderPage extends React.Component {
         {orderId? (
           <div className='final-page__nav'>
             <p>
-              Заказ номер {`RU${orderId.replace(/\D/gm, '') || 'RU58491823'}`}
+              Заказ номер {`RU${orderId.replace(/\D/gm, '')}`}
             </p>
           </div>
         ) : (

@@ -40,7 +40,12 @@ export default function Total({
       case 1:
         return cityId.id && pointId.id && name ? false : true;
       case 2:
-        return cityId.id && pointId.id && name && dateFrom && dateTo && rateId
+        return cityId.id &&
+          pointId.id &&
+          name &&
+          dateFrom &&
+          dateTo &&
+          rateId
           ? false
           : true;
       case 3:
@@ -57,14 +62,32 @@ export default function Total({
     'Отменить',
   ];
   const mins = (new Date(dateTo) - new Date(dateFrom)) / 60000;
+  const hours = Math.trunc(mins / 60);
   function getTime() {
+    function getWords(number, array) {
+      const lastnumbers = number % 100;
+      const word =
+        9 < lastnumbers && lastnumbers < 21
+          ? array[0]
+          : 1 < lastnumbers % 10 && lastnumbers % 10 < 5
+          ? array[1]
+          : lastnumbers % 10 === 1
+          ? array[3]
+          : array[0];
+
+      return `${number} ${word} `;
+    }
+
     if (rateId.rateTypeId.name === 'Поминутно') {
-      return `${Math.trunc(mins / 60)} часов ${Math.trunc(mins % 60)} Минут`;
+      return `${getWords(hours, ['часов', 'часа', 'час'])} ${Math.trunc(
+        mins % 60,
+      )} мин.`;
     } else {
-      const result = mins / 60;
-      return `${Math.round(result / 24)} дней`;
+      const days = Math.trunc(mins / 1440);
+      return getWords(days, ['дней', 'дня', 'день']);
     }
   }
+
   return (
     <>
       {warning && (
@@ -98,8 +121,11 @@ export default function Total({
           )}
           {(color || (name && currentColor)) && (
             <p className='total__list__item'>
-              <span className='text'>Цвет</span> <span className='dots'></span>
-              <span className='text__dinamic'>{color || currentColor}</span>
+              <span className='text'>Цвет</span>{' '}
+              <span className='dots'></span>
+              <span className='text__dinamic'>
+                {color || currentColor}
+              </span>
             </p>
           )}
           {dateFrom !== 0 && dateTo !== 0 && (
@@ -111,8 +137,11 @@ export default function Total({
           )}
           {name && rateId.rateTypeId.name && (
             <p className='total__list__item'>
-              <span className='text'>Тариф</span> <span className='dots'></span>
-              <span className='text__dinamic'>{rateId.rateTypeId.name}</span>
+              <span className='text'>Тариф</span>{' '}
+              <span className='dots'></span>
+              <span className='text__dinamic'>
+                {rateId.rateTypeId.name}
+              </span>
             </p>
           )}
           {name && isFullTank && (
@@ -150,7 +179,9 @@ export default function Total({
             <Button
               type={`big-btn`}
               title={titles[currentStep]}
-              action={+currentStep === 3 ? () => setWarning(!warning) : action}
+              action={
+                +currentStep === 3 ? () => setWarning(!warning) : action
+              }
               disable={isDisable(currentStep)}
             />
           ) : (

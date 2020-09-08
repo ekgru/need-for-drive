@@ -38,13 +38,23 @@ export default class StepOne extends React.Component {
   handleChange(event, name, customValue) {
     const { cities, points } = this.state;
     const { getLocation } = this.props;
-    const value = event.target ? event.target.value : customValue;
+    const value = event ? event.target.value : customValue;
 
     const resultObj =
       name === 'cityId'
-        ? cities.filter((el) => el.name === value)
-        : points.filter((el) => el.address === value);
-    getLocation(name, resultObj[0] ? resultObj[0] : { name: value, id: '' });
+        ? cities.filter(
+            (el) =>
+              el.name.replace(/ +/g, ' ') === value.replace(/ +/g, ' '),
+          )
+        : points.filter(
+            (el) =>
+              el.address.replace(/ +/g, ' ') === value.replace(/ +/g, ' '),
+          );
+    console.log(resultObj);
+    getLocation(
+      name,
+      resultObj[0] ? resultObj[0] : { name: value, id: '' },
+    );
   }
   render() {
     const { city, point, action } = this.props;

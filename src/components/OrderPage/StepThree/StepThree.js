@@ -15,6 +15,7 @@ export default function StepThree({
   actionInfo,
 }) {
   const [tariffs, setTarffs] = useState([]);
+
   useEffect(() => {
     fetch(`${api}rate`, {
       headers: headers,
@@ -28,26 +29,20 @@ export default function StepThree({
       })
       .catch((err) => console.error('ERROR', err));
   }, []);
+
   const additional = [
     { name: 'isFullTank', description: 'Полный бак, 500р' },
     { name: 'isNeedChildChair', description: 'Детское кресло, 200р' },
     { name: 'isRightWheel', description: 'Правый руль, 1600р' },
   ];
+
   return (
     <div className='step-three'>
       <form className='step-three__form'>
         <fieldset className='step-three__form__color-selector'>
           <legend>Цвет</legend>
           <br></br>
-          <CustomInput
-            type='radio'
-            name='currentColor'
-            value={'Любой'}
-            checked={currentColor === 'Любой' ? true : false}
-            description={'Любой'}
-            onChangeAction={action}
-          />{' '}
-          {colors.map((el, i) => (
+          {[...['Любой'], ...colors].map((el, i) => (
             <CustomInput
               key={i}
               type='radio'
@@ -62,7 +57,7 @@ export default function StepThree({
         <fieldset className='step-three__form__date-selector'>
           <legend>Дата аренды</legend>
           <CustomInput
-          dateTo={dateTo}
+            dateTo={dateTo}
             onChangeAction={action}
             name='dateFrom'
             description={'С'}

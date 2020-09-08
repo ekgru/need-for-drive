@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import Authorization from './Authorization';
 import './AdminPanel.scss';
 import Sidebar from './Sidebar';
@@ -13,13 +13,13 @@ import AdminLoader from './AdminLoader';
 import CarListPage from './CarListPage';
 
 export default function AdminPanel() {
-  const [auth, setAuth] = useState(false);
   const [isLoad, setLoad] = useState(false);
   const [userName, setUserName] = useState('');
-
+  const history = useHistory();
+  const location = useLocation();
   useEffect(() => {
     checkAuth();
-  }, []);
+  }, [location]);
 
   function getCookie(name) {
     const matches = document.cookie.match(
@@ -31,119 +31,95 @@ export default function AdminPanel() {
     );
     return matches ? matches[1] : undefined;
   }
-  //    'https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/';
-
   const api = 'http://api-factory.simbirsoft1.com/api/';
-  const headers = {
-    'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
-    'Content-Type': 'application/json',
-  };
 
   function checkAuth() {
-    setLoad(true);
-    fetch(`${api}auth/check`, {
-      method: 'GET',
-      headers: {
-        ...headers,
-        Authorization: 'Bearer ' + getCookie('access_token'),
-      },
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        setUserName(res.username);
-        setAuth(true);
-        setLoad(false);
+    const access = getCookie('access_token');
+    const headers = {
+      'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
+      'Content-Type': 'application/json',
+    };
+
+    if (access) {
+      console.log(access);
+      fetch(`${api}auth/check`, {
+        method: 'GET',
+        headers: {
+          ...headers,
+          Authorization: 'Bearer ' + access,
+        },
       })
-      .catch(() => {
-        const data = { refresh_token: getCookie('refresh_token') };
-
-        fetch(`${api}auth/refresh`, {
-          method: 'POST',
-          headers: {
-            ...headers,
-            Authorization: 'Basic ' + getCookie('basicToken'),
-          },
-          body: JSON.stringify(data),
+        .then((response) => response.json())
+        .then((res) => {
+          setUserName(res.username);
+          setLoad(false);
         })
-          .then((response) => response.json())
-          .then((res) => {
-            document.cookie = `access_token=${res.access_token};
-        max-age=${res.expires_in};
-        path='/need-for-drive/admin`;
-            document.cookie = `refresh_token=${res.refresh_token};
-        max-age=${res.expires_in};
-        path=/need-for-drive/admin`;
-            setAuth(true);
-            setLoad(false);
-          })
-          .catch((err) => {
-            console.error('ERROR', err);
-
-            setAuth(false);
-
-            setLoad(false);
-          });
-      });
+        .catch((err) => {
+          if (location.pathname != '/admin/authorization') {
+            history.push('/admin/authorization');
+          }
+          setLoad(false);
+        });
+    } else {
+      if (location.pathname != '/admin/authorization') {
+        history.push('/admin/authorization');
+      }
+    }
   }
 
   return (
     <div className='admin-panel'>
-      <Switch>
-        <Route path='/admin/autorization'>
-          {auth && !isLoad ? (
-            <Redirect to='/admin/' />
-          ) : isLoad ? (
-            <AdminLoader />
-          ) : (
-            <Authorization isAuth={checkAuth} />
-          )}
-        </Route>
-        <Route path='/admin/'>
-          <div className='admin-panel__container'>
-            <div className='admin-panel__container__topbar'>
-              <Topbar
-                api={api}
-                userName={userName}
-                getCookie={getCookie}
-                isAuth={checkAuth}
-              />
-            </div>
-            <div className='admin-panel__container__sidebar'>
-              <Sidebar />
-            </div>
-            <div className='admin-panel__container__content'>
-              <Switch>
-                {/* {!auth && <Redirect to='/admin/autorization' />} */}
-                <Route exact path='/admin/'>
-                  <h1 className='admin__hello-text'>
-                    Добро пожаловать, {userName || 'администратор'}!
-                  </h1>
-                </Route>
-                <Route exact path='/admin/car-edit-card'>
-                  <CarEditCard getCookie={getCookie} />{' '}
-                </Route>
-
-                <Route exact path='/admin/car-list'>
-                  <CarListPage getCookie={getCookie} />
-                </Route>
-                <Route exact path='/admin/orders'>
-                  <Orders getCookie={getCookie} />
-                </Route>
-                <Route
-                  exact
-                  path='/admin/points'
-                  component={CityPointCard}
+      {isLoad ? (
+        <AdminLoader />
+      ) : (
+        <Switch>
+          <Route path='/admin/authorization'>
+            {isLoad ? <AdminLoader /> : <Authorization />}
+          </Route>
+          <Route path='/admin/'>
+            <div className='admin-panel__container'>
+              <div className='admin-panel__container__topbar'>
+                <Topbar
+                  api={api}
+                  userName={userName}
+                  getCookie={getCookie}
+                  isAuth={checkAuth}
                 />
+              </div>
+              <div className='admin-panel__container__sidebar'>
+                <Sidebar />
+              </div>
+              <div className='admin-panel__container__content'>
+                <Switch>
+                  <Route exact path='/admin/'>
+                    <h1 className='admin__hello-text'>
+                      Добро пожаловать, {userName || 'администратор'}!
+                    </h1>
+                  </Route>
+                  <Route exact path='/admin/car-edit-card'>
+                    <CarEditCard getCookie={getCookie} />{' '}
+                  </Route>
 
-                <Route path='/admin/*' component={ErrorPage} />
-              </Switch>
-            </div>
-            <div className='admin-panel__container__bottombar'>
+                  <Route exact path='/admin/car-list'>
+                    <CarListPage getCookie={getCookie} />
+                  </Route>
+                  <Route exact path='/admin/orders'>
+                    <Orders getCookie={getCookie} />
+                  </Route>
+                  <Route
+                    exact
+                    path='/admin/points'
+                    component={CityPointCard}
+                  />
+                  <Route path='/admin/*' component={ErrorPage} />
+                </Switch>
+              </div>
+              <div className='admin-panel__container__bottombar'></div>
               <Bottombar />
             </div>
-          </div>
-        </Route>
-      </Switch>
+          </Route>
+        </Switch>
+      )}
     </div>
   );
 }
