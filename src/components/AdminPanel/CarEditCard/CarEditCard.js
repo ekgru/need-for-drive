@@ -2,7 +2,7 @@ import React from 'react';
 import './CarEditCard.scss';
 import fakeCar from '../../../resources/car.png';
 import AdminRequest from '../AdminRequest';
-
+import AdminTextInput from '../AdminTextInput';
 export default class CarEditCard extends React.Component {
   constructor(props) {
     super(props);
@@ -14,37 +14,75 @@ export default class CarEditCard extends React.Component {
       category: '5e25c99a099b810b946c5d63',
       addColor: '',
       description: '',
+      errors: {
+        addColor: false,
+        description: false,
+        file: false,
+        model: false,
+      },
     };
     this.handleChange = this.handleChange.bind(this);
     this.addColor = this.addColor.bind(this);
     this.createNewCar = this.createNewCar.bind(this);
     this.fileHandler = this.fileHandler.bind(this);
   }
+
   handleChange(event) {
     const { name, value } = event.target;
     this.setState({ [name]: value });
+    if (value === '') {
+      this.setState((prevState) => {
+        return { errors: { ...prevState.errors, [name]: false } };
+      });
+    }
   }
-  addColor() {
-    this.setState((prevState) => ({
-      colors: [...prevState.colors, prevState.addColor],
-      addColor: '',
-    }));
+  addColor(event) {
+    event.preventDefault();
+    if (!this.state.colors.includes(this.state.addColor)) {
+      this.setState((prevState) => ({
+        colors: [...prevState.colors, prevState.addColor],
+        addColor: '',
+        errors: { ...prevState.errors, addColor: false },
+      }));
+    } else {
+      this.setState((prevState) => {
+        return { errors: { ...prevState.errors, addColor: true } };
+      });
+    }
   }
   fileHandler(event) {
-    this.setState({
-      // file: new FormData(document.getElementById('file-form')),
-      file: event.target.files[0],
-    });
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.setState({
+        file: file,
+        fileToSend: reader.result,
+      });
+    };
+    reader.onerror = () => console.log(reader.error);
   }
   createNewCar() {
-    const { model, file, description, category, colors } = this.state;
+    const {
+      model,
+      fileToSend,
+      file,
+      description,
+      category,
+      colors,
+    } = this.state;
     const data = {
       priceMax: 50000,
-      prixeMin: 1000,
+      priceMin: 1000,
       name: model,
-      thumbnail: new FormData(document.getElementById('file-form')),
+      thumbnail: {
+        originalname: file.name,
+        mimetype: file.type,
+        size: file.size,
+        path: fileToSend,
+      },
       description: description,
-      categoryId: { id: category },
+      categoryId: { id: category, name: 'econom' },
       colors: colors,
     };
     const req = new AdminRequest(
@@ -54,7 +92,6 @@ export default class CarEditCard extends React.Component {
       data
     );
     req.doRequest().then((res) => console.log(res));
-    console.log(data)
   }
 
   render() {
@@ -137,31 +174,27 @@ export default class CarEditCard extends React.Component {
           </div>
 
           <div className='car-edit__container__additional-block'>
-            <form className='car-edit__container__additional-block__form'>
+            <div className='car-edit__container__additional-block__form'>
               <h2>Настройки автомобиля</h2>
               <span className='car-edit__container__additional-block__form__group'>
-                <fieldset>
-                  <legend>Модель автомобиля</legend>
-                  <input
-                    onChange={this.handleChange}
-                    type='text'
-                    className='admin__input'
-                    name='model'
-                    value={this.state.model}
-                    placeholder='Введите модель автомобиля'
-                  />
-                </fieldset>
-                <fieldset>
-                  <legend>Тип автомобиля</legend>
-                  <input
-                    onChange={this.handleChange}
-                    type='text'
-                    className='admin__input'
-                    name='type'
-                    placeholder='Введите тип автомобиля'
-                    value={this.state.type}
-                  />
-                </fieldset>
+                <AdminTextInput
+                  placeholder='Введите модель автомобиля'
+                  legend='Модель автомобиля'
+                  onChange={this.handleChange}
+                  value={this.state.model}
+                  name='model'
+                  error={this.state.errors.model}
+                  errorText='Некорректное название автомобиля'
+                />
+                <AdminTextInput
+                  placeholder='Введите тип автомобиля'
+                  legend='Тип автомобиля'
+                  onChange={this.handleChange}
+                  value={this.state.type}
+                  name='type'
+                  error={false}
+                  errorText=''
+                />
               </span>
               <span className='car-edit__container__additional-block__form__group'>
                 <fieldset>
@@ -190,35 +223,46 @@ export default class CarEditCard extends React.Component {
                 </fieldset>
               </span>
               <span className='car-edit__container__additional-block__form__group'>
-                <fieldset>
-                  <legend>Доступные цвета</legend>
+                <form onSubmit={this.addColor}>
                   <span>
-                    <input
-                      type='text'
-                      className='admin__input'
-                      name='addColor'
+                    <AdminTextInput
                       placeholder='Введите цвет'
+                      legend='Доступные цвета'
                       onChange={this.handleChange}
                       value={this.state.addColor}
+                      name='addColor'
+                      error={this.state.errors.addColor}
+                      errorText='Этот цвет уже выбран'
                     />
                     <button
                       className='plus-btn'
-                      type='button'
+                      type='submit'
                       disabled={this.state.addColor ? false : true}
-                      onClick={this.addColor}
                     >
                       <span></span>
                     </button>
                   </span>
-                </fieldset>
-                {this.state.colors.map((el) => (
-                  <label key={el}>
-                    <input type='checkbox' readOnly checked />
-                    <span>{el}</span>
-                  </label>
-                ))}
+                </form>
+                <div className='car-edit__container__additional-block__form__group__checkboxes'>
+                  {this.state.colors.map((el, i) => (
+                    <label key={+new Date() + i}>
+                      <input
+                        type='checkbox'
+                        defaultChecked
+                        onChange={() =>
+                          this.setState((prevState) => {
+                            const newArray = [...prevState.colors];
+                            newArray.splice(i, 1);
+                            return { colors: newArray };
+                          })
+                        }
+                      />
+                      <span>{el}</span>
+                    </label>
+                  ))}
+                </div>
               </span>
-            </form>
+            </div>
             <div className='car-edit__container__additional-block__btn-bar'>
               <span>
                 <button

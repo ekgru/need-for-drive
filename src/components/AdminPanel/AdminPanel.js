@@ -13,7 +13,7 @@ import AdminLoader from './AdminLoader';
 import CarListPage from './CarListPage';
 
 export default function AdminPanel() {
-  const [isLoad, setLoad] = useState(false);
+  const [isLoad, setLoad] = useState(true);
   const [userName, setUserName] = useState('');
   const history = useHistory();
   const location = useLocation();
@@ -41,7 +41,6 @@ export default function AdminPanel() {
     };
 
     if (access) {
-      console.log(access);
       fetch(`${api}auth/check`, {
         method: 'GET',
         headers: {
@@ -63,8 +62,10 @@ export default function AdminPanel() {
     } else {
       if (location.pathname != '/admin/authorization') {
         history.push('/admin/authorization');
+        setLoad(false);
       }
     }
+    setLoad(false);
   }
 
   return (
@@ -83,7 +84,7 @@ export default function AdminPanel() {
                   api={api}
                   userName={userName}
                   getCookie={getCookie}
-                  isAuth={checkAuth}
+                  setLoad={setLoad}
                 />
               </div>
               <div className='admin-panel__container__sidebar'>
@@ -114,8 +115,9 @@ export default function AdminPanel() {
                   <Route path='/admin/*' component={ErrorPage} />
                 </Switch>
               </div>
-              <div className='admin-panel__container__bottombar'></div>
-              <Bottombar />
+              <div className='admin-panel__container__bottombar'>
+                <Bottombar />
+              </div>
             </div>
           </Route>
         </Switch>

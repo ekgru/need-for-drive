@@ -229,6 +229,9 @@ $logo: url('../../resources/Logo.svg');
     font-size: 29px;
     line-height: 33px;
   }
+  &__fieldset{
+    position: relative;
+  }
   &__input {
     font-family: $adminFont;
     min-width: 320px;
@@ -243,6 +246,19 @@ $logo: url('../../resources/Logo.svg');
     &:active, &:focus{
 border-color:$blue;
 box-shadow: 0px 2.5px 5.5px rgba(24, 93, 196, 0.1);
+    }
+    &__error-text{
+      font-style: normal;
+            font-weight: normal;
+            font-size: 10px;
+            line-height: 11px;
+            color: $red!important;
+            position: absolute;
+            top: 50px;
+    }
+    &.error{
+      border-color: $red;
+      
     }
   }
   &__textarea {
@@ -320,6 +336,8 @@ box-shadow: 0px 2.5px 5.5px rgba(24, 93, 196, 0.1);
       font-size: 30px;
       line-height: 28px;
     }
+    &__file-loader{
+      max-width: 200px;    }
   }
   .admin-panel {
     &__container {

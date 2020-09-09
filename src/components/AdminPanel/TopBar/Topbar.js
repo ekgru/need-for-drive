@@ -5,7 +5,6 @@ import { useHistory } from 'react-router-dom';
 export default function Topbar({
   userName,
   api,
-  isAuth,
   setLoad,
   getCookie,
 }) {
