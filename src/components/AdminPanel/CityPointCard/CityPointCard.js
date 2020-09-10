@@ -1,9 +1,10 @@
 import React from 'react';
 import './CityPointCard.scss';
 import CityPointMap from './CityPointMap';
+import AdminRequest from '../AdminRequest';
 export default class CityPointCard extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       pointName: '',
       address: '',
@@ -17,6 +18,52 @@ export default class CityPointCard extends React.Component {
   }
   handler(info) {
     this.setState({ address: info });
+  }
+  createPoint() {
+    const currentCity = this.state.address.metaDataProperty.GeocoderMetaData.Address.Components.find(
+      (el) => el.kind === 'locality',
+    ).name;
+    new AdminRequest('db/city/', 'GET')
+      .doRequest()
+      .then(({ data }) => this.setState({ cities: data }))
+      .then(() => {
+        const city = this.state.cities.filter(
+          (el) => el.name === currentCity,
+        );
+        if (city.length) {
+          new AdminRequest(
+            'db/point',
+            'POST',
+            `Bearer ${this.props.getCookie('access_token')}`,
+            {
+              name: this.state.pointName,
+              cityId: city[0],
+              address: this.state.address.name,
+            },
+          ).doRequest();
+        } else {
+          new AdminRequest(
+            'db/city',
+            'POST',
+            `Bearer ${this.props.getCookie('access_token')}`,
+            { name: currentCity },
+          )
+            .doRequest()
+            .then(({ data }) =>
+              new AdminRequest(
+                'db/point',
+                'POST',
+                `Bearer ${this.props.getCookie('access_token')}`,
+                {
+                  name: this.state.pointName,
+                  cityId: data,
+                  address: this.state.address.name,
+                },
+              ).doRequest(),
+            );
+        }
+      })
+      .catch((err) => console.log(err));
   }
   render() {
     return (
@@ -56,7 +103,7 @@ export default class CityPointCard extends React.Component {
                     </span>
                     {
                       this.state.address.metaDataProperty.GeocoderMetaData.Address.Components.find(
-                        (el) => el.kind === 'locality'
+                        (el) => el.kind === 'locality',
                       ).name
                     }
                   </p>
@@ -79,7 +126,12 @@ export default class CityPointCard extends React.Component {
                 </p>
               )}
               <div className='city-point-card__content__info__btn-bar'>
-                <button className='admin__button blue'>Сохранить</button>
+                <button
+                  className='admin__button blue'
+                  onClick={this.createPoint.bind(this)}
+                >
+                  Сохранить
+                </button>
                 <button className='admin__button red'>Отменить</button>
               </div>
             </div>

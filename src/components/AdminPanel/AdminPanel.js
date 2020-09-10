@@ -54,10 +54,31 @@ export default function AdminPanel() {
           setLoad(false);
         })
         .catch((err) => {
-          if (location.pathname != '/admin/authorization') {
-            history.push('/admin/authorization');
-          }
-          setLoad(false);
+          const data = { refresh_token: getCookie('refresh_token') };
+          fetch(`${api}auth/refresh`, {
+            method: 'POST',
+            headers: {
+              ...headers,
+              Authorization: 'Basic ' + getCookie('basicToken'),
+            },
+            body: JSON.stringify(data),
+          })
+            .then((response) => response.json())
+            .then((res) => {
+              document.cookie = `access_token=${res.access_token};
+          max-age=${res.expires_in};
+          path='/need-for-drive/admin`;
+              document.cookie = `refresh_token=${res.refresh_token};
+          max-age=${res.expires_in};
+          path=/need-for-drive/admin`;
+              setLoad(false);
+            })
+            .catch(() => {
+              if (location.pathname != '/admin/authorization') {
+                history.push('/admin/authorization');
+              }
+              setLoad(false);
+            });
         });
     } else {
       if (location.pathname != '/admin/authorization') {
@@ -107,11 +128,10 @@ export default function AdminPanel() {
                   <Route exact path='/admin/orders'>
                     <Orders getCookie={getCookie} />
                   </Route>
-                  <Route
-                    exact
-                    path='/admin/points'
-                    component={CityPointCard}
-                  />
+                  <Route exact path='/admin/points'>
+                    <CityPointCard getCookie={getCookie} />
+                  </Route>
+
                   <Route path='/admin/*' component={ErrorPage} />
                 </Switch>
               </div>

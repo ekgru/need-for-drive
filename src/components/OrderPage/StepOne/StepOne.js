@@ -44,16 +44,29 @@ export default class StepOne extends React.Component {
       name === 'cityId'
         ? cities.filter(
             (el) =>
-              el.name.replace(/ +/g, ' ') === value.replace(/ +/g, ' '),
+              el.name
+                .replace(/(проспект|улица|[\.,])/gi, '')
+                .replace(/(\d+)(к\.?)(\d+)/i, '$1, корп.$3')
+                .trim() ===
+              value
+                .replace(/(проспект|улица|[\.,])/gi, '')
+                .replace(/(\d+)(к\.?)(\d+)/i, '$1, корп.$3')
+                .trim()
           )
         : points.filter(
             (el) =>
-              el.address.replace(/ +/g, ' ') === value.replace(/ +/g, ' '),
+              el.address
+                .replace(/(проспект|улица|[\.,])/gi, '')
+                .replace(/(\d+)(к\.?)(\d+)/i, '$1, корп.$3')
+                .trim() ===
+              value
+                .replace(/(проспект|улица|[\.,])/gi, '')
+                .replace(/(\d+)(к\.?)(\d+)/i, '$1, корп.$3')
+                .trim()
           );
-    console.log(resultObj);
     getLocation(
       name,
-      resultObj[0] ? resultObj[0] : { name: value, id: '' },
+      resultObj[0] ? resultObj[0] : { name: value, id: '' }
     );
   }
   render() {
@@ -79,7 +92,7 @@ export default class StepOne extends React.Component {
                 <option key={i} id={el.id} value={el.name}></option>
               ) : (
                 ''
-              ),
+              )
             )}
           </datalist>
           <br />
@@ -114,7 +127,7 @@ export default class StepOne extends React.Component {
                 </option>
               ) : (
                 ''
-              ),
+              )
             )}
           </datalist>
         </form>

@@ -53,7 +53,13 @@ export default class CarMap extends React.Component {
     });
   }
   cityHandler(el) {
-    this.props.action('', 'cityId', el.name);
+    this.props.action(
+      '',
+      'cityId',
+      el.metaDataProperty.GeocoderMetaData.Address.Components.find(
+        (el) => el.kind === 'locality',
+      ).name,
+    );
     this.map.setCenter(el.Point.pos.split(' ', 2).reverse(), 10, {
       checkZoomRange: true,
     });
@@ -122,7 +128,9 @@ export default class CarMap extends React.Component {
 
           {city.id &&
             pointMarks.map((el) =>
-              el.description.split(', ', 1)[0] === city.name ? (
+              el.metaDataProperty.GeocoderMetaData.Address.Components.find(
+                (el) => el.kind === 'locality',
+              ).name === city.name ? (
                 <Placemark
                   key={el.Point.pos}
                   onClick={this.placemarkHandeler.bind(this, el)}
