@@ -1,0 +1,26 @@
+@import '../../../variables.scss';
+.admin-table {
+  width: 100%;
+  text-align: center;
+  &__row {
+    background-color: lighten($blue, 48);
+    &:hover{
+        background-color: lighten($blue, 40);
+    }
+    &.head {
+      background-color: $blue;
+      color: lighten($blue, 48);
+      font-size: 12px;
+      line-height: 14px;
+      font-family: $adminFont;
+tr{
+    height: 40px;
+}    }
+    &:nth-child(even) {
+      background-color: lighten($blue, 45);
+      &:hover{
+        background-color: lighten($blue, 37);
+    }
+    }
+  }
+}
