@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/need-for-drive/static/css/main.1e78a05d.chunk.css",
-    "main.js": "/need-for-drive/static/js/main.fe4735b5.chunk.js",
-    "main.js.map": "/need-for-drive/static/js/main.fe4735b5.chunk.js.map",
+    "main.css": "/need-for-drive/static/css/main.70fa4150.chunk.css",
+    "main.js": "/need-for-drive/static/js/main.5f53b611.chunk.js",
+    "main.js.map": "/need-for-drive/static/js/main.5f53b611.chunk.js.map",
     "runtime-main.js": "/need-for-drive/static/js/runtime-main.7c67051a.js",
     "runtime-main.js.map": "/need-for-drive/static/js/runtime-main.7c67051a.js.map",
     "static/css/2.1be1aeea.chunk.css": "/need-for-drive/static/css/2.1be1aeea.chunk.css",
-    "static/js/2.fa963968.chunk.js": "/need-for-drive/static/js/2.fa963968.chunk.js",
-    "static/js/2.fa963968.chunk.js.map": "/need-for-drive/static/js/2.fa963968.chunk.js.map",
+    "static/js/2.460037af.chunk.js": "/need-for-drive/static/js/2.460037af.chunk.js",
+    "static/js/2.460037af.chunk.js.map": "/need-for-drive/static/js/2.460037af.chunk.js.map",
     "index.html": "/need-for-drive/index.html",
-    "precache-manifest.902aa10fed38321dfcc5c263eb9bd108.js": "/need-for-drive/precache-manifest.902aa10fed38321dfcc5c263eb9bd108.js",
+    "precache-manifest.224d1f7bf784fa78564e5b45cfebf172.js": "/need-for-drive/precache-manifest.224d1f7bf784fa78564e5b45cfebf172.js",
     "service-worker.js": "/need-for-drive/service-worker.js",
     "static/css/2.1be1aeea.chunk.css.map": "/need-for-drive/static/css/2.1be1aeea.chunk.css.map",
-    "static/css/main.1e78a05d.chunk.css.map": "/need-for-drive/static/css/main.1e78a05d.chunk.css.map",
-    "static/js/2.fa963968.chunk.js.LICENSE.txt": "/need-for-drive/static/js/2.fa963968.chunk.js.LICENSE.txt",
+    "static/css/main.70fa4150.chunk.css.map": "/need-for-drive/static/css/main.70fa4150.chunk.css.map",
+    "static/js/2.460037af.chunk.js.LICENSE.txt": "/need-for-drive/static/js/2.460037af.chunk.js.LICENSE.txt",
     "static/media/Sidebar.scss": "/need-for-drive/static/media/Person.39670054.svg",
     "static/media/index.scss": "/need-for-drive/static/media/Rubik-Regular.b3d0902b.ttf",
     "static/media/NavBar.scss": "/need-for-drive/static/media/Telegram.0b51a5ca.svg",
@@ -30,8 +30,8 @@
   "entrypoints": [
     "static/js/runtime-main.7c67051a.js",
     "static/css/2.1be1aeea.chunk.css",
-    "static/js/2.fa963968.chunk.js",
-    "static/css/main.1e78a05d.chunk.css",
-    "static/js/main.fe4735b5.chunk.js"
+    "static/js/2.460037af.chunk.js",
+    "static/css/main.70fa4150.chunk.css",
+    "static/js/main.5f53b611.chunk.js"
   ]
 }
