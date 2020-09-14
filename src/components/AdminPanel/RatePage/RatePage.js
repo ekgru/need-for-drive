@@ -3,7 +3,7 @@ import AdminRequest from '../AdminRequest';
 import AdminTable from '../AdminTable/AdminTable';
 import './RatePage.scss';
 import AdminLoader from '../AdminLoader';
-export default function RatePage({ getCookie }) {
+export default function RatePage() {
   const [rateData, setData] = useState();
   useEffect(() => {
     new AdminRequest('db/rate/', 'GET').doRequest().then(({ data }) =>
@@ -32,7 +32,7 @@ export default function RatePage({ getCookie }) {
         {rateData ? (
           <AdminTable columns={columns} data={rateData} />
         ) : (
-          <span className='rate-page__wrapper'><AdminLoader /></span>
+         <AdminLoader />
         )}
       </div>
     </>

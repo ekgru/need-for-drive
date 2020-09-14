@@ -45,7 +45,7 @@ export default function Orders({ api, headers, getCookie }) {
         status && '&orderStatusId=' + status
       }`,
       'GET',
-      `Bearer ${getCookie('access_token')}`,
+      `Bearer ${getCookie('access_token')}`
     );
     getTable
       .doRequest()
@@ -60,20 +60,6 @@ export default function Orders({ api, headers, getCookie }) {
       });
   }
 
-  function paginationHandler(event) {
-    const { name, value } = event.target;
-    switch (name) {
-      case 'back':
-        setPage(+page - 1);
-        break;
-      case 'forward':
-        setPage(+page + 1);
-        break;
-      default:
-        setPage(value);
-        break;
-    }
-  }
 
   function filterHandler(event) {
     const now = new Date();
@@ -142,7 +128,7 @@ export default function Orders({ api, headers, getCookie }) {
                     cars: cars,
                     cities: cities,
                     statuses: statuses,
-                  }),
+                  })
                 );
             });
         });
@@ -290,16 +276,13 @@ export default function Orders({ api, headers, getCookie }) {
             'Заказы не найдены'
           )}
         </div>
-
-        <div className='order-block__pagination'>
-          {currentOrder && (
-            <AdminPagination
-              paginationHandler={paginationHandler}
-              page={page}
-              countPages={countPages}
-            />
-          )}
-        </div>
+        {currentOrder && (
+          <AdminPagination
+            setPage={setPage}
+            page={page}
+            countPages={countPages}
+          />
+        )}
       </div>
     </>
   );

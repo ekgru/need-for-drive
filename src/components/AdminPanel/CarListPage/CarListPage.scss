@@ -1,6 +1,7 @@
 @import '../../../variables.scss';
 .car-list-page {
   @include adminBlock;
+  min-height: 414px;;
   &__container {
     display: flex;
     flex-direction: row;

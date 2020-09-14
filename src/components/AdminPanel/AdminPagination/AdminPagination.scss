@@ -1,4 +1,13 @@
 @import '../../../variables.scss';
+.pagination-wrapper{
+  display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-top: $adminBorder;
+    height: 59px;
+    min-height: 59px;
+}
 .admin__pagination {
     display: flex;
     flex-direction: row;

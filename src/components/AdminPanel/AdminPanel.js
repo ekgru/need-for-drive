@@ -12,6 +12,7 @@ import CityPointCard from './CityPointCard';
 import AdminLoader from './AdminLoader';
 import CarListPage from './CarListPage';
 import RatePage from './RatePage';
+import PointsPage from './PointsPage';
 
 export default function AdminPanel() {
   const [isLoad, setLoad] = useState(true);
@@ -132,10 +133,12 @@ export default function AdminPanel() {
                   <Route exact path='/admin/points'>
                     <CityPointCard getCookie={getCookie} />
                   </Route>
-                  <Route exact path='/admin/rate'>
-                    <RatePage getCookie={getCookie} />
+                  <Route exact path='/admin/rate-list'>
+                    <RatePage/>
                   </Route>
-
+                  <Route exact path='/admin/points-list'>
+                    <PointsPage getCookie={getCookie}/>
+                  </Route>
                   <Route path='/admin/*' component={ErrorPage} />
                 </Switch>
               </div>

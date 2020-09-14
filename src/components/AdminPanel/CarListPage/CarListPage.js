@@ -3,6 +3,7 @@ import './CarListPage.scss';
 import AdminRequest from '../AdminRequest';
 import CarListCard from './CarListCard';
 import AdminPagination from '../AdminPagination';
+import AdminLoader from '../AdminLoader';
 export default function CarListPage({ getCookie }) {
   const [page, setPage] = useState(1);
   const [thisList, setThisList] = useState();
@@ -25,27 +26,13 @@ export default function CarListPage({ getCookie }) {
     });
   }
 
-  function paginationHandler(event) {
-    const { name, value } = event.target;
-    switch (name) {
-      case 'back':
-        setPage(+page - 1);
-        break;
-      case 'forward':
-        setPage(+page + 1);
-        break;
-      default:
-        setPage(value);
-        break;
-    }
-  }
   return (
     <>
       <h1 className='admin__heading'>Список автомобилей</h1>
       <div className='car-list-page'>
-        <div className='car-list-page__container'>
-          {thisList &&
-            thisList.map((el) => (
+        {thisList ? (
+          <div className='car-list-page__container'>
+            {thisList.map((el) => (
               <CarListCard
                 key={el.id}
                 img={el.thumbnail.path}
@@ -57,16 +44,17 @@ export default function CarListPage({ getCookie }) {
                 tank={el.tank}
               />
             ))}
-        </div>
-        <div className='order-block__pagination'>
-          {thisList && (
-            <AdminPagination
-              paginationHandler={paginationHandler}
-              page={page}
-              countPages={countPages}
-            />
-          )}
-        </div>
+          </div>
+        ) : (
+          <AdminLoader />
+        )}
+        {thisList && (
+          <AdminPagination
+            setPage={setPage}
+            page={page}
+            countPages={countPages}
+          />
+        )}
       </div>
     </>
   );

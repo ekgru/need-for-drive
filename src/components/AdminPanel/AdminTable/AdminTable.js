@@ -13,15 +13,23 @@ export default function AdminTable({ columns, data }) {
         </tr>
       </thead>
       <tbody>
-        {data.map((val) => (
-          <tr key={val.id} className='admin-table__row'>
-            {columns.map((el) => (
-              <td key={val[el.dataName]} className='admin-table__cell'>
-                {val[el.dataName]}
-              </td>
-            ))}
+        {data.length > 0 ? (
+          data.map((val) => (
+            <tr key={val.id} className='admin-table__row'>
+              {columns.map((el) => (
+                <td key={val[el.dataName]} className='admin-table__cell'>
+                  {val[el.dataName]}
+                </td>
+              ))}
+            </tr>
+          ))
+        ) : (
+          <tr className='admin-table__row'>
+            <td className='admin-table__cell' colSpan='3'>
+              Данные не найдены
+            </td>
           </tr>
-        ))}
+        )}
       </tbody>
     </table>
   );
