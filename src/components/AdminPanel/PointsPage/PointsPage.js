@@ -4,7 +4,9 @@ import AdminLoader from '../AdminLoader';
 import AdminTable from '../AdminTable/AdminTable';
 import AdminRequest from '../AdminRequest';
 import AdminPagination from '../AdminPagination';
+import { useHistory } from 'react-router-dom';
 export default function PointsPage({ getCookie }) {
+  const history = useHistory();
   const [pointsData, setData] = useState();
   const [page, setPage] = useState(1);
   const [countPages, setCountPages] = useState(1);
@@ -40,7 +42,8 @@ export default function PointsPage({ getCookie }) {
         new AdminRequest('db/city/', 'GET')
           .doRequest()
           .then(({ data }) => setCityList(data)),
-      );
+      )
+      .catch(() => history.push('/admin/error-page/'));
   }, [page, city, sort, trend]);
 
   const columns = [
@@ -102,9 +105,7 @@ export default function PointsPage({ getCookie }) {
             className='admin__select'
             name='sort'
           >
-            <option value='nameDown'>
-              По названию А-Я ↓
-            </option>
+            <option value='nameDown'>По названию А-Я ↓</option>
             <option value='nameUp'>По названию Я-А ↑</option>
             <option value='addressUp'>По адресу Я-А ↑</option>
             <option value='addressDown'>По адресу А-Я ↓</option>

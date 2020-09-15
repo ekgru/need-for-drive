@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './Authorization.scss';
 import AdminLoader from '../AdminLoader';
+import AdminRequest from '../AdminRequest';
 export default function Authorization() {
   const history = useHistory();
   const [userPass, setPass] = useState('');
@@ -28,24 +29,14 @@ export default function Authorization() {
 
   const basicToken = btoa(createRandomString(6) + ':4cbcea96de');
 
-  const api = 'http://api-factory.simbirsoft1.com/api/';
-  const headers = {
-    'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
-    'Content-Type': 'application/json',
-    'Authorization': 'Basic ' + basicToken,
-  };
-
   function auth(event) {
     event.preventDefault();
     setLoad(true);
-    const data = { username: userLogin, password: userPass };
-
-    fetch(`${api}auth/login`, {
-      method: 'POST',
-      headers: headers,
-      body: JSON.stringify(data),
+    new AdminRequest(`auth/login`, 'POST', `Basic ${basicToken}`, {
+      username: userLogin,
+      password: userPass,
     })
-      .then((response) => response.json())
+      .doRequest()
       .then((res) => {
         document.cookie = `basicToken=${basicToken};
          max-age=${res.expires_in}; path='/need-for-drive/admin`;

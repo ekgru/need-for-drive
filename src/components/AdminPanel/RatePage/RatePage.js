@@ -3,22 +3,27 @@ import AdminRequest from '../AdminRequest';
 import AdminTable from '../AdminTable/AdminTable';
 import './RatePage.scss';
 import AdminLoader from '../AdminLoader';
+import { useHistory } from 'react-router-dom';
 export default function RatePage() {
+  const history = useHistory();
   const [rateData, setData] = useState();
   useEffect(() => {
-    new AdminRequest('db/rate/', 'GET').doRequest().then(({ data }) =>
-      setData(
-        data.map(
-          (el) =>
-            (el = {
-              updatedAt: new Date(el.updatedAt).toLocaleString('RU'),
-              price: `${el.price} ₽ в ${el.rateTypeId.unit}`,
-              id: el.id,
-              name: el.rateTypeId.name,
-            }),
+    new AdminRequest('db/rate/', 'GET')
+      .doRequest()
+      .then(({ data }) =>
+        setData(
+          data.map(
+            (el) =>
+              (el = {
+                updatedAt: new Date(el.updatedAt).toLocaleString('RU'),
+                price: `${el.price} ₽ в ${el.rateTypeId.unit}`,
+                id: el.id,
+                name: el.rateTypeId.name,
+              }),
+          ),
         ),
-      ),
-    );
+      )
+      .catch(() => history.push('/admin/error-page/'));
   }, []);
   const columns = [
     { name: 'Название тарифа', dataName: 'name' },
@@ -32,7 +37,7 @@ export default function RatePage() {
         {rateData ? (
           <AdminTable columns={columns} data={rateData} />
         ) : (
-         <AdminLoader />
+          <AdminLoader />
         )}
       </div>
     </>
