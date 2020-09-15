@@ -12,7 +12,7 @@ export default class AdminRequest {
     this.body = JSON.stringify(body);
   }
   doRequest() {
-    return fetch(`/${this.apiParams}`, {
+    return fetch(`https://cors-anywhere.herokuapp.com/http://api-factory.simbirsoft1.com/api/${this.apiParams}`, {
       method: this.method,
       headers: this.headers,
       body: this.body,

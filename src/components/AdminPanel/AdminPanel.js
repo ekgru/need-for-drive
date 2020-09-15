@@ -104,10 +104,12 @@ export default function AdminPanel() {
                       Добро пожаловать, {userName || 'администратор'}!
                     </h1>
                   </Route>
-                  <Route exact path='/admin/car-edit-card'>
-                    <CarEditCard getCookie={getCookie} />{' '}
+                  <Route exact path='/admin/car-edit-card/:id'>
+                    <CarEditCard getCookie={getCookie} />
                   </Route>
-
+                  <Route exact path='/admin/car-edit-card/'>
+                    <CarEditCard getCookie={getCookie} />
+                  </Route>
                   <Route exact path='/admin/car-list'>
                     <CarListPage getCookie={getCookie} />
                   </Route>
