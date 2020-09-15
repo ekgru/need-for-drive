@@ -1,0 +1,48 @@
+@import '../../../variables.scss';
+.admin__final-block {
+    padding-top: 34px;
+    margin: 0px auto;
+  @include adminBlock;
+  min-width: 250px;
+  max-width: 500px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  h1 {
+    font-family: $adminFont;
+     font-size: 32px;
+    line-height: 35px;
+    color:$adminFontColor;
+    margin: 0px;
+    padding: 50px 0px;
+  }
+  button{
+      padding: 0px;
+      outline: none;
+      border:none;
+      background: $mainAccent;
+      border-radius: 0px 0px 10px  10px;
+      &:hover{
+        background: darken( $mainAccent, 10);
+    }
+  }
+  &__link {
+    width: 100%;
+    box-sizing: border-box;
+      padding: 5px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    text-decoration: none;
+    color: #fff;
+    font-family: $adminFont;
+    background: $blue;
+    &:hover{
+        background: darken( $blue, 10);
+    }
+  }
+}
