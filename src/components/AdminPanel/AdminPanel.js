@@ -13,6 +13,7 @@ import AdminLoader from './AdminLoader';
 import CarListPage from './CarListPage';
 import RatePage from './RatePage';
 import PointsPage from './PointsPage';
+import AdminRequest from './AdminRequest';
 
 export default function AdminPanel() {
   const [isLoad, setLoad] = useState(true);
@@ -28,44 +29,28 @@ export default function AdminPanel() {
       new RegExp(
         '(?:^|; )' +
           name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') +
-          '=([^;]*)'
-      )
+          '=([^;]*)',
+      ),
     );
     return matches ? matches[1] : undefined;
   }
-  const api = 'http://api-factory.simbirsoft1.com/api/';
 
   function checkAuth() {
     const access = getCookie('access_token');
-    const headers = {
-      'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
-      'Content-Type': 'application/json',
-    };
+    const refresh = getCookie('refresh_token');
 
-    if (access) {
-      fetch(`${api}auth/check`, {
-        method: 'GET',
-        headers: {
-          ...headers,
-          Authorization: 'Bearer ' + access,
-        },
-      })
-        .then((response) => response.json())
+    if (access || refresh) {
+     new AdminRequest('auth/check', 'GET', `Bearer ${access}`).doRequest()
         .then((res) => {
           setUserName(res.username);
           setLoad(false);
-        })
-        .catch((err) => {
-          const data = { refresh_token: getCookie('refresh_token') };
-          fetch(`${api}auth/refresh`, {
-            method: 'POST',
-            headers: {
-              ...headers,
-              Authorization: 'Basic ' + getCookie('basicToken'),
-            },
-            body: JSON.stringify(data),
-          })
-            .then((response) => response.json())
+        }).catch(() => {
+          new AdminRequest(
+            'auth/refresh',
+            'POST',
+            `Basic ${getCookie('basicToken')}`,
+            { refresh_token: refresh },
+          ).doRequest()
             .then((res) => {
               document.cookie = `access_token=${res.access_token};
           max-age=${res.expires_in};
@@ -104,7 +89,6 @@ export default function AdminPanel() {
             <div className='admin-panel__container'>
               <div className='admin-panel__container__topbar'>
                 <Topbar
-                  api={api}
                   userName={userName}
                   getCookie={getCookie}
                   setLoad={setLoad}
@@ -134,10 +118,10 @@ export default function AdminPanel() {
                     <CityPointCard getCookie={getCookie} />
                   </Route>
                   <Route exact path='/admin/rate-list'>
-                    <RatePage/>
+                    <RatePage />
                   </Route>
                   <Route exact path='/admin/points-list'>
-                    <PointsPage getCookie={getCookie}/>
+                    <PointsPage getCookie={getCookie} />
                   </Route>
                   <Route path='/admin/*' component={ErrorPage} />
                 </Switch>

@@ -23,7 +23,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://cors-anywhere.herokuapp.com",
+  "proxy": "https://thingproxy.freeboard.io/fetch/http://api-factory.simbirsoft1.com/api",
   "eslintConfig": {
     "extends": "react-app"
   },

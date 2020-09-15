@@ -19,7 +19,7 @@ export default function PointsPage({ getCookie }) {
         sort && `&sort[${sort}]=${trend}`
       }`,
       'GET',
-      `Bearer ${getCookie('access_token')}`
+      `Bearer ${getCookie('access_token')}`,
     )
       .doRequest()
       .then((res) => {
@@ -32,14 +32,14 @@ export default function PointsPage({ getCookie }) {
                 name: el.name,
                 id: el.id,
                 city: el.cityId.name,
-              })
-          )
+              }),
+          ),
         );
       })
       .then(() =>
         new AdminRequest('db/city/', 'GET')
           .doRequest()
-          .then(({ data }) => setCityList(data))
+          .then(({ data }) => setCityList(data)),
       );
   }, [page, city, sort, trend]);
 

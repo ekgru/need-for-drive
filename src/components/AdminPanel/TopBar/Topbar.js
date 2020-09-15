@@ -2,23 +2,17 @@ import React from 'react';
 import person from './../../../resources/Person.svg';
 import './Topbar.scss';
 import { useHistory } from 'react-router-dom';
-export default function Topbar({
-  userName,
-  api,
-  setLoad,
-  getCookie,
-}) {
+import AdminRequest from '../AdminRequest';
+export default function Topbar({ userName, setLoad, getCookie }) {
   const history = useHistory();
   function logout() {
-    const headers = {
-      'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
-      'Authorization': 'Bearer ' + getCookie('access_token'),
-    };
     setLoad(true);
-    fetch(`${api}auth/logout`, {
-      method: 'POST',
-      headers: headers,
-    })
+    new AdminRequest(
+      'auth/logout',
+      'POST',
+      `Bearer  ${getCookie('access_token')}`,
+    )
+      .doRequest()
       .then(() => {
         document.cookie = `basicToken='';
          max-age=0;
@@ -35,7 +29,7 @@ export default function Topbar({
         history.push('/admin/authorization');
         setLoad(false);
       })
-      .catch((err) => {
+      .catch(() => {
         setLoad(true);
         history.push('/admin/authorization');
         setLoad(false);
