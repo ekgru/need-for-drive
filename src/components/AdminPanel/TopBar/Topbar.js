@@ -54,6 +54,7 @@ export default function Topbar({ userName, setLoad, getCookie }) {
         <div className='user-block__group'>
           <span className='user-block__group__user-info'>
             <img
+            alt='Аватар пользователя'
               className='user-block__group__user-info__user-pic'
               src={person}
             />

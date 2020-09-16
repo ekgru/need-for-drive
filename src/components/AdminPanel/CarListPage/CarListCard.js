@@ -1,6 +1,7 @@
 import React from 'react';
 import fakeCar from '../../../resources/car.png';
-export default function TableRow({
+import { Link } from 'react-router-dom';
+export default function CarListCard({
   img,
   carName,
   description,
@@ -8,9 +9,18 @@ export default function TableRow({
   colors,
   updated,
   tank,
+  id,
 }) {
   return (
     <div className='car-list-page__car-card'>
+      <div className='mask'>
+        <Link
+          to={`car-edit-card/${id}`}
+          className='admin__button blue link'
+        >
+          Редактировать
+        </Link>
+      </div>
       <div className='car-list-page__car-card__img'>
         <img
           crossOrigin='anonymous'

@@ -14,14 +14,22 @@ export default function PointsPage({ getCookie }) {
   const [city, setCity] = useState('');
   const [sort, setSort] = useState('name');
   const [trend, setTrend] = useState('1');
+  const controller = new AbortController();
   useEffect(() => {
     setData('');
+    getTable();
+    return () => controller.abort();
+  }, [page, city, sort, trend]);
+
+  function getTable() {
     new AdminRequest(
       `db/point?page=${page - 1}&limit=10${city && '&cityId=' + city}${
         sort && `&sort[${sort}]=${trend}`
       }`,
       'GET',
       `Bearer ${getCookie('access_token')}`,
+      null,
+      controller.signal,
     )
       .doRequest()
       .then((res) => {
@@ -39,13 +47,12 @@ export default function PointsPage({ getCookie }) {
         );
       })
       .then(() =>
-        new AdminRequest('db/city/', 'GET')
+        new AdminRequest('db/city/', 'GET', null, null, controller.signal)
           .doRequest()
           .then(({ data }) => setCityList(data)),
       )
-      .catch(() => history.push('/admin/error-page/'));
-  }, [page, city, sort, trend]);
-
+      .catch((err) => console.error('ERROR', err));
+  }
   const columns = [
     { name: 'Адрес', dataName: 'address' },
     { name: 'Название', dataName: 'name' },
@@ -61,24 +68,20 @@ export default function PointsPage({ getCookie }) {
           setSort('name');
           setTrend('-1');
           break;
-      }
-      switch (value) {
         case 'addressUp':
           setSort('address');
           setTrend('-1');
           break;
-      }
-      switch (value) {
         case 'nameDown':
           setSort('name');
           setTrend('1');
           break;
-      }
-      switch (value) {
         case 'addressDown':
           setSort('address');
           setTrend('1');
           break;
+        default:
+          history.push('/admin/error-page/');
       }
     }
   }

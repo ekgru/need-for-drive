@@ -35,7 +35,7 @@ export default class CarMap extends React.Component {
   }
   getPointName(string) {
     return string
-      .replace(/(проспект|улица|[\.,])/gi, '')
+      .replace(/(проспект|улица|[.,])/gi, '')
       .replace(/(\d+)(к\.?)(\d+)/i, '$1, корп.$3')
       .trim();
   }

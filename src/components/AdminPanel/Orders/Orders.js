@@ -2,7 +2,6 @@ import React, { Fragment, useState, useEffect } from 'react';
 import './Orders.scss';
 import CustomInput from '../../CustomInput';
 import fakeCar from '../../../resources/car.png';
-import { useHistory } from 'react-router-dom';
 import AdminLoader from '../AdminLoader';
 import AdminPagination from '../AdminPagination';
 import AdminRequest from '../AdminRequest';
@@ -12,7 +11,6 @@ export default function Orders({ api, headers, getCookie }) {
     { name: 'isNeedChildChair', description: 'Детское кресло' },
     { name: 'isRightWheel', description: 'Правый руль' },
   ];
-  const history = useHistory();
   const [viewFilter, setViewFilter] = useState(false);
   const [isLoad, setLoad] = useState(true);
   const [page, setPage] = useState(1);
@@ -23,6 +21,7 @@ export default function Orders({ api, headers, getCookie }) {
     cars: [],
     statuses: [],
   });
+  const controller = new AbortController();
 
   const [filter, setFilter] = useState({
     date: 0,
@@ -33,6 +32,7 @@ export default function Orders({ api, headers, getCookie }) {
 
   useEffect(() => {
     getOrderTable();
+    return () => controller.abort();
   }, [page]);
 
   function getOrderTable() {
@@ -45,7 +45,9 @@ export default function Orders({ api, headers, getCookie }) {
         status && '&orderStatusId=' + status
       }`,
       'GET',
-      `Bearer ${getCookie('access_token')}`
+      `Bearer ${getCookie('access_token')}`,
+      null,
+      controller.signal,
     );
     getTable
       .doRequest()
@@ -55,7 +57,6 @@ export default function Orders({ api, headers, getCookie }) {
         setLoad(false);
       })
       .catch((err) => {
-        history.push('/admin/error-page');
         console.error('ERROR', err);
       });
   }
@@ -128,7 +129,7 @@ export default function Orders({ api, headers, getCookie }) {
                     cars: cars,
                     cities: cities,
                     statuses: statuses,
-                  })
+                  }),
                 );
             });
         });

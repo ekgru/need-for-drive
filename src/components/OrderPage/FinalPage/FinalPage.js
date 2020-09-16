@@ -8,16 +8,20 @@ export default function FinalPage({ getInfo, orderStatus }) {
   const { orderId } = useParams();
   const [orderInfo, setOrderInfo] = useState([]);
   const [isLoad, setLoad] = useState(false);
-  const api =
-    'http://api-factory.simbirsoft1.com/api/db/';
+  const api = 'http://api-factory.simbirsoft1.com/api/db/';
   const headers = {
     'X-Api-Factory-Application-Id': '5e25c641099b810b946c5d5b',
   };
   const history = useHistory();
+  const controller = new AbortController();
 
   useEffect(() => {
     setLoad(false);
-    const controller = new AbortController();
+    getOrder();
+    return () => controller.abort();
+  }, [orderStatus]);
+
+  function getOrder() {
     fetch(`${api}order/${orderId}`, {
       method: 'GET',
       headers: headers,
@@ -37,8 +41,7 @@ export default function FinalPage({ getInfo, orderStatus }) {
         getInfo('orderStatus', '');
         history.push('/order-page/');
       });
-    return () => controller.abort();
-  }, [orderStatus]);
+  }
   const getStatus = (status) => {
     switch (status) {
       case 'new':
@@ -61,7 +64,10 @@ export default function FinalPage({ getInfo, orderStatus }) {
             <h1 className='final-page__head'>
               {getStatus(orderInfo.orderStatusId.name)}
             </h1>
-            <StepFour carId={orderInfo.carId} dateFrom={orderInfo.dateFrom} />
+            <StepFour
+              carId={orderInfo.carId}
+              dateFrom={orderInfo.dateFrom}
+            />
           </>
         ) : (
           <div className='loader-container'>

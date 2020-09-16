@@ -8,33 +8,43 @@ export default function CarListPage({ getCookie }) {
   const [page, setPage] = useState(1);
   const [thisList, setThisList] = useState();
   const [countPages, setCountPages] = useState();
-
+  const controller = new AbortController();
   useEffect(() => {
     const width = document.documentElement.clientWidth;
     getCarList(width);
+    return () => controller.abort();
   }, [page]);
 
   function getCarList(width) {
+    setThisList('');
     const getCars = new AdminRequest(
       `db/car?page=${page - 1}&limit=${width < 1024 ? 1 : 2}`,
       'GET',
       `Bearer ${getCookie('access_token')}`,
+      null,
+      controller.signal,
     );
-    getCars.doRequest().then((res) => {
-      setThisList(res.data);
-      setCountPages(Math.ceil(res.count / 2));
-    });
+    getCars
+      .doRequest()
+      .then((res) => {
+        setThisList(res.data);
+        setCountPages(Math.ceil(res.count / 2));
+      })
+      .catch((err) => {
+        console.error('ERROR', err);
+      });
   }
 
   return (
     <>
       <h1 className='admin__heading'>Список автомобилей</h1>
       <div className='car-list-page'>
-        {thisList ? (
-          <div className='car-list-page__container'>
-            {thisList.map((el) => (
+        <div className='car-list-page__container'>
+          {thisList ? (
+            thisList.map((el) => (
               <CarListCard
                 key={el.id}
+                id={el.id}
                 img={el.thumbnail.path}
                 carName={el.name}
                 description={el.description}
@@ -43,18 +53,17 @@ export default function CarListPage({ getCookie }) {
                 updated={el.updatedAt}
                 tank={el.tank}
               />
-            ))}
-          </div>
-        ) : (
-          <AdminLoader />
-        )}
-        {thisList && (
-          <AdminPagination
-            setPage={setPage}
-            page={page}
-            countPages={countPages}
-          />
-        )}
+            ))
+          ) : (
+            <AdminLoader />
+          )}
+        </div>
+
+        <AdminPagination
+          setPage={setPage}
+          page={page}
+          countPages={countPages || 1}
+        />
       </div>
     </>
   );

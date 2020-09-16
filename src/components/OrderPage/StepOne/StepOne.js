@@ -45,28 +45,28 @@ export default class StepOne extends React.Component {
         ? cities.filter(
             (el) =>
               el.name
-                .replace(/(проспект|улица|[\.,])/gi, '')
+                .replace(/(проспект|улица|[.,])/gi, '')
                 .replace(/(\d+)(к\.?)(\d+)/i, '$1, корп.$3')
                 .trim() ===
               value
-                .replace(/(проспект|улица|[\.,])/gi, '')
+                .replace(/(проспект|улица|[.,])/gi, '')
                 .replace(/(\d+)(к\.?)(\d+)/i, '$1, корп.$3')
-                .trim()
+                .trim(),
           )
         : points.filter(
             (el) =>
               el.address
-                .replace(/(проспект|улица|[\.,])/gi, '')
-                .replace(/(\d+)(к\.?)(\d+)/i, '$1, корп.$3')
+                .replace(/(проспект|улица|[.,])/gi, '')
+                .replace(/(\d+)(к.?)(\d+)/i, '$1, корп.$3')
                 .trim() ===
               value
-                .replace(/(проспект|улица|[\.,])/gi, '')
-                .replace(/(\d+)(к\.?)(\d+)/i, '$1, корп.$3')
-                .trim()
+                .replace(/(проспект|улица|[.,])/gi, '')
+                .replace(/(\d+)(к.?)(\d+)/i, '$1, корп.$3')
+                .trim(),
           );
     getLocation(
       name,
-      resultObj[0] ? resultObj[0] : { name: value, id: '' }
+      resultObj[0] ? resultObj[0] : { name: value, id: '' },
     );
   }
   render() {
@@ -92,7 +92,7 @@ export default class StepOne extends React.Component {
                 <option key={i} id={el.id} value={el.name}></option>
               ) : (
                 ''
-              )
+              ),
             )}
           </datalist>
           <br />
@@ -127,7 +127,7 @@ export default class StepOne extends React.Component {
                 </option>
               ) : (
                 ''
-              )
+              ),
             )}
           </datalist>
         </form>
