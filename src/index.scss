@@ -55,7 +55,7 @@ span {
   font-style: normal;
   user-select: none;
 }
-input, textarea{
+input[type="text"], textarea{
   cursor: text;
 }
 body {

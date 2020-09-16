@@ -3,7 +3,7 @@ import './CarEditCard.scss';
 import fakeCar from '../../../resources/car.png';
 import AdminRequest from '../AdminRequest';
 import AdminTextInput from '../AdminTextInput';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import AdminLoader from '../AdminLoader';
 import AdminFinalBlock from '../AdminFinalBlock';
 
@@ -34,18 +34,24 @@ export default withRouter(
       this.handleChange = this.handleChange.bind(this);
       this.addColor = this.addColor.bind(this);
       this.createNewCar = this.createNewCar.bind(this);
-      this.fileHandler = this.fileHandler.bind(this);
+      this.deleteCar = this.deleteCar.bind(this);
       this.clearState = this.clearState.bind(this);
+      this.fileHandler = this.fileHandler.bind(this);
+      this.closeAlert = this.closeAlert.bind(this);
+      this.getCarById = this.getCarById.bind(this);
       this.id = 0;
     }
     componentDidMount() {
+      this.getCarById();
+    }
+    getCarById() {
       this.id = this.props.match.params.id;
       if (this.id) {
         this.setState({ isLoad: true });
         new AdminRequest(
           `db/car/${this.id}`,
           'GET',
-          `Bearer ${this.props.getCookie('access_token')}`
+          `Bearer ${this.props.getCookie('access_token')}`,
         )
           .doRequest()
           .then(({ data }) =>
@@ -66,13 +72,35 @@ export default withRouter(
                 model: false,
               },
               isLoad: false,
-            })
+            }),
           )
           .catch((err) => {
             this.props.history.push('/admin/error-page');
             console.error('ERROR', err);
           });
       }
+    }
+    clearState() {
+      this.setState({
+        model: '',
+        type: '',
+        colors: [],
+        file: '',
+        category: '5e25c99a099b810b946c5d63',
+        addColor: '',
+        description: '',
+        errors: {
+          addColor: false,
+          description: false,
+          file: false,
+          model: false,
+        },
+        tank: 100,
+        priceMax: 50000,
+        priceMin: 0,
+        isSave: false,
+        isLoad: false,
+      });
     }
     handleChange(event) {
       const { name, value } = event.target;
@@ -109,6 +137,20 @@ export default withRouter(
       };
       reader.onerror = () => console.log(reader.error);
     }
+    deleteCar() {
+      new AdminRequest(
+        `db/car/${this.id}`,
+        'DELETE',
+        `Bearer ${this.props.getCookie('access_token')}`,
+      )
+        .doRequest()
+        .then(() => this.clearState())
+        .then(() => (this.id = 0))
+        .catch((err) => {
+          this.props.history.push('/admin/error-page');
+          console.error('ERROR', err);
+        });
+    }
     createNewCar() {
       const {
         model,
@@ -141,36 +183,33 @@ export default withRouter(
             `db/car/${this.id}`,
             'PUT',
             `Bearer ${this.props.getCookie('access_token')}`,
-            data
+            data,
           )
         : new AdminRequest(
             `db/car`,
             'POST',
             `Bearer ${this.props.getCookie('access_token')}`,
-            data
+            data,
           );
-      req.doRequest().then(() => this.setState({ isSave: true }));
+      req
+        .doRequest()
+        .then(() => this.setState({ isSave: true }))
+        .then(() => {
+          this.clearState();
+        })
+        .catch((err) => {
+          this.props.history.push('/admin/error-page');
+          console.error('ERROR', err);
+        });
     }
-    clearState() {
-      this.setState({
-        model: '',
-        type: '',
-        colors: [],
-        file: '',
-        category: '5e25c99a099b810b946c5d63',
-        addColor: '',
-        description: '',
-        errors: {
-          addColor: false,
-          description: false,
-          file: false,
-          model: false,
-        },
-        tank: 100,
-        priceMax: 50000,
-        priceMin: 0,
-        isSave: false,
-        isLoad: false,
+    closeAlert() {
+      this.setState({ isSave: false });
+    }
+    colorCheckHandler(i) {
+      this.setState((prevState) => {
+        const newArray = [...prevState.colors];
+        newArray.splice(i, 1);
+        return { colors: newArray };
       });
     }
     render() {
@@ -183,17 +222,15 @@ export default withRouter(
 
       return (
         <>
+          {this.state.isSave && (
+            <AdminFinalBlock
+              text='Успех машина сохранена!'
+              closeAction={this.closeAlert}
+            />
+          )}
           <h1 className='admin__heading'>Карточка автомобиля</h1>
           {this.state.isLoad ? (
             <AdminLoader />
-          ) : this.state.isSave ? (
-            <AdminFinalBlock
-              text='Информация об автомобиле успешно сохранена'
-              link='/admin/car-list'
-              linkText='Просмотреть автомобили'
-              linkReturnText='Создать еще один автомобиль'
-              returnAction={this.clearState}
-            />
           ) : (
             <div className='car-edit__container'>
               <div className='car-edit__container__car-block'>
@@ -202,9 +239,9 @@ export default withRouter(
                   referrerPolicy='origin'
                   className='car-edit__container__car-block__img'
                   src={
-                    this.state.file && !this.props.match.params
+                    this.state.file && !this.id
                       ? URL.createObjectURL(this.state.file)
-                      : this.props.match.params && this.state.file
+                      : this.id
                       ? `http://api-factory.simbirsoft1.com${this.state.file.path}`
                       : fakeCar
                   }
@@ -223,7 +260,7 @@ export default withRouter(
                     <span className='admin__file-loader__text'>
                       {this.state.file
                         ? this.state.file.name
-                        : 'Выберите файл...'}
+                        : 'Выберите файл...  *'}
                     </span>
                     <input
                       id='fileLoader'
@@ -238,17 +275,17 @@ export default withRouter(
                     </span>
                   </label>
                 </form>
-                <div className='car-edit__container__car-block__counter'>
-                  <p className='car-edit__container__car-block__counter__text'>
+                <div className='counter'>
+                  <p className='counter__text'>
                     Заполнено:
                   </p>
-                  <p className='car-edit__container__car-block__counter__text'>
+                  <p className='counter__text'>
                     {procentes || 0}%
                   </p>
-                  <span className='car-edit__container__car-block__counter__container'>
+                  <span className='counter__container'>
                     <span
                       style={{ width: `${procentes || 0}%` }}
-                      className='car-edit__container__car-block__counter__container__line'
+                      className='counter__container__line'
                     ></span>
                   </span>
                 </div>
@@ -274,7 +311,7 @@ export default withRouter(
                   <span className='car-edit__container__additional-block__form__group'>
                     <AdminTextInput
                       placeholder='Введите модель автомобиля'
-                      legend='Модель автомобиля'
+                      legend='Модель автомобиля *'
                       onChange={this.handleChange}
                       value={this.state.model}
                       name='model'
@@ -293,7 +330,7 @@ export default withRouter(
                   </span>
                   <span className='car-edit__container__additional-block__form__group'>
                     <fieldset>
-                      <legend>Класс автомобиля</legend>
+                      <legend>Класс автомобиля *</legend>
                       <label className='admin__radio'>
                         <input
                           type='radio'
@@ -322,7 +359,7 @@ export default withRouter(
                       <span>
                         <AdminTextInput
                           placeholder='Введите цвет'
-                          legend='Доступные цвета'
+                          legend='Доступные цвета  *'
                           onChange={this.handleChange}
                           value={this.state.addColor}
                           name='addColor'
@@ -344,13 +381,7 @@ export default withRouter(
                           <input
                             type='checkbox'
                             defaultChecked
-                            onChange={() =>
-                              this.setState((prevState) => {
-                                const newArray = [...prevState.colors];
-                                newArray.splice(i, 1);
-                                return { colors: newArray };
-                              })
-                            }
+                            onChange={this.colorCheckHandler.bind(this, i)}
                           />
                           <span>{el}</span>
                         </label>
@@ -362,16 +393,31 @@ export default withRouter(
                   <span>
                     <button
                       className='admin__button blue'
+                      disabled={
+                        (!this.state.model ||
+                          !this.state.file ||
+                          !this.state.colors.length) &&
+                        'disabled'
+                      }
                       onClick={this.createNewCar}
                     >
                       Сохранить
                     </button>
-                    <button className='admin__button gray'>
+                    <button
+                      onClick={this.id ? this.getCarById : this.clearState}
+                      className='admin__button gray'
+                    >
                       Отменить
                     </button>
                   </span>
                   <span>
-                    <button className='admin__button red'>Удалить</button>
+                    <button
+                      disabled={!this.id && 'disabled'}
+                      onClick={this.deleteCar}
+                      className='admin__button red'
+                    >
+                      Удалить
+                    </button>
                   </span>
                 </div>
               </div>
@@ -380,5 +426,5 @@ export default withRouter(
         </>
       );
     }
-  }
+  },
 );

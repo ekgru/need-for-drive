@@ -1,48 +1,37 @@
 @import '../../../variables.scss';
 .admin__final-block {
-    padding-top: 34px;
-    margin: 0px auto;
-  @include adminBlock;
-  min-width: 250px;
-  max-width: 500px;
-  margin-bottom: 20px;
+  width: 100%;
+  background: $mainAccent;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  position: fixed;
+  left: 0px;
+  box-sizing: border-box;
+  padding-left: 300px;
+  color: #fff;
+  height: 42px;
   align-items: center;
-  text-align: center;
-  h1 {
-    font-family: $adminFont;
-     font-size: 32px;
-    line-height: 35px;
-    color:$adminFontColor;
-    margin: 0px;
-    padding: 50px 0px;
+  font-family: $adminFont;
+  font-style: normal;
+font-weight: normal;
+font-size: 13px;
+line-height: 15px;
+  p{
+padding: 0px 29px;
   }
   button{
-      padding: 0px;
-      outline: none;
-      border:none;
-      background: $mainAccent;
-      border-radius: 0px 0px 10px  10px;
-      &:hover{
-        background: darken( $mainAccent, 10);
-    }
+      margin: 0px;
+      padding:  0px 39px;
+      background: none;
+      color: inherit;
+      border: none;
+      outline:none;
   }
-  &__link {
-    width: 100%;
-    box-sizing: border-box;
-      padding: 5px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    text-decoration: none;
-    color: #fff;
-    font-family: $adminFont;
-    background: $blue;
-    &:hover{
-        background: darken( $blue, 10);
+}
+@media(max-width:1150){
+    .admin__final-block {
+        top: 69.5px;
+        padding-left: 47px;
     }
-  }
 }
