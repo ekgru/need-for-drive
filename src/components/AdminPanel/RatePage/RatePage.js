@@ -4,10 +4,15 @@ import AdminTable from '../AdminTable/AdminTable';
 import './RatePage.scss';
 import AdminLoader from '../AdminLoader';
 import { useHistory } from 'react-router-dom';
+import AdminFinalBlock from '../AdminFinalBlock';
 export default function RatePage() {
   const history = useHistory();
   const [rateData, setData] = useState();
+  const [isDeleted, setDelete] = useState(false);
   useEffect(() => {
+    getTable();
+  }, [isDeleted]);
+  function getTable() {
     new AdminRequest('db/rate/', 'GET')
       .doRequest()
       .then(({ data }) =>
@@ -19,12 +24,15 @@ export default function RatePage() {
                 price: `${el.price} ₽ в ${el.rateTypeId.unit}`,
                 id: el.id,
                 name: el.rateTypeId.name,
-              }),
-          ),
-        ),
+              })
+          )
+        )
       )
       .catch(() => history.push('/admin/error-page/'));
-  }, []);
+  }
+  function closeAlert() {
+    setDelete(false);
+  }
   const columns = [
     { name: 'Название тарифа', dataName: 'name' },
     { name: 'Стоимость', dataName: 'price' },
@@ -32,10 +40,21 @@ export default function RatePage() {
   ];
   return (
     <>
+      {isDeleted && (
+        <AdminFinalBlock
+          text='Успех тариф удален!'
+          closeAction={closeAlert}
+        />
+      )}
       <h1 className='admin__heading'>Список тарифов</h1>
       <div className='rate-page'>
         {rateData ? (
-          <AdminTable columns={columns} data={rateData} />
+          <AdminTable
+            columns={columns}
+            data={rateData}
+            tableName='db/rate/'
+            setDelete={setDelete}
+          />
         ) : (
           <AdminLoader />
         )}

@@ -14,6 +14,7 @@ import CarListPage from './CarListPage';
 import RatePage from './RatePage';
 import PointsPage from './PointsPage';
 import AdminRequest from './AdminRequest';
+import RateCreatePage from './RateCreatePage';
 
 export default function AdminPanel() {
   const [isLoad, setLoad] = useState(true);
@@ -124,6 +125,9 @@ export default function AdminPanel() {
                   </Route>
                   <Route exact path='/admin/points-list'>
                     <PointsPage getCookie={getCookie} />
+                  </Route>
+                  <Route exact path='/admin/rate-create'>
+                    <RateCreatePage getCookie={getCookie} />
                   </Route>
                   <Route path='/admin/*' component={ErrorPage} />
                 </Switch>

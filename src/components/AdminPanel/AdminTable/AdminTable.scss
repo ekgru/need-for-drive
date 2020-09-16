@@ -32,5 +32,9 @@
     font-size: 14px;
     line-height: 16px;
     font-family: $adminFont;
+    &.delete{
+      color: $red;
+      
+    }
   }
 }

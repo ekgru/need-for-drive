@@ -7,14 +7,16 @@ export default function AdminTextInput({
   value,
   placeholder,
   errorText,
+  isNumber,
 }) {
   return (
     <fieldset className='admin__fieldset'>
       <legend>{legend}</legend>
       <input
         onChange={onChange}
-        type='text'
-        className={`admin__input ${error && 'error'}`}
+        type={!isNumber ? 'text' : 'number'}
+        min={isNumber && '1'}
+        className={`admin__input ${error ? 'error' : ''}`}
         name={name}
         value={value}
         placeholder={placeholder}

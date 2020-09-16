@@ -5,6 +5,7 @@ import AdminTable from '../AdminTable/AdminTable';
 import AdminRequest from '../AdminRequest';
 import AdminPagination from '../AdminPagination';
 import { useHistory } from 'react-router-dom';
+import AdminFinalBlock from '../AdminFinalBlock';
 export default function PointsPage({ getCookie }) {
   const history = useHistory();
   const [pointsData, setData] = useState();
@@ -14,13 +15,16 @@ export default function PointsPage({ getCookie }) {
   const [city, setCity] = useState('');
   const [sort, setSort] = useState('name');
   const [trend, setTrend] = useState('1');
+  const [isDelete, setDelete] = useState(false);
   const controller = new AbortController();
   useEffect(() => {
     setData('');
     getTable();
     return () => controller.abort();
   }, [page, city, sort, trend]);
-
+  function closeAlert() {
+    setDelete(false);
+  }
   function getTable() {
     new AdminRequest(
       `db/point?page=${page - 1}&limit=10${city && '&cityId=' + city}${
@@ -29,7 +33,7 @@ export default function PointsPage({ getCookie }) {
       'GET',
       `Bearer ${getCookie('access_token')}`,
       null,
-      controller.signal,
+      controller.signal
     )
       .doRequest()
       .then((res) => {
@@ -42,14 +46,14 @@ export default function PointsPage({ getCookie }) {
                 name: el.name,
                 id: el.id,
                 city: el.cityId.name,
-              }),
-          ),
+              })
+          )
         );
       })
       .then(() =>
         new AdminRequest('db/city/', 'GET', null, null, controller.signal)
           .doRequest()
-          .then(({ data }) => setCityList(data)),
+          .then(({ data }) => setCityList(data))
       )
       .catch((err) => console.error('ERROR', err));
   }
@@ -87,6 +91,12 @@ export default function PointsPage({ getCookie }) {
   }
   return (
     <>
+      {isDelete && (
+        <AdminFinalBlock
+          text='Успех точка удалена!'
+          closeAction={closeAlert}
+        />
+      )}
       <h1 className='admin__heading'>Список точек выдачи</h1>
       <div className='points-page'>
         <div className='points-page__sort'>
@@ -115,13 +125,18 @@ export default function PointsPage({ getCookie }) {
           </select>
         </div>
         {pointsData ? (
-          <AdminTable columns={columns} data={pointsData} />
+          <AdminTable
+            columns={columns}
+            data={pointsData}
+            tableName='db/point/'
+            update={getTable}
+            setDelete={setDelete}
+          />
         ) : (
           <span className='points-page__wrapper'>
             <AdminLoader />
           </span>
         )}
-
         <AdminPagination
           page={page}
           setPage={setPage}
