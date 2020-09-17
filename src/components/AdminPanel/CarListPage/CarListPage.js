@@ -4,7 +4,7 @@ import AdminRequest from '../AdminRequest';
 import CarListCard from './CarListCard';
 import AdminPagination from '../AdminPagination';
 import AdminLoader from '../AdminLoader';
-export default function CarListPage({ getCookie }) {
+export default function CarListPage() {
   const [page, setPage] = useState(1);
   const [thisList, setThisList] = useState();
   const [countPages, setCountPages] = useState();
@@ -20,7 +20,7 @@ export default function CarListPage({ getCookie }) {
     const getCars = new AdminRequest(
       `db/car?page=${page - 1}&limit=${width < 1024 ? 1 : 2}`,
       'GET',
-      `Bearer ${getCookie('access_token')}`,
+    null,
       null,
       controller.signal,
     );

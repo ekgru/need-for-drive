@@ -11,7 +11,7 @@ export default function RatePage() {
   const [isDeleted, setDelete] = useState(false);
   useEffect(() => {
     getTable();
-  }, [isDeleted]);
+  }, [ ]);
   function getTable() {
     new AdminRequest('db/rate/', 'GET')
       .doRequest()
@@ -54,6 +54,7 @@ export default function RatePage() {
             data={rateData}
             tableName='db/rate/'
             setDelete={setDelete}
+            update={getTable}
           />
         ) : (
           <AdminLoader />

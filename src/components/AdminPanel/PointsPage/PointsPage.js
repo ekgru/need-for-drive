@@ -6,7 +6,7 @@ import AdminRequest from '../AdminRequest';
 import AdminPagination from '../AdminPagination';
 import { useHistory } from 'react-router-dom';
 import AdminFinalBlock from '../AdminFinalBlock';
-export default function PointsPage({ getCookie }) {
+export default function PointsPage() {
   const history = useHistory();
   const [pointsData, setData] = useState();
   const [page, setPage] = useState(1);
@@ -31,7 +31,7 @@ export default function PointsPage({ getCookie }) {
         sort && `&sort[${sort}]=${trend}`
       }`,
       'GET',
-      `Bearer ${getCookie('access_token')}`,
+      null,
       null,
       controller.signal
     )

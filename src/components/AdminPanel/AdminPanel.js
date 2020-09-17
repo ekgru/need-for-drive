@@ -91,7 +91,6 @@ export default function AdminPanel() {
               <div className='admin-panel__container__topbar'>
                 <Topbar
                   userName={userName}
-                  getCookie={getCookie}
                   setLoad={setLoad}
                 />
               </div>
@@ -106,28 +105,28 @@ export default function AdminPanel() {
                     </h1>
                   </Route>
                   <Route exact path='/admin/car-edit-card/:id'>
-                    <CarEditCard getCookie={getCookie} />
+                    <CarEditCard />
                   </Route>
                   <Route exact path='/admin/car-edit-card/'>
-                    <CarEditCard getCookie={getCookie} />
+                    <CarEditCard />
                   </Route>
                   <Route exact path='/admin/car-list'>
-                    <CarListPage getCookie={getCookie} />
+                    <CarListPage />
                   </Route>
                   <Route exact path='/admin/orders'>
-                    <Orders getCookie={getCookie} />
+                    <Orders />
                   </Route>
                   <Route exact path='/admin/points'>
-                    <CityPointCard getCookie={getCookie} />
+                    <CityPointCard   />
                   </Route>
                   <Route exact path='/admin/rate-list'>
                     <RatePage />
                   </Route>
                   <Route exact path='/admin/points-list'>
-                    <PointsPage getCookie={getCookie} />
+                    <PointsPage />
                   </Route>
                   <Route exact path='/admin/rate-create'>
-                    <RateCreatePage getCookie={getCookie} />
+                    <RateCreatePage />
                   </Route>
                   <Route path='/admin/*' component={ErrorPage} />
                 </Switch>

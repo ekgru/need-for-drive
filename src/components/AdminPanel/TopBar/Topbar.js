@@ -3,15 +3,11 @@ import person from './../../../resources/Person.svg';
 import './Topbar.scss';
 import { useHistory } from 'react-router-dom';
 import AdminRequest from '../AdminRequest';
-export default function Topbar({ userName, setLoad, getCookie }) {
+export default function Topbar({ userName, setLoad }) {
   const history = useHistory();
   function logout() {
     setLoad(true);
-    new AdminRequest(
-      'auth/logout',
-      'POST',
-      `Bearer  ${getCookie('access_token')}`,
-    )
+    new AdminRequest('auth/logout', 'POST')
       .doRequest()
       .then(() => {
         document.cookie = `basicToken='';
@@ -54,7 +50,7 @@ export default function Topbar({ userName, setLoad, getCookie }) {
         <div className='user-block__group'>
           <span className='user-block__group__user-info'>
             <img
-            alt='Аватар пользователя'
+              alt='Аватар пользователя'
               className='user-block__group__user-info__user-pic'
               src={person}
             />

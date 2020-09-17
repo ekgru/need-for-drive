@@ -5,7 +5,7 @@ import fakeCar from '../../../resources/car.png';
 import AdminLoader from '../AdminLoader';
 import AdminPagination from '../AdminPagination';
 import AdminRequest from '../AdminRequest';
-export default function Orders({ api, headers, getCookie }) {
+export default function Orders() {
   const options = [
     { name: 'isFullTank', description: 'Полный бак' },
     { name: 'isNeedChildChair', description: 'Детское кресло' },
@@ -45,7 +45,7 @@ export default function Orders({ api, headers, getCookie }) {
         status && '&orderStatusId=' + status
       }`,
       'GET',
-      `Bearer ${getCookie('access_token')}`,
+      null,
       null,
       controller.signal,
     );

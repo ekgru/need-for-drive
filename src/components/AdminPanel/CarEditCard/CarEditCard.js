@@ -51,7 +51,7 @@ export default withRouter(
         new AdminRequest(
           `db/car/${this.id}`,
           'GET',
-          `Bearer ${this.props.getCookie('access_token')}`,
+         null,
         )
           .doRequest()
           .then(({ data }) =>
@@ -141,7 +141,7 @@ export default withRouter(
       new AdminRequest(
         `db/car/${this.id}`,
         'DELETE',
-        `Bearer ${this.props.getCookie('access_token')}`,
+       null,
       )
         .doRequest()
         .then(() => this.clearState())
@@ -182,13 +182,13 @@ export default withRouter(
         ? new AdminRequest(
             `db/car/${this.id}`,
             'PUT',
-            `Bearer ${this.props.getCookie('access_token')}`,
+           null,
             data,
           )
         : new AdminRequest(
             `db/car`,
             'POST',
-            `Bearer ${this.props.getCookie('access_token')}`,
+           null,
             data,
           );
       req

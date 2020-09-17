@@ -3,8 +3,8 @@ import './CityPointCard.scss';
 import CityPointMap from './CityPointMap';
 import AdminRequest from '../AdminRequest';
 export default class CityPointCard extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       pointName: '',
       address: '',
@@ -34,7 +34,7 @@ export default class CityPointCard extends React.Component {
           new AdminRequest(
             'db/point',
             'POST',
-            `Bearer ${this.props.getCookie('access_token')}`,
+            null,
             {
               name: this.state.pointName,
               cityId: city[0],
@@ -45,7 +45,7 @@ export default class CityPointCard extends React.Component {
           new AdminRequest(
             'db/city',
             'POST',
-            `Bearer ${this.props.getCookie('access_token')}`,
+            null,
             { name: currentCity },
           )
             .doRequest()
@@ -53,7 +53,7 @@ export default class CityPointCard extends React.Component {
               new AdminRequest(
                 'db/point',
                 'POST',
-                `Bearer ${this.props.getCookie('access_token')}`,
+                null,
                 {
                   name: this.state.pointName,
                   cityId: data,

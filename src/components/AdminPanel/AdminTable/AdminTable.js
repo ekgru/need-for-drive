@@ -11,7 +11,10 @@ export default function AdminTable({
 }) {
   const history = useHistory();
   function deleteRow(id) {
-    new AdminRequest(`${tableName}${id}`, 'DELETE')
+    new AdminRequest(
+      `${tableName}${id}`,
+      'DELETE',
+    )
       .doRequest()
       .then(() => {
         if (update) {
